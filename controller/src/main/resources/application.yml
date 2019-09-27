@@ -13,7 +13,7 @@ spring:
     livereload:
       enabled: true
     restart:
-      additional-paths: src/main
+      additional-paths: controller/src/main/java,dao/src/main/java,service/src/main/java,shiro/src/main/java
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://47.107.118.152:3306/quarkCommunity?useUnicode=true&characterEncoding=UTF-8&useSSL=false
@@ -31,12 +31,12 @@ spring:
       validation-query: select 'x'
       min-idle: 1
   liquibase:
-    change-log: classpath:liqiubase/master.yml
+    change-log: classpath:liquibase/master.yml
     user: root
     password:
     url: jdbc:mysql://47.107.118.152:3306/quarkCommunity?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     drop-first: false
-    enabled: false
+    enabled: true
   redis:
     host: 47.107.118.152
     port: 6379
