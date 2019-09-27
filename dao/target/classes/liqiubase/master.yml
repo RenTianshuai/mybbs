@@ -1,0 +1,4 @@
+databaseChangeLog:
+#  - includeAll:
+  - include:
+      file: liquibase/v1.0/yh_portal.sql
