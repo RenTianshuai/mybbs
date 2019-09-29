@@ -1,0 +1,3 @@
+com\yaohan\bbs\controller\IndexController.class
+com\yaohan\bbs\BbsApplication.class
+com\yaohan\bbs\config\GlobalExceptionHandler.class

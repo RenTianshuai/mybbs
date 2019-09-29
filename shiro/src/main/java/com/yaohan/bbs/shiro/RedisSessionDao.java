@@ -39,6 +39,7 @@ public class RedisSessionDao extends AbstractSessionDAO {
         Serializable sessionId = generateSessionId(session);
         assignSessionId(session, sessionId);
         saveSession(session);
+        log.info("create session : " + sessionId.toString());
         return sessionId;
     }
 

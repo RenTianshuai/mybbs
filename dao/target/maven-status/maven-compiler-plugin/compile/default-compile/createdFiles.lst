@@ -1,0 +1,10 @@
+com\yaohan\bbs\dao\entity\PostsLebel.class
+com\yaohan\bbs\dao\mapper\PostsMapper.class
+com\yaohan\bbs\dao\entity\Posts.class
+com\yaohan\bbs\dao\mapper\RoleMapper.class
+com\yaohan\bbs\dao\mapper\PostsCollectionMapper.class
+com\yaohan\bbs\dao\entity\PostsCollection.class
+com\yaohan\bbs\dao\mapper\UserMapper.class
+com\yaohan\bbs\dao\entity\User.class
+com\yaohan\bbs\dao\entity\Role.class
+com\yaohan\bbs\dao\mapper\PostsLebelMapper.class

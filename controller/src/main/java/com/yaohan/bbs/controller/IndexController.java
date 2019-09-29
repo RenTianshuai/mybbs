@@ -1,20 +1,23 @@
 package com.yaohan.bbs.controller;
 
+import com.yaohan.bbs.dao.entity.User;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class IndexController {
+public class IndexController extends BaseController{
 
     @GetMapping("/")
-    public String index(){
+    public String index(@RequestParam(value = "label", required = false) String label, Model model){
+        Subject subject = SecurityUtils.getSubject();
+        User user = (User) subject.getSession().getAttribute("user");
+        model.addAttribute("user", user);
+        model.addAttribute("labels", getPostsLabel());
         return "index";
-    }
-
-    @RequestMapping("/jie/add")
-    public String add(){
-        return "jie/add";
     }
 
 }

@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yaohan.bbs.dao.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.yaohan.bbs.dao.entity.User" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="realname" property="realname" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="portrait" property="portrait" jdbcType="VARCHAR" />
+    <result column="salt" property="salt" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="email_activate" property="emailActivate" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <result column="auth" property="auth" jdbcType="VARCHAR" />
+    <result column="auth_info" property="authInfo" jdbcType="VARCHAR" />
+    <result column="experience" property="experience" jdbcType="INTEGER" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="school" property="school" jdbcType="VARCHAR" />
+    <result column="class_name" property="className" jdbcType="VARCHAR" />
+    <result column="signature" property="signature" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="register_date" property="registerDate" jdbcType="TIMESTAMP" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, realname, username, sex, password, portrait, salt, email, email_activate, phone, 
+    role_id, auth, auth_info, experience, city, school, class_name, signature, status, 
+    register_date, remarks, del_flag
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.yaohan.bbs.dao.entity.User" >
+    insert into user (id, realname, username, 
+      sex, password, portrait, 
+      salt, email, email_activate, 
+      phone, role_id, auth, 
+      auth_info, experience, city, 
+      school, class_name, signature, 
+      status, register_date, remarks, 
+      del_flag)
+    values (#{id,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{portrait,jdbcType=VARCHAR}, 
+      #{salt,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{emailActivate,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{auth,jdbcType=VARCHAR}, 
+      #{authInfo,jdbcType=VARCHAR}, #{experience,jdbcType=INTEGER}, #{city,jdbcType=VARCHAR}, 
+      #{school,jdbcType=VARCHAR}, #{className,jdbcType=VARCHAR}, #{signature,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{registerDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, 
+      #{delFlag,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yaohan.bbs.dao.entity.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="realname != null" >
+        realname,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="portrait != null" >
+        portrait,
+      </if>
+      <if test="salt != null" >
+        salt,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="emailActivate != null" >
+        email_activate,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="auth != null" >
+        auth,
+      </if>
+      <if test="authInfo != null" >
+        auth_info,
+      </if>
+      <if test="experience != null" >
+        experience,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="school != null" >
+        school,
+      </if>
+      <if test="className != null" >
+        class_name,
+      </if>
+      <if test="signature != null" >
+        signature,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="registerDate != null" >
+        register_date,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="realname != null" >
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="portrait != null" >
+        #{portrait,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="emailActivate != null" >
+        #{emailActivate,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="auth != null" >
+        #{auth,jdbcType=VARCHAR},
+      </if>
+      <if test="authInfo != null" >
+        #{authInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="experience != null" >
+        #{experience,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="className != null" >
+        #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="signature != null" >
+        #{signature,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="registerDate != null" >
+        #{registerDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yaohan.bbs.dao.entity.User" >
+    update user
+    <set >
+      <if test="realname != null" >
+        realname = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="portrait != null" >
+        portrait = #{portrait,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="emailActivate != null" >
+        email_activate = #{emailActivate,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="auth != null" >
+        auth = #{auth,jdbcType=VARCHAR},
+      </if>
+      <if test="authInfo != null" >
+        auth_info = #{authInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="experience != null" >
+        experience = #{experience,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="school != null" >
+        school = #{school,jdbcType=VARCHAR},
+      </if>
+      <if test="className != null" >
+        class_name = #{className,jdbcType=VARCHAR},
+      </if>
+      <if test="signature != null" >
+        signature = #{signature,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="registerDate != null" >
+        register_date = #{registerDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yaohan.bbs.dao.entity.User" >
+    update user
+    set realname = #{realname,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      portrait = #{portrait,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      email_activate = #{emailActivate,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      role_id = #{roleId,jdbcType=VARCHAR},
+      auth = #{auth,jdbcType=VARCHAR},
+      auth_info = #{authInfo,jdbcType=VARCHAR},
+      experience = #{experience,jdbcType=INTEGER},
+      city = #{city,jdbcType=VARCHAR},
+      school = #{school,jdbcType=VARCHAR},
+      class_name = #{className,jdbcType=VARCHAR},
+      signature = #{signature,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      register_date = #{registerDate,jdbcType=TIMESTAMP},
+      remarks = #{remarks,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=CHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
