@@ -13,13 +13,13 @@
       <ul class="layui-nav fly-nav-user">
 
         <!-- 未登入的状态 -->
-        <li class="layui-nav-item" th:if="user == null">
+        <li class="layui-nav-item">
           <a class="iconfont icon-touxiang layui-hide-xs" th:href="@{/user/login}"></a>
         </li>
-        <li class="layui-nav-item" th:if="user == null">
+        <li class="layui-nav-item">
           <a th:href="@{/user/login}">登入</a>
         </li>
-        <li class="layui-nav-item" th:if="user == null">
+        <li class="layui-nav-item">
           <a th:href="@{/user/login}">注册</a>
         </li>
         <!--<li class="layui-nav-item layui-hide-xs">-->
@@ -30,10 +30,10 @@
         <!--</li>-->
 
         <!-- 登入后的状态 -->
-        <li class="layui-nav-item" th:if="user != null">
+        <li class="layui-nav-item">
           <a class="fly-nav-avatar" href="javascript:;">
-            <cite class="layui-hide-xs" th:text="${user==null?'':user.username}"></cite>
-            <i class="iconfont icon-renzheng layui-hide-xs" th:title="${user==null?'':user.roleId}"></i>
+            <cite class="layui-hide-xs">任天帅</cite>
+            <i class="iconfont icon-renzheng layui-hide-xs">管理员</i>
             <i class="layui-badge fly-badge-vip layui-hide-xs">VIP3</i>
             <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
           </a>

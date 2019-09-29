@@ -15,7 +15,9 @@ public class IndexController extends BaseController{
     public String index(@RequestParam(value = "label", required = false) String label, Model model){
         Subject subject = SecurityUtils.getSubject();
         User user = (User) subject.getSession().getAttribute("user");
-        model.addAttribute("user", user);
+        if (user != null){
+            model.addAttribute("user", user);
+        }
         model.addAttribute("labels", getPostsLabel());
         return "index";
     }
