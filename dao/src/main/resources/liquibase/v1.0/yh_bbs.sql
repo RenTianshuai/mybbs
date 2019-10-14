@@ -23,7 +23,7 @@ Date: 2019-09-27 10:00:30
 DROP TABLE IF EXISTS `posts`;
 CREATE TABLE `posts` (
   `id` varchar(32) NOT NULL,
-  `label_id` varchar(10) NOT NULL COMMENT '标签ID',
+  `label_id` varchar(50) NOT NULL COMMENT '标签ID',
   `title` varchar(100) NOT NULL COMMENT '标题',
   `content` longtext NOT NULL COMMENT '详细描述',
   `experience` int(10) DEFAULT NULL COMMENT '悬赏飞吻',
@@ -111,7 +111,7 @@ CREATE TABLE `user` (
   `email` varchar(20) DEFAULT NULL COMMENT '邮件',
   `email_activate` varchar(1) DEFAULT NULL COMMENT '邮箱激活',
   `phone` varchar(20) DEFAULT NULL COMMENT '联系电话',
-  `role_id` varchar(2) DEFAULT NULL COMMENT '角色ID',
+  `role_id` varchar(50) DEFAULT NULL COMMENT '角色ID',
   `auth` varchar(1) DEFAULT NULL,
   `auth_info` varchar(250) DEFAULT NULL COMMENT '认证信息',
   `experience` int(10) DEFAULT NULL COMMENT '飞吻',
@@ -128,3 +128,15 @@ CREATE TABLE `user` (
   UNIQUE KEY `idx_user_email` (`email`) USING BTREE,
   UNIQUE KEY `idx_user_phone` (`phone`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表' ROW_FORMAT = Dynamic;
+
+DROP TABLE IF EXISTS `posts_reply`;
+CREATE TABLE `posts_reply` (
+  `id` varchar(32) NOT NULL,
+  `user_id` varchar(32) DEFAULT NULL COMMENT '收藏人ID',
+  `posts_id` varchar(32) NOT NULL COMMENT '帖子ID',
+  `content` text NOT NULL COMMENT '详细描述',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `idx1`(`user_id`) USING BTREE,
+  INDEX `idx2`(`posts_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT = '回复表' ROW_FORMAT = Dynamic;

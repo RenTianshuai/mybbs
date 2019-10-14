@@ -1,6 +1,0 @@
-com\yaohan\bbs\shiro\RedisUtil.class
-com\yaohan\bbs\shiro\CustomRealm.class
-com\yaohan\bbs\shiro\RedisSessionDao.class
-com\yaohan\bbs\shiro\CustomSessionManager.class
-com\yaohan\bbs\shiro\ShiroConfig.class
-com\yaohan\bbs\shiro\RedisConfig.class

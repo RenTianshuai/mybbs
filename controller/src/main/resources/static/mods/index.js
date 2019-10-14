@@ -157,7 +157,7 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
               upload.render({
                 elem: '#uploadImg'
                 ,url: '/api/upload/'
-                ,size: 200
+                ,size: 400
                 ,done: function(res){
                   if(res.status == 0){
                     image.val(res.url);
@@ -279,30 +279,30 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
     //新消息通知
     ,newmsg: function(){
       var elemUser = $('.fly-nav-user');
-      if(layui.cache.user.uid !== -1 && elemUser[0]){
-        fly.json('/message/nums/', {
-          _: new Date().getTime()
-        }, function(res){
-          if(res.status === 0 && res.count > 0){
-            var msg = $('<a class="fly-nav-msg" href="javascript:;">'+ res.count +'</a>');
-            elemUser.append(msg);
-            msg.on('click', function(){
-              fly.json('/message/read', {}, function(res){
-                if(res.status === 0){
-                  location.href = '/user/message/';
-                }
-              });
-            });
-            layer.tips('你有 '+ res.count +' 条未读消息', msg, {
-              tips: 3
-              ,tipsMore: true
-              ,fixed: true
-            });
-            msg.on('mouseenter', function(){
-              layer.closeAll('tips');
-            })
-          }
-        });
+      if(layui.cache.user.id !== -1 && elemUser[0]){
+        // fly.json('/message/nums/', {
+        //   _: new Date().getTime()
+        // }, function(res){
+        //   if(res.status === 0 && res.count > 0){
+        //     var msg = $('<a class="fly-nav-msg" href="javascript:;">'+ res.count +'</a>');
+        //     elemUser.append(msg);
+        //     msg.on('click', function(){
+        //       fly.json('/message/read', {}, function(res){
+        //         if(res.status === 0){
+        //           location.href = '/user/message/';
+        //         }
+        //       });
+        //     });
+        //     layer.tips('你有 '+ res.count +' 条未读消息', msg, {
+        //       tips: 3
+        //       ,tipsMore: true
+        //       ,fixed: true
+        //     });
+        //     msg.on('mouseenter', function(){
+        //       layer.closeAll('tips');
+        //     })
+        //   }
+        // });
       }
       return arguments.callee;
     }
@@ -510,7 +510,7 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
           if(val.replace(/\s/g, '') === ''){
             return false;
           }
-          input.val('site:layui.com '+ input.val());
+          input.val('site:chzy.org.cn '+ input.val());
       });
       }
     })
@@ -541,7 +541,7 @@ layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function(
     }
     text = text.replace(/^@|（[\s\S]+?）/g, '');
     othis.attr({
-      href: '/jump?username='+ text
+      href: '/user/jump?username='+ text
       ,target: '_blank'
     });
   });

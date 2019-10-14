@@ -1,6 +1,11 @@
 package com.yaohan.bbs.dao.entity;
 
-public class Role {
+import java.io.Serializable;
+
+/**
+ * @author rents
+ */
+public class Role implements Serializable {
     private String id;
 
     private String name;

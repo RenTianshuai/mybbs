@@ -1,8 +1,12 @@
 package com.yaohan.bbs.dao.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class PostsCollection {
+/**
+ * @author renti
+ */
+public class PostsCollection implements Serializable {
     private String id;
 
     private String userId;
@@ -10,6 +14,8 @@ public class PostsCollection {
     private String postsId;
 
     private Date createTime;
+
+    private String postsName;
 
     public String getId() {
         return id;
@@ -41,5 +47,13 @@ public class PostsCollection {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getPostsName() {
+        return postsName;
+    }
+
+    public void setPostsName(String postsName) {
+        this.postsName = postsName;
     }
 }

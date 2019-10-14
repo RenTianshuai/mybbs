@@ -11,7 +11,7 @@ spring:
     mode: LEGACYHTML5
   devtools:
     livereload:
-      enabled: true
+      enabled: false
     restart:
       additional-paths: controller/src/main/java,dao/src/main/java,service/src/main/java,shiro/src/main/java
   datasource:
@@ -67,7 +67,7 @@ management:
 mybatis:
   mapper-locations: classpath*:com/yaohan/bbs/dao/mapper/xml/*.xml
   configuration:
-    cache-enabled: true
+    cache-enabled: false
     lazy-loading-enabled: true
     aggressive-lazy-loading: false
 
@@ -81,3 +81,6 @@ id:
   worker: 1
   datacenter: 20
   app: yaohanbbs
+
+upload:
+  images-path: C:\Users\renti\Desktop\mybbsPic\

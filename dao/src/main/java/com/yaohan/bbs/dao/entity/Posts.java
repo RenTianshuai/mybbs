@@ -1,8 +1,12 @@
 package com.yaohan.bbs.dao.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Posts {
+/**
+ * @author renti
+ */
+public class Posts implements Serializable {
     private String id;
 
     private String labelId;

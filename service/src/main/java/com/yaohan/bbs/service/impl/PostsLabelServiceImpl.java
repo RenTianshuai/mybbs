@@ -20,4 +20,9 @@ public class PostsLabelServiceImpl implements PostsLabelService {
     public List<PostsLabel> getUsablePostsLabel() {
         return postsLebelMapper.findActive();
     }
+
+    @Override
+    public PostsLabel get(String id) {
+        return postsLebelMapper.selectByPrimaryKey(id);
+    }
 }

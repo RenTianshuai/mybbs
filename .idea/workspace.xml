@@ -19,23 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="IndexController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/java/com/yaohan/bbs/controller/IndexController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="9" lean-forward="true" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="UserController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/java/com/yaohan/bbs/controller/UserController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+            <state relative-caret-position="187">
+              <caret line="217" selection-start-line="217" selection-end-line="217" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -43,27 +31,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="header.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/common/header.html">
+      <file leaf-file-name="set.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/user/set.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="19" column="35" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="35" />
+            <state relative-caret-position="292">
+              <caret line="34" column="175" selection-start-line="34" selection-start-column="175" selection-end-line="34" selection-end-column="175" />
               <folding>
-                <element signature="n#style#0;n#hr#0;n#dl#0;n#li#3;n#ul#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="956">
-              <caret line="172" selection-start-line="172" selection-end-line="178" selection-end-column="11" />
-              <folding>
-                <element signature="n#style#0;n#a#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="n#ul#0;n#div#1;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" />
-                <element signature="n#dl#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -89,6 +63,18 @@
       <find>class</find>
       <find>posts_lebel</find>
       <find>message</find>
+      <find>selectByUserName</find>
+      <find>selectByUsername</find>
+      <find>请求异常，请重试</find>
+      <find>laypage-main</find>
+      <find>layui.cache.user</find>
+      <find>collection/find</find>
+      <find>fly-admin-box</find>
+      <find>LAY_jieAdmin</find>
+      <find>jie-admin</find>
+      <find>BaseResultMap</find>
+      <find>LAY_page</find>
+      <find>site-mobile-shade</find>
     </findStrings>
     <replaceStrings>
       <replace>class_name</replace>
@@ -102,57 +88,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/shiro/src/main/java/com/yaohan/bbs/shiro/CustomSessionManager.java" />
-        <option value="$PROJECT_DIR$/shiro/src/main/java/com/yaohan/bbs/shiro/RedisSessionDao.java" />
-        <option value="$PROJECT_DIR$/shiro/src/main/java/com/yaohan/bbs/shiro/RedisConfig.java" />
-        <option value="$PROJECT_DIR$/controller/src/main/java/com/yaohan/bbs/config/AccessLogConfig.java" />
-        <option value="$PROJECT_DIR$/shiro/pom.xml" />
-        <option value="$PROJECT_DIR$/controller/target/classes/application.yml" />
-        <option value="$PROJECT_DIR$/controller/src/main/java/com/yaohan/bbs/BbsApplication.java" />
-        <option value="$PROJECT_DIR$/dao/src/main/resources/liqiubase/master.yml" />
-        <option value="$PROJECT_DIR$/dao/src/main/resources/liqiubase/v1.0/yh_bbs.sql" />
-        <option value="$PROJECT_DIR$/dao/src/main/resources/liquibase/v1.0/yh_bbs.sql" />
-        <option value="$PROJECT_DIR$/controller/src/main/resources/application.yml" />
-        <option value="$PROJECT_DIR$/dao/src/main/resources/liquibase/v1.0/yh_bbs.sql" />
-        <option value="$PROJECT_DIR$/dao/src/main/java/com/yaohan/bbs/dao/entity/User.java" />
-        <option value="$PROJECT_DIR$/dao/src/main/java/com/yaohan/bbs/dao/mapper/xml/UserMapper.xml" />
-        <option value="$PROJECT_DIR$/service/src/main/java/com/yaohan/bbs/utils/SnowflakeIdUtil.java" />
-        <option value="$PROJECT_DIR$/service/src/main/java/com/yaohan/bbs/service/FlowNoService.java" />
-        <option value="$PROJECT_DIR$/service/src/main/java/com/yaohan/bbs/service/impl/FlowNoServiceImpl.java" />
-        <option value="$PROJECT_DIR$/controller/src/main/resources/application.yml" />
-        <option value="$PROJECT_DIR$/controller/src/main/java/com/yaohan/bbs/BbsApplication.java" />
-        <option value="$PROJECT_DIR$/shiro/src/main/java/com/yaohan/bbs/shiro/CustomRealm.java" />
-        <option value="$PROJECT_DIR$/shiro/src/main/java/com/yaohan/bbs/shiro/ShiroConfig.java" />
-        <option value="$PROJECT_DIR$/dao/src/main/resources/generatorConfig.xml" />
-        <option value="$PROJECT_DIR$/shiro/src/main/java/com/yaohan/bbs/shiro/CustomRealm.java" />
-        <option value="$PROJECT_DIR$/controller/src/main/java/com/yaohan/bbs/BbsApplication.java" />
-        <option value="$PROJECT_DIR$/dao/src/main/resources/generatorConfig.xml" />
-        <option value="$PROJECT_DIR$/controller/src/main/resources/application.yml" />
+        <option value="$PROJECT_DIR$/controller/src/main/java/com/yaohan/bbs/controller/PostsReplyController.java" />
+        <option value="$PROJECT_DIR$/dao/target/classes/com/yaohan/bbs/dao/mapper/xml/PostsMapper.xml" />
+        <option value="$PROJECT_DIR$/controller/src/main/resources/templates/user/login.html" />
+        <option value="$PROJECT_DIR$/controller/src/main/resources/static/mods/user.js" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/yaohan/bbs/dao/mapper/xml/PostsMapper.xml" />
+        <option value="$PROJECT_DIR$/controller/src/main/resources/templates/common/user-nav.html" />
+        <option value="$PROJECT_DIR$/controller/src/main/resources/templates/common/column.html" />
+        <option value="$PROJECT_DIR$/controller/src/main/java/com/yaohan/bbs/config/GlobalExceptionHandler.java" />
+        <option value="$PROJECT_DIR$/controller/src/main/resources/templates/user/index.html" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/yaohan/bbs/dao/mapper/PostsMapper.java" />
+        <option value="$PROJECT_DIR$/service/src/main/java/com/yaohan/bbs/service/impl/PostsServiceImpl.java" />
+        <option value="$PROJECT_DIR$/service/src/main/java/com/yaohan/bbs/service/PostsServcie.java" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/yaohan/bbs/dao/entity/PostsCollection.java" />
+        <option value="$PROJECT_DIR$/service/src/main/java/com/yaohan/bbs/service/PostsCollectionService.java" />
+        <option value="$PROJECT_DIR$/service/src/main/java/com/yaohan/bbs/service/impl/PostsCollectionServiceImpl.java" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/yaohan/bbs/dao/mapper/PostsCollectionMapper.java" />
+        <option value="$PROJECT_DIR$/dao/target/classes/com/yaohan/bbs/dao/mapper/xml/PostsCollectionMapper.xml" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/yaohan/bbs/dao/mapper/xml/PostsReplyMapper.xml" />
+        <option value="$PROJECT_DIR$/dao/src/main/java/com/yaohan/bbs/dao/mapper/PostsReplyMapper.java" />
+        <option value="$PROJECT_DIR$/service/src/main/java/com/yaohan/bbs/service/impl/PostsReplyServiceImpl.java" />
+        <option value="$PROJECT_DIR$/service/src/main/java/com/yaohan/bbs/service/PostsReplyService.java" />
+        <option value="$PROJECT_DIR$/controller/src/main/java/com/yaohan/bbs/controller/UserController.java" />
+        <option value="$PROJECT_DIR$/controller/src/main/resources/templates/user/home.html" />
         <option value="$PROJECT_DIR$/controller/src/main/resources/templates/index.html" />
-        <option value="$PROJECT_DIR$/shiro/src/main/java/com/yaohan/bbs/shiro/ShiroConfig.java" />
         <option value="$PROJECT_DIR$/controller/src/main/resources/templates/jie/add.html" />
-        <option value="$PROJECT_DIR$/../mybbs/shiro/src/main/java/com/yaohan/bbs/shiro/ShiroConfig.java" />
+        <option value="$PROJECT_DIR$/controller/src/main/resources/templates/jie/detail.html" />
+        <option value="$PROJECT_DIR$/controller/src/main/resources/templates/jie/index.html" />
+        <option value="$PROJECT_DIR$/controller/src/main/resources/templates/user/collection.html" />
+        <option value="$PROJECT_DIR$/controller/src/main/resources/static/mods/index.js" />
+        <option value="$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/user/collection.html" />
+        <option value="$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/user/index.html" />
+        <option value="$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/error.html" />
+        <option value="$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/common/user-nav.html" />
+        <option value="$PROJECT_DIR$/../mybbs/controller/src/main/java/com/yaohan/bbs/config/MyWeb.java" />
+        <option value="$PROJECT_DIR$/../mybbs/controller/src/main/resources/application.yml" />
+        <option value="$PROJECT_DIR$/../mybbs/controller/src/main/java/com/yaohan/bbs/config/MyWebAppConfigurer.java" />
         <option value="$PROJECT_DIR$/../mybbs/service/src/main/java/com/yaohan/bbs/service/UserService.java" />
-        <option value="$PROJECT_DIR$/../mybbs/dao/src/main/java/com/yaohan/bbs/dao/mapper/xml/UserMapper.xml" />
-        <option value="$PROJECT_DIR$/../mybbs/dao/src/main/java/com/yaohan/bbs/dao/mapper/UserMapper.java" />
         <option value="$PROJECT_DIR$/../mybbs/service/src/main/java/com/yaohan/bbs/service/impl/UserServiceImpl.java" />
-        <option value="$PROJECT_DIR$/../mybbs/shiro/src/main/java/com/yaohan/bbs/shiro/CustomRealm.java" />
-        <option value="$PROJECT_DIR$/../mybbs/service/src/main/java/com/yaohan/bbs/service/PostsServcie.java" />
-        <option value="$PROJECT_DIR$/../mybbs/service/src/main/java/com/yaohan/bbs/service/PostsLabelService.java" />
-        <option value="$PROJECT_DIR$/../mybbs/service/src/main/java/com/yaohan/bbs/service/impl/PostsLabelServiceImpl.java" />
-        <option value="$PROJECT_DIR$/../mybbs/dao/src/main/java/com/yaohan/bbs/dao/mapper/PostsLebelMapper.java" />
-        <option value="$PROJECT_DIR$/../mybbs/dao/src/main/java/com/yaohan/bbs/dao/mapper/xml/PostsLebelMapper.xml" />
-        <option value="$PROJECT_DIR$/../mybbs/dao/src/main/resources/liquibase/v1.0/yh_bbs.sql" />
         <option value="$PROJECT_DIR$/../mybbs/controller/src/main/java/com/yaohan/bbs/controller/BaseController.java" />
-        <option value="$PROJECT_DIR$/../mybbs/controller/src/main/java/com/yaohan/bbs/BbsApplication.java" />
-        <option value="$PROJECT_DIR$/../mybbs/shiro/src/main/java/com/yaohan/bbs/shiro/RedisSessionDao.java" />
+        <option value="$PROJECT_DIR$/../mybbs/controller/src/main/resources/static/mods/user.js" />
         <option value="$PROJECT_DIR$/../mybbs/controller/src/main/resources/static/mods/index.js" />
+        <option value="$PROJECT_DIR$/../mybbs/controller/src/main/java/com/yaohan/bbs/controller/RestController.java" />
+        <option value="$PROJECT_DIR$/../mybbs/controller/src/main/java/com/yaohan/bbs/controller/ApiController.java" />
+        <option value="$PROJECT_DIR$/../mybbs/controller/src/main/java/com/yaohan/bbs/controller/PageController.java" />
+        <option value="$PROJECT_DIR$/../mybbs/controller/src/main/java/com/yaohan/bbs/controller/PostsReplyController.java" />
+        <option value="$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/jie/detail.html" />
         <option value="$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/common/link.html" />
-        <option value="$PROJECT_DIR$/../mybbs/dao/src/main/java/com/yaohan/bbs/dao/mapper/xml/PostsLabelMapper.xml" />
-        <option value="$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/index.html" />
-        <option value="$PROJECT_DIR$/../mybbs/controller/src/main/java/com/yaohan/bbs/controller/IndexController.java" />
-        <option value="$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/common/header.html" />
+        <option value="$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/jie/add.html" />
         <option value="$PROJECT_DIR$/../mybbs/controller/src/main/java/com/yaohan/bbs/controller/UserController.java" />
+        <option value="$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/user/activate.html" />
+        <option value="$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/user/set.html" />
       </list>
     </option>
   </component>
@@ -172,6 +158,15 @@
         <path>
           <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
           <item name="controller" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Dependencies" type="f4be9f2a:MavenProjectsStructure$DependenciesNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="dao" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="dao" type="9519ce18:MavenProjectsStructure$ProjectNode" />
           <item name="Dependencies" type="f4be9f2a:MavenProjectsStructure$DependenciesNode" />
         </path>
         <path>
@@ -210,8 +205,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="453" />
-    <option name="y" value="10" />
+    <option name="x" value="547" />
+    <option name="y" value="40" />
     <option name="width" value="903" />
     <option name="height" value="788" />
   </component>
@@ -222,6 +217,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -295,6 +291,18 @@
               <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="yaohan" type="462c0819:PsiDirectoryNode" />
               <item name="bbs" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="mybbs" type="b2602c69:ProjectViewProjectNode" />
+              <item name="mybbs" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="yaohan" type="462c0819:PsiDirectoryNode" />
+              <item name="bbs" type="462c0819:PsiDirectoryNode" />
               <item name="controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -304,25 +312,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mybbs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mybbs" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mybbs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mybbs" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="mods" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="mybbs" type="b2602c69:ProjectViewProjectNode" />
@@ -341,7 +330,7 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="mybbs" type="b2602c69:ProjectViewProjectNode" />
@@ -441,14 +430,6 @@
             <path>
               <item name="mybbs" type="b2602c69:ProjectViewProjectNode" />
               <item name="mybbs" type="462c0819:PsiDirectoryNode" />
-              <item name="dao" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mybbs" type="b2602c69:ProjectViewProjectNode" />
-              <item name="mybbs" type="462c0819:PsiDirectoryNode" />
               <item name="shiro" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -518,7 +499,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
       <pane id="AndroidView" />
     </panes>
@@ -529,9 +509,10 @@
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
-    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;jar://C:/Users/renti/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/2.0.0.RELEASE/spring-boot-autoconfigure-2.0.0.RELEASE-sources.jar!/org/springframework/boot/autoconfigure/web/servlet/error/BasicErrorController.java&#10;basicErrorController&#9;PSI&#9;JAVA://org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController&#10;InternalResourceViewResolver&#9;PSI&#9;JAVA://org.springframework.web.servlet.view.InternalResourceViewResolver" />
+    <property name="SearchEverywhereHistoryKey" value="StandardMultipartFile&#9;PSI&#9;JAVA://org.springframework.web.multipart.support.StandardMultipartHttpServletRequest.StandardMultipartFile&#10;StandardMultipartHttpServletRequest&#9;PSI&#9;JAVA://org.springframework.web.multipart.support.StandardMultipartHttpServletRequest&#10;basicErrorController&#9;PSI&#9;JAVA://org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController&#10;InternalResourceViewResolver&#9;PSI&#9;JAVA://org.springframework.web.servlet.view.InternalResourceViewResolver" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.idea/workspace.xml" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -551,10 +532,11 @@
       <recent name="com.yaohan.bbs.utils" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\mybbs\controller\src\main\resources\static\images" />
+      <recent name="E:\mybbs\controller\src\main\resources\templates\user" />
+      <recent name="E:\mybbs\controller\src\main\resources\static\json" />
       <recent name="E:\mybbs\dao\src\main\resources" />
       <recent name="E:\mybbs\src\main\resources\templates" />
-      <recent name="E:\mybbs\src\main\resources\static" />
-      <recent name="E:\mybbs\src\main\webapp" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -676,7 +658,16 @@
       <workItem from="1569545755044" duration="21023000" />
       <workItem from="1569574078405" duration="5306000" />
       <workItem from="1569717821060" duration="3189000" />
-      <workItem from="1569740221528" duration="11194000" />
+      <workItem from="1569740221528" duration="11446000" />
+      <workItem from="1569804994677" duration="17738000" />
+      <workItem from="1569841295194" duration="84000" />
+      <workItem from="1570499674016" duration="8389000" />
+      <workItem from="1570583135251" duration="10710000" />
+      <workItem from="1570603711121" duration="12243000" />
+      <workItem from="1570667317122" duration="22994000" />
+      <workItem from="1570754816564" duration="10289000" />
+      <workItem from="1570843688390" duration="27724000" />
+      <workItem from="1571013364923" duration="23502000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1569558927569</created>
@@ -710,80 +701,80 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="90930000" />
+    <option name="totallyTimeSpent" value="224855000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="right" id="Maven Projects" order="3" weight="0.26096824" />
+      <window_info anchor="bottom" id="Event Log" order="6" side_tool="true" />
+      <window_info anchor="right" id="Maven Projects" order="3" weight="0.26066098" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info anchor="bottom" id="Profiler" order="7" />
+      <window_info anchor="bottom" id="Profiler" order="8" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.74471545" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="7" />
+      <window_info anchor="bottom" id="Debug" order="14" weight="0.6256742" />
+      <window_info anchor="bottom" id="TODO" order="5" />
+      <window_info anchor="bottom" id="Messages" order="9" weight="0.32901832" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
-      <window_info anchor="bottom" id="Java Enterprise" order="7" />
+      <window_info anchor="bottom" id="Java Enterprise" order="10" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.6569106" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.4796748" />
-      <window_info anchor="bottom" id="Spring" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.3284553" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.33207262" />
+      <window_info anchor="bottom" id="Version Control" order="11" weight="0.6558792" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.4789644" />
+      <window_info anchor="bottom" id="Spring" order="12" />
+      <window_info anchor="bottom" id="Terminal" order="13" weight="0.3279396" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.41257995" />
       <window_info anchor="right" id="Bean Validation" order="3" />
       <window_info id="Web" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3284553" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3284553" />
     </layout>
     <layout-to-restore>
       <window_info id="Designer" order="2" />
       <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="bottom" id="Spring" order="7" />
+      <window_info anchor="bottom" id="Spring" order="12" />
       <window_info id="Image Layers" order="3" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.48051947" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.4789644" />
+      <window_info anchor="bottom" id="Cvs" order="3" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
       <window_info anchor="bottom" id="Profiler" order="8" />
       <window_info id="Favorites" order="5" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="13" weight="0.3284553" />
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="11" />
-      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="9" weight="0.32901832" />
+      <window_info anchor="bottom" id="TODO" order="5" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Java Enterprise" order="12" />
-      <window_info anchor="bottom" id="Database Changes" order="13" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="14" show_stripe_button="false" />
-      <window_info anchor="right" id="Maven Projects" order="5" weight="0.26096824" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.33358547" />
+      <window_info anchor="bottom" id="Java Enterprise" order="10" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="11" weight="0.6558792" />
+      <window_info anchor="right" id="Maven Projects" order="5" weight="0.26066098" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20842217" />
       <window_info anchor="right" id="Database" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32954547" />
+      <window_info anchor="bottom" id="Inspection" order="4" weight="0.4" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3284553" />
       <window_info anchor="right" id="Bean Validation" order="9" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.5081169" />
+      <window_info active="true" anchor="bottom" id="Debug" order="14" visible="true" weight="0.49946064" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -834,312 +825,337 @@
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="9" />
+      <option name="time" value="40" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../mybbs/dao/src/main/resources/liquibase/master.yml">
+    <entry file="file://$PROJECT_DIR$/../mybbs/dao/src/main/java/com/yaohan/bbs/dao/entity/Posts.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="13" selection-start-line="3" selection-start-column="13" selection-end-line="3" selection-end-column="13" />
+        <state relative-caret-position="-75">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-autoconfigure/2.0.0.RELEASE/spring-boot-autoconfigure-2.0.0.RELEASE.jar!/META-INF/spring-configuration-metadata.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/controller/target/classes/application.yml" />
-    <entry file="file://$PROJECT_DIR$/../mybbs/dao/src/main/java/com/yaohan/bbs/dao/entity/Posts.java">
+    <entry file="file://$PROJECT_DIR$/../mybbs/service/src/main/java/com/yaohan/bbs/service/PostsServcie.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-799">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        <state relative-caret-position="210">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../mybbs/dao/src/main/java/com/yaohan/bbs/dao/entity/PostsCollection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        <state relative-caret-position="510">
+          <caret line="51" column="34" selection-start-line="51" selection-start-column="34" selection-end-line="51" selection-end-column="34" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/dao/src/main/java/com/yaohan/bbs/dao/entity/PostsLabel.java">
+    <entry file="file://$PROJECT_DIR$/../mybbs/service/src/main/java/com/yaohan/bbs/service/PostsCollectionService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        <state relative-caret-position="135">
+          <caret line="9" column="28" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/dao/src/main/java/com/yaohan/bbs/dao/entity/Role.java">
+    <entry file="file://$PROJECT_DIR$/../mybbs/service/src/main/java/com/yaohan/bbs/service/impl/PostsServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        <state relative-caret-position="540">
+          <caret line="38" column="8" lean-forward="true" selection-start-line="38" selection-start-column="8" selection-end-line="40" selection-end-column="20" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/service/src/main/java/com/yaohan/bbs/service/impl/FlowNoServiceImpl.java">
+    <entry file="file://$PROJECT_DIR$/../mybbs/dao/target/classes/com/yaohan/bbs/dao/mapper/xml/PostsMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="50" lean-forward="true" selection-start-line="22" selection-start-column="50" selection-end-line="22" selection-end-column="50" />
+        <state relative-caret-position="2805">
+          <caret line="196" column="16" selection-start-line="196" selection-start-column="11" selection-end-line="196" selection-end-column="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/service/src/main/java/com/yaohan/bbs/service/FlowNoService.java">
+    <entry file="file://$PROJECT_DIR$/../mybbs/dao/src/main/java/com/yaohan/bbs/dao/mapper/PostsCollectionMapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
+        <state relative-caret-position="285">
+          <caret line="22" column="53" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="53" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/service/src/main/java/com/yaohan/bbs/utils/SnowflakeIdUtil.java">
+    <entry file="file://$PROJECT_DIR$/../mybbs/service/src/main/java/com/yaohan/bbs/service/impl/PostsCollectionServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        <state relative-caret-position="292">
+          <caret line="34" column="45" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="45" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/controller/pom.xml">
+    <entry file="file://$PROJECT_DIR$/../mybbs/dao/target/classes/com/yaohan/bbs/dao/mapper/xml/PostsCollectionMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="28" column="29" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
+        <state relative-caret-position="757">
+          <caret line="110" column="31" lean-forward="true" selection-start-line="110" selection-start-column="31" selection-end-line="110" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/dao/src/main/resources/ehcache.xml">
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/user/forget.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/dao/src/main/java/com/yaohan/bbs/dao/mapper/xml/PostsMapper.xml">
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/static/images/fly.jpg" />
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/static/images/case.png" />
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/static/images/userhome.jpg" />
+    <entry file="file://$PROJECT_DIR$/../mybbs/dao/src/main/java/com/yaohan/bbs/dao/mapper/PostsMapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="18" column="59" selection-start-line="18" selection-start-column="41" selection-end-line="18" selection-end-column="59" />
+        <state relative-caret-position="375">
+          <caret line="28" column="46" lean-forward="true" selection-start-line="28" selection-start-column="46" selection-end-line="28" selection-end-column="46" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/dao/src/main/java/com/yaohan/bbs/dao/mapper/xml/PostsCollectionMapper.xml">
+    <entry file="file://$PROJECT_DIR$/../mybbs/dao/src/main/java/com/yaohan/bbs/dao/mapper/xml/PostsReplyMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="772">
+          <caret line="125" column="13" lean-forward="true" selection-start-line="125" selection-start-column="13" selection-end-line="125" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mybbs/dao/src/main/java/com/yaohan/bbs/dao/mapper/PostsReplyMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="55" lean-forward="true" selection-start-line="17" selection-start-column="55" selection-end-line="17" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mybbs/service/src/main/java/com/yaohan/bbs/service/impl/PostsReplyServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="24" column="32" lean-forward="true" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mybbs/service/src/main/java/com/yaohan/bbs/service/PostsReplyService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="59" lean-forward="true" selection-start-line="13" selection-start-column="59" selection-end-line="13" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/user/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="617">
+          <caret line="63" column="30" selection-start-line="63" selection-start-column="8" selection-end-line="63" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/common/column.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="114" selection-start-line="15" selection-start-column="114" selection-end-line="15" selection-end-column="114" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/static/layui/css/layui.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="1" column="38435" selection-start-line="1" selection-start-column="38435" selection-end-line="1" selection-end-column="38435" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/user/message.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1170" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/user/collection.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="37" lean-forward="true" selection-start-line="26" selection-start-column="37" selection-end-line="26" selection-end-column="37" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/jie/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="69" column="23" lean-forward="true" selection-start-line="69" selection-start-column="23" selection-end-line="72" selection-end-column="6" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/user/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="367">
+          <caret line="51" column="4" selection-start-line="51" selection-start-column="4" selection-end-line="51" selection-end-column="4" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="638">
+          <caret line="116" column="6" selection-start-line="116" selection-start-column="6" selection-end-line="116" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/error.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/common/user-nav.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
-          <caret line="3" column="30" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="30" />
+          <caret line="3" column="38" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/shiro/src/main/java/com/yaohan/bbs/shiro/CustomSessionManager.java">
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/user/reg.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="439">
-          <caret line="33" selection-start-line="33" selection-end-line="33" />
+        <state>
+          <caret selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/java/com/yaohan/bbs/controller/PostsController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="36" column="8" selection-start-line="36" selection-start-column="8" selection-end-line="36" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/dao/src/main/resources/generatorConfig.xml">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-web/5.0.4.RELEASE/spring-web-5.0.4.RELEASE-sources.jar!/org/springframework/web/multipart/support/StandardMultipartHttpServletRequest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="81" column="39" selection-start-line="81" selection-start-column="39" selection-end-line="81" selection-end-column="39" />
+        <state relative-caret-position="127">
+          <caret line="204" column="71" selection-start-line="204" selection-start-column="58" selection-end-line="204" selection-end-column="71" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/jie/add.html">
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/application.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1200">
-          <caret line="80" column="17" selection-start-line="80" selection-start-column="17" selection-end-line="80" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/shiro/shiro-core/1.4.0/shiro-core-1.4.0.jar!/org/apache/shiro/authz/SimpleAuthorizationInfo.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="12" column="26" selection-start-line="12" selection-start-column="26" selection-end-line="12" selection-end-column="26" />
-          <folding>
-            <element signature="e#664#665#0" expanded="true" />
-            <element signature="e#698#699#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="832">
+          <caret line="85" column="15" selection-start-line="85" selection-start-column="15" selection-end-line="85" selection-end-column="47" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../mybbs/service/src/main/java/com/yaohan/bbs/service/UserService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="37" lean-forward="true" selection-start-line="2" selection-start-column="37" selection-end-line="2" selection-end-column="37" />
+        <state relative-caret-position="180">
+          <caret line="12" column="11" lean-forward="true" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/dao/src/main/java/com/yaohan/bbs/dao/mapper/xml/UserMapper.xml">
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/java/com/yaohan/bbs/controller/BaseController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="42" column="31" selection-start-line="42" selection-start-column="31" selection-end-line="42" selection-end-column="31" />
+        <state relative-caret-position="435">
+          <caret line="44" column="20" selection-start-line="44" selection-start-column="9" selection-end-line="44" selection-end-column="20" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/dao/src/main/java/com/yaohan/bbs/dao/mapper/UserMapper.java">
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/user/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="43" lean-forward="true" selection-start-line="17" selection-start-column="43" selection-end-line="17" selection-end-column="43" />
+        <state relative-caret-position="135">
+          <caret line="9" column="27" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="27" />
+          <folding>
+            <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../mybbs/service/src/main/java/com/yaohan/bbs/service/impl/UserServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="51" selection-start-line="17" selection-start-column="51" selection-end-line="17" selection-end-column="51" />
+        <state relative-caret-position="390">
+          <caret line="37" column="53" selection-start-line="37" selection-start-column="53" selection-end-line="37" selection-end-column="53" />
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#591#592#0" expanded="true" />
-            <element signature="e#618#619#0" expanded="true" />
+            <element signature="e#804#805#0" expanded="true" />
+            <element signature="e#864#865#0" expanded="true" />
+            <element signature="e#915#916#0" expanded="true" />
+            <element signature="e#940#941#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/shiro/shiro-core/1.4.0/shiro-core-1.4.0.jar!/org/apache/shiro/authz/Permission.class">
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/common/header.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/shiro/shiro-core/1.4.0/shiro-core-1.4.0.jar!/org/apache/shiro/realm/CachingRealm.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="46" column="18" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="18" />
+        <state relative-caret-position="435">
+          <caret line="29" column="93" selection-start-line="29" selection-start-column="85" selection-end-line="29" selection-end-column="93" />
           <folding>
-            <element signature="e#1493#1494#0" expanded="true" />
-            <element signature="e#1525#1526#0" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#dd#3;n#dl#0;n#li#0;n#ul#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../mybbs/shiro/src/main/java/com/yaohan/bbs/shiro/CustomRealm.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="38" column="62" lean-forward="true" selection-start-line="38" selection-start-column="62" selection-end-line="38" selection-end-column="62" />
+        <state relative-caret-position="675">
+          <caret line="80" column="74" lean-forward="true" selection-start-line="80" selection-start-column="74" selection-end-line="80" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/static/mods/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1942">
+          <caret line="297" column="30" lean-forward="true" selection-start-line="297" selection-start-column="30" selection-end-line="297" selection-end-column="30" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#td#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#strong#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/java/com/yaohan/bbs/controller/ApiController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/java/com/yaohan/bbs/config/GlobalExceptionHandler.java">
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/java/com/yaohan/bbs/controller/PageController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="46" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="46" />
+        <state relative-caret-position="301">
+          <caret line="123" column="9" lean-forward="true" selection-start-line="123" selection-start-column="9" selection-end-line="123" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/service/src/main/java/com/yaohan/bbs/service/PostsCollectionService.java">
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/java/com/yaohan/bbs/controller/PostsReplyController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="39" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="39" />
+        <state relative-caret-position="270">
+          <caret line="27" column="26" selection-start-line="27" selection-start-column="26" selection-end-line="27" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/service/src/main/java/com/yaohan/bbs/service/PostsServcie.java">
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/jie/detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/service/src/main/java/com/yaohan/bbs/service/RoleService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="28" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/service/src/main/java/com/yaohan/bbs/service/PostsLabelService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="44" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
+        <state relative-caret-position="503">
+          <caret line="49" column="93" selection-start-line="49" selection-start-column="93" selection-end-line="49" selection-end-column="93" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#fieldset#0;n#div#1;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#textarea#0;n#div#0;n#div#0;n#form#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/service/src/main/java/com/yaohan/bbs/service/impl/PostsLabelServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="15" lean-forward="true" selection-start-line="16" selection-start-column="15" selection-end-line="16" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#558#559#0" expanded="true" />
-            <element signature="e#585#586#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/dao/src/main/java/com/yaohan/bbs/dao/mapper/PostsLabelMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="34" selection-start-line="19" selection-start-column="34" selection-end-line="19" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/dao/src/main/resources/liquibase/v1.0/yh_bbs.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="456">
-          <caret line="74" column="24" selection-start-line="74" selection-start-column="24" selection-end-line="74" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/java/com/yaohan/bbs/controller/BaseController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="37" lean-forward="true" selection-start-line="13" selection-start-column="37" selection-end-line="13" selection-end-column="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#381#382#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/common/head.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/shiro/src/main/java/com/yaohan/bbs/shiro/RedisConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="39" column="40" selection-start-line="39" selection-start-column="40" selection-end-line="39" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/shiro/src/main/java/com/yaohan/bbs/shiro/ShiroConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1005">
-          <caret line="69" selection-start-line="69" selection-end-line="69" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1992#2008#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/java/com/yaohan/bbs/BbsApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="38" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/common/column.html">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/static/mods/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1136">
-          <caret line="614" column="35" lean-forward="true" selection-start-line="614" selection-start-column="35" selection-end-line="614" selection-end-column="35" />
+        <state relative-caret-position="3247">
+          <caret line="523" column="27" selection-start-line="523" selection-start-column="19" selection-end-line="523" selection-end-column="27" />
           <folding>
             <element signature="n#style#0;n#i#0;n#span#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#i#0;n#span#0;n#!!top" expanded="true" />
@@ -1155,97 +1171,66 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/common/link.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="87" lean-forward="true" selection-start-line="7" selection-start-column="87" selection-end-line="7" selection-end-column="87" />
+        <state relative-caret-position="120">
+          <caret line="8" column="131" selection-start-line="8" selection-start-column="131" selection-end-line="8" selection-end-column="131" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/application.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="16" selection-start-line="15" selection-start-column="6" selection-end-line="15" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/shiro/src/main/java/com/yaohan/bbs/shiro/RedisSessionDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="21" column="17" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/redis/clients/jedis/2.9.0/jedis-2.9.0.jar!/redis/clients/jedis/BinaryJedis.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1726">
-          <caret line="190" column="18" selection-start-line="190" selection-start-column="18" selection-end-line="190" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/shiro/src/main/java/com/yaohan/bbs/shiro/RedisUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="18" column="20" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/dao/src/main/java/com/yaohan/bbs/dao/entity/User.java">
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/jie/add.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
-          <caret line="9" column="27" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="27" />
+          <caret line="9" column="58" selection-start-line="9" selection-start-column="58" selection-end-line="9" selection-end-column="58" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/dao/src/main/java/com/yaohan/bbs/dao/mapper/xml/PostsLabelMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="56" selection-start-line="3" selection-start-column="44" selection-end-line="3" selection-end-column="56" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="956">
-          <caret line="172" selection-start-line="172" selection-end-line="178" selection-end-column="11" />
-          <folding>
-            <element signature="n#style#0;n#a#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#ul#0;n#div#1;n#div#0;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" />
-            <element signature="n#dl#0;n#div#1;n#div#0;n#div#2;n#body#0;n#html#0;n#!!top" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/common/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="19" column="35" selection-start-line="19" selection-start-column="30" selection-end-line="19" selection-end-column="35" />
-          <folding>
-            <element signature="n#style#0;n#hr#0;n#dl#0;n#li#3;n#ul#1;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/java/com/yaohan/bbs/controller/IndexController.java">
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/java/com/yaohan/bbs/config/MyWebAppConfigurer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
-          <caret line="19" column="9" lean-forward="true" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="9" />
+          <caret line="19" column="52" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/java/com/yaohan/bbs/config/GlobalExceptionHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="66" selection-start-line="17" selection-start-column="63" selection-end-line="17" selection-end-column="66" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/user/activate.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="780">
+          <caret line="52" column="52" selection-start-line="52" selection-start-column="52" selection-end-line="52" selection-end-column="52" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#4;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#em#0;n#span#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#div#4;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#li#1;n#ul#0;n#div#0;n#div#0;n#div#4;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/java/com/yaohan/bbs/controller/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="6" selection-start-line="6" selection-start-column="6" selection-end-line="6" selection-end-column="6" />
+        <state relative-caret-position="187">
+          <caret line="217" selection-start-line="217" selection-end-line="217" />
           <folding>
             <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../mybbs/controller/src/main/resources/templates/user/set.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="34" column="175" selection-start-line="34" selection-start-column="175" selection-end-line="34" selection-end-column="175" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1343,7 +1328,7 @@
   </component>
   <component name="mavenExecuteGoalHistory">
     <option value="$PROJECT_DIR$" />
-    <option value="clean compile" />
     <option value="clean" />
+    <option value="clean compile" />
   </component>
 </project>

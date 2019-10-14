@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface PostsLabelService {
     List<PostsLabel>  getUsablePostsLabel();
+
+    PostsLabel get(String id);
 }

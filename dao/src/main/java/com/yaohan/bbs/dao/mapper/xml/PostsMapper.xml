@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.yaohan.bbs.dao.mapper.PostsMapper" >
+  <cache type="org.mybatis.caches.ehcache.EhcacheCache"></cache>
   <resultMap id="BaseResultMap" type="com.yaohan.bbs.dao.entity.Posts" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="label_id" property="labelId" jdbcType="VARCHAR" />
@@ -31,6 +32,12 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
+    from posts
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByPrimaryKeyWithoutBLOBS" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
     from posts
     where id = #{id,jdbcType=VARCHAR}
   </select>
@@ -219,4 +226,63 @@
       del_flag = #{delFlag,jdbcType=CHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="findAllPubishPosts" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from posts
+    where status = 4 order by publish_time desc
+  </select>
+
+  <select id="findAllPubishPostsBy" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select
+    <include refid="Base_Column_List" />
+    from posts
+    where status = 4
+    <if test="labelId != null" >
+      and label_id = #{labelId,jdbcType=VARCHAR}
+    </if>
+    <if test="title != null" >
+      and title = #{title,jdbcType=VARCHAR}
+    </if>
+    <if test="experience != null" >
+      and experience = #{experience,jdbcType=INTEGER}
+    </if>
+    <if test="userId != null" >
+      and user_id = #{userId,jdbcType=VARCHAR}
+    </if>
+    <if test="publishTime != null" >
+      and publish_time = #{publishTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="readCount != null" >
+      and read_count = #{readCount,jdbcType=INTEGER}
+    </if>
+    <if test="top != null" >
+      and top = #{top,jdbcType=BIT}
+    </if>
+    <if test="essence != null" >
+      and essence = #{essence,jdbcType=BIT}
+    </if>
+    <if test="score != null" >
+      and score = #{score,jdbcType=TINYINT}
+    </if>
+    <if test="approver != null" >
+      and approver = #{approver,jdbcType=VARCHAR}
+    </if>
+    <if test="delFlag != null" >
+      and del_flag = #{delFlag,jdbcType=CHAR}
+    </if>
+    <if test="content != null" >
+      and content = #{content,jdbcType=LONGVARCHAR}
+    </if>
+    order by publish_time desc
+  </select>
+
+  <select id="topPublishPostsByNum" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List" />
+    from posts
+    where top = 1 and status = 4 order by publish_time desc
+    limit #{num,jdbcType=INTEGER}
+  </select>
 </mapper>

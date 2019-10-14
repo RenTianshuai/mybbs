@@ -1,8 +1,12 @@
 package com.yaohan.bbs.dao.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
+/**
+ * @author rents
+ */
+public class User implements Serializable {
     private String id;
 
     private String realname;
@@ -46,6 +50,8 @@ public class User {
     private String remarks;
 
     private String delFlag;
+
+    private String roleName;
 
     public String getId() {
         return id;
@@ -221,5 +227,13 @@ public class User {
 
     public void setDelFlag(String delFlag) {
         this.delFlag = delFlag == null ? null : delFlag.trim();
+    }
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 }

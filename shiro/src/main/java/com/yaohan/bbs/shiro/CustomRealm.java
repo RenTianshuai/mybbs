@@ -1,14 +1,18 @@
 package com.yaohan.bbs.shiro;
 
 import com.yaohan.bbs.dao.entity.User;
+import com.yaohan.bbs.service.RoleService;
 import com.yaohan.bbs.service.UserService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
-import org.apache.shiro.authz.Permission;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,6 +24,8 @@ public class CustomRealm extends AuthorizingRealm {
 
     @Autowired
     UserService userService;
+    @Autowired
+    RoleService roleService;
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
@@ -47,16 +53,34 @@ public class CustomRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         log.info("认证");
-        String username = (String) authenticationToken.getPrincipal();
-        User user = userService.getByUserName(username);
+        CustomPasswordToken token = (CustomPasswordToken) authenticationToken;
+
+        //验证码
+        Session session = SecurityUtils.getSubject().getSession();
+        String code = (String)session.getAttribute("validateCode");
+        if (token.getVercode() == null || !token.getVercode().toUpperCase().equals(code)){
+            throw new AuthenticationException("验证码错误,请重试");
+        }
+
+        String username = (String) token.getPrincipal();
+        User user = null;
+        if (StringUtils.isNotEmpty(username)){
+            user = userService.getByUserName(username);
+        }else {
+            String email = token.getEmail();
+            user = userService.getByEmail(email);
+        }
         if (user == null) {
-            // 用户名不存在抛出异常
-            throw new UnknownAccountException();
+            throw new UnknownAccountException("用户不存在");
         }
         if ("1".equals(user.getDelFlag())) {
-            // 用户被管理员锁定抛出异常
-            throw new LockedAccountException();
+            throw new LockedAccountException("该账户已删除");
         }
+        //设置角色名
+        if (StringUtils.isNotEmpty(user.getRoleId())){
+            user.setRoleName(roleService.get(user.getRoleId()).getName());
+        }
+        session.setAttribute("user", user);
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(user.getUsername(),
                 user.getPassword(), ByteSource.Util.bytes(user.getSalt()), getName());
         return authenticationInfo;

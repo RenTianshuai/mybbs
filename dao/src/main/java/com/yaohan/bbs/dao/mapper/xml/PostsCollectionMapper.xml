@@ -79,4 +79,20 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+  <select id="selectBy" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from posts_collection
+    <where>
+      <if test="id != null" >
+        and id = #{id,jdbcType=VARCHAR}
+      </if>
+      <if test="userId != null" >
+        and user_id = #{userId,jdbcType=VARCHAR}
+      </if>
+      <if test="postsId != null" >
+        and posts_id = #{postsId,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </select>
 </mapper>

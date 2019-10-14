@@ -17,4 +17,24 @@ public class UserServiceImpl implements UserService {
     public User getByUserName(String userName) {
         return userMapper.selectByUsername(userName);
     }
+
+    @Override
+    public User getByEmail(String email) {
+        return userMapper.selectByEmail(email);
+    }
+
+    @Override
+    public void add(User user) {
+        userMapper.insertSelective(user);
+    }
+
+    @Override
+    public User get(String userId) {
+        return userMapper.selectByPrimaryKey(userId);
+    }
+
+    @Override
+    public void update(User user) {
+        userMapper.updateByPrimaryKeySelective(user);
+    }
 }

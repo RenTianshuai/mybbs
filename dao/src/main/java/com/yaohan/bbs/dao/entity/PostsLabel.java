@@ -1,6 +1,11 @@
 package com.yaohan.bbs.dao.entity;
 
-public class PostsLabel {
+import java.io.Serializable;
+
+/**
+ * @author renti
+ */
+public class PostsLabel implements Serializable {
     private String id;
 
     private String name;

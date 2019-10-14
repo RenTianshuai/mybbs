@@ -64,74 +64,74 @@ layui.define(['laypage', 'fly', 'element', 'flow'], function(exports){
       elemUCM.children().eq(index).find('ul').html(res.rows.length === 0 ? '<div class="fly-msg">没有相关数据</div>' : html);
     };
 
-    var page = function(now){
-      var curr = now || 1;
-      if(gather.minelog[type + '-page-' + curr]){
-        view(gather.minelog[type + '-page-' + curr]);
-      } else {
-        //我收藏的帖
-        if(type === 'collection'){
-          var nums = 10; //每页出现的数据量
-          fly.json(url, {}, function(res){
-            res.count = res.rows.length;
+    // var page = function(now){
+    //   var curr = now || 1;
+    //   if(gather.minelog[type + '-page-' + curr]){
+    //     view(gather.minelog[type + '-page-' + curr]);
+    //   } else {
+    //     //我收藏的帖
+    //     if(type === 'collection'){
+    //       var nums = 10; //每页出现的数据量
+    //       fly.json(url, {}, function(res){
+    //         res.count = res.rows.length;
+    //
+    //         var rows = layui.sort(res.rows, 'collection_timestamp', 'desc')
+    //         ,render = function(curr){
+    //           var data = []
+    //           ,start = curr*nums - nums
+    //           ,last = start + nums - 1;
+    //
+    //           if(last >= rows.length){
+    //             last = curr > 1 ? start + (rows.length - start - 1) : rows.length - 1;
+    //           }
+    //
+    //           for(var i = start; i <= last; i++){
+    //             data.push(rows[i]);
+    //           }
+    //
+    //           res.rows = data;
+    //
+    //           view(res);
+    //         };
+    //
+    //         render(curr)
+    //         gather.minelog['collect-page-' + curr] = res;
+    //
+    //         now || laypage.render({
+    //           elem: 'LAY_page1'
+    //           ,count: rows.length
+    //           ,curr: curr
+    //           ,jump: function(e, first){
+    //             if(!first){
+    //               render(e.curr);
+    //             }
+    //           }
+    //         });
+    //       });
+    //     } else {
+    //       fly.json('/api/'+ type +'/', {
+    //         page: curr
+    //       }, function(res){
+    //         view(res);
+    //         gather.minelog['mine-jie-page-' + curr] = res;
+    //         now || laypage.render({
+    //           elem: 'LAY_page'
+    //           ,count: res.count
+    //           ,curr: curr
+    //           ,jump: function(e, first){
+    //             if(!first){
+    //               page(e.curr);
+    //             }
+    //           }
+    //         });
+    //       });
+    //     }
+    //   }
+    // };
 
-            var rows = layui.sort(res.rows, 'collection_timestamp', 'desc')
-            ,render = function(curr){
-              var data = []
-              ,start = curr*nums - nums
-              ,last = start + nums - 1;
-
-              if(last >= rows.length){
-                last = curr > 1 ? start + (rows.length - start - 1) : rows.length - 1;
-              }
-
-              for(var i = start; i <= last; i++){
-                data.push(rows[i]);
-              }
-
-              res.rows = data;
-              
-              view(res);
-            };
-
-            render(curr)
-            gather.minelog['collect-page-' + curr] = res;
-
-            now || laypage.render({
-              elem: 'LAY_page1'
-              ,count: rows.length
-              ,curr: curr
-              ,jump: function(e, first){
-                if(!first){
-                  render(e.curr);
-                }
-              }
-            });
-          });
-        } else {
-          fly.json('/api/'+ type +'/', {
-            page: curr
-          }, function(res){
-            view(res);
-            gather.minelog['mine-jie-page-' + curr] = res;
-            now || laypage.render({
-              elem: 'LAY_page'
-              ,count: res.count
-              ,curr: curr
-              ,jump: function(e, first){
-                if(!first){
-                  page(e.curr);
-                }
-              }
-            });
-          });
-        }
-      }
-    };
-
-    if(!gather.minelog[type]){
-      page();
-    }
+    // if(!gather.minelog[type]){
+    //   page();
+    // }
   };
 
   if(elemUC[0]){
@@ -168,7 +168,7 @@ layui.define(['laypage', 'fly', 'element', 'flow'], function(exports){
       upload.render({
         elem: '.upload-img'
         ,url: '/user/upload/'
-        ,size: 50
+        ,size: 100
         ,before: function(){
           avatarAdd.find('.loading').show();
         }

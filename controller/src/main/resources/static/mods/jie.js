@@ -38,37 +38,37 @@ layui.define('fly', function(exports){
   });
 
   //提交回答
-  fly.form['/jie/reply/'] = function(data, required){
-    var tpl = '<li>\
-      <div class="detail-about detail-about-reply">\
-        <a class="fly-avatar" href="/u/{{ layui.cache.user.uid }}" target="_blank">\
-          <img src="{{= d.user.avatar}}" alt="{{= d.user.username}}">\
-        </a>\
-        <div class="fly-detail-user">\
-          <a href="/u/{{ layui.cache.user.uid }}" target="_blank" class="fly-link">\
-            <cite>{{d.user.username}}</cite>\
-          </a>\
-        </div>\
-        <div class="detail-hits">\
-          <span>刚刚</span>\
-        </div>\
-      </div>\
-      <div class="detail-body jieda-body photos">\
-        {{ d.content}}\
-      </div>\
-    </li>'
-    data.content = fly.content(data.content);
-    laytpl(tpl).render($.extend(data, {
-      user: layui.cache.user
-    }), function(html){
-      required[0].value = '';
-      dom.jieda.find('.fly-none').remove();
-      dom.jieda.append(html);
-      
-      var count = dom.jiedaCount.text()|0;
-      dom.jiedaCount.html(++count);
-    });
-  };
+  // fly.form['/jie/reply/'] = function(data, required){
+  //   var tpl = '<li>\
+  //     <div class="detail-about detail-about-reply">\
+  //       <a class="fly-avatar" href="/u/{{ layui.cache.user.uid }}" target="_blank">\
+  //         <img src="{{= d.user.avatar}}" alt="{{= d.user.username}}">\
+  //       </a>\
+  //       <div class="fly-detail-user">\
+  //         <a href="/u/{{ layui.cache.user.uid }}" target="_blank" class="fly-link">\
+  //           <cite>{{d.user.username}}</cite>\
+  //         </a>\
+  //       </div>\
+  //       <div class="detail-hits">\
+  //         <span>刚刚</span>\
+  //       </div>\
+  //     </div>\
+  //     <div class="detail-body jieda-body photos">\
+  //       {{ d.content}}\
+  //     </div>\
+  //   </li>'
+  //   data.content = fly.content(data.content);
+  //   laytpl(tpl).render($.extend(data, {
+  //     user: layui.cache.user
+  //   }), function(html){
+  //     required[0].value = '';
+  //     dom.jieda.find('.fly-none').remove();
+  //     dom.jieda.append(html);
+  //
+  //     var count = dom.jiedaCount.text()|0;
+  //     dom.jiedaCount.html(++count);
+  //   });
+  // };
 
   //求解管理
   gather.jieAdmin = {
@@ -108,10 +108,12 @@ layui.define('fly', function(exports){
       fly.json('/collection/'+ type +'/', {
         cid: div.data('id')
       }, function(res){
-        if(type === 'add'){
-          othis.data('type', 'remove').html('取消收藏').addClass('layui-btn-danger');
-        } else if(type === 'remove'){
-          othis.data('type', 'add').html('收藏').removeClass('layui-btn-danger');
+        if (res.status == 0){
+            if(type === 'add'){
+                othis.data('type', 'remove').html('取消收藏').addClass('layui-btn-danger');
+            } else if(type === 'remove'){
+                othis.data('type', 'add').html('收藏').removeClass('layui-btn-danger');
+            }
         }
       });
     }
@@ -123,17 +125,17 @@ layui.define('fly', function(exports){
   });
 
   //异步渲染
-  var asyncRender = function(){
-    var div = $('.fly-admin-box'), jieAdmin = $('#LAY_jieAdmin');
-    //查询帖子是否收藏
-    if(jieAdmin[0] && layui.cache.user.uid != -1){
-      fly.json('/collection/find/', {
-        cid: div.data('id')
-      }, function(res){
-        jieAdmin.append('<span class="layui-btn layui-btn-xs jie-admin '+ (res.data.collection ? 'layui-btn-danger' : '') +'" type="collect" data-type="'+ (res.data.collection ? 'remove' : 'add') +'">'+ (res.data.collection ? '取消收藏' : '收藏') +'</span>');
-      });
-    }
-  }();
+  // var asyncRender = function(){
+  //   var div = $('.fly-admin-box'), jieAdmin = $('#LAY_jieAdmin');
+  //   //查询帖子是否收藏
+  //   if(jieAdmin[0] && layui.cache.user.uid != -1){
+  //     fly.json('/collection/find/', {
+  //       cid: div.data('id')
+  //     }, function(res){
+  //       jieAdmin.append('<span class="layui-btn layui-btn-xs jie-admin '+ (res.data.collection ? 'layui-btn-danger' : '') +'" type="collect" data-type="'+ (res.data.collection ? 'remove' : 'add') +'">'+ (res.data.collection ? '取消收藏' : '收藏') +'</span>');
+  //     });
+  //   }
+  // }();
 
   //解答操作
   gather.jiedaActive = {

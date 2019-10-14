@@ -7,27 +7,24 @@
 
 <div class="layui-container fly-marginTop">
   <div class="fly-panel" pad20 style="padding-top: 5px;">
-    <!--<div class="fly-none">没有权限</div>-->
-    <div class="layui-form layui-form-pane">
+    <div class="fly-none" th:if="${user == null}">没有权限,请登录</div>
+    <div class="layui-form layui-form-pane" th:if="${user != null}">
       <div class="layui-tab layui-tab-brief" lay-filter="user">
         <ul class="layui-tab-title">
           <li class="layui-this">发表新帖<!-- 编辑帖子 --></li>
         </ul>
         <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
           <div class="layui-tab-item layui-show">
-            <form action="" method="post">
+            <form th:action="@{/posts/add}" method="post">
+              <div class="layui-form-item">
+                <span th:text="${msg}" style="color: red;"></span>
+              </div>
               <div class="layui-row layui-col-space15 layui-form-item">
                 <div class="layui-col-md3">
                   <label class="layui-form-label">所在专栏</label>
                   <div class="layui-input-block">
-                    <select lay-verify="required" name="class" lay-filter="column"> 
-                      <option></option> 
-                      <option value="0">提问</option> 
-                      <option value="99">分享</option> 
-                      <option value="100">讨论</option> 
-                      <option value="101">建议</option> 
-                      <option value="168">公告</option> 
-                      <option value="169">动态</option> 
+                    <select lay-verify="required" name="label" lay-filter="column">
+                      <option th:each="label:${labels}" th:value="${label?.id}" th:text="${label?.name}" th:disabled="${label?.id=='diary'&&user?.roleId!='student'}"></option>
                     </select>
                   </div>
                 </div>
@@ -47,10 +44,10 @@
               <div class="layui-form-item">
                 <label for="L_vercode" class="layui-form-label">人类验证</label>
                 <div class="layui-input-inline">
-                  <input type="text" id="L_vercode" name="vercode" required lay-verify="required" placeholder="请回答后面的问题" autocomplete="off" class="layui-input">
+                  <input type="text" id="L_vercode" name="vercode" required lay-verify="required" placeholder="请输入后面内容" autocomplete="off" class="layui-input">
                 </div>
                 <div class="layui-form-mid">
-                  <span style="color: #c00;">1+1=?</span>
+                  <img th:src="@{/captcha/code}" id="validateCode" title="看不清点击刷新" onclick="document.getElementById('validateCode').src= '/captcha/code?' + new Date().getTime();"/>
                 </div>
               </div>
               <div class="layui-form-item">
@@ -67,14 +64,11 @@
 <div th:include="common/footer::footer"></div>
 
 <script th:src="@{/layui/layui.js}"></script>
-<script>
+<script th:inline="javascript">
     layui.cache.page = 'jie';
     layui.cache.user = {
-        username: '游客'
-        ,uid: -1
-        ,avatar: '/images/avatar/00.jpg'
-        ,experience: 83
-        ,sex: '男'
+        username: [[${user==null?'游客':user.username}]]
+        ,id: [[${user==null?-1:user.id}]]
     };
     layui.config({
         version: "3.0.0"
