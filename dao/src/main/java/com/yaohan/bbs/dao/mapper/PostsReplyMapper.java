@@ -3,6 +3,7 @@ package com.yaohan.bbs.dao.mapper;
 import com.yaohan.bbs.dao.entity.PostsReply;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PostsReplyMapper {
     int deleteByPrimaryKey(String id);
@@ -22,4 +23,8 @@ public interface PostsReplyMapper {
     List<PostsReply> getByPostsId(String postsId);
 
     List<PostsReply> getRecentReplyByUserId(String userId);
+
+    List<Map> getWeeklyTopReplys(Integer limit);
+
+    List<Map> getWeeklyHopReplys(Integer limit);
 }

@@ -1,6 +1,9 @@
 package com.yaohan.bbs.dao.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
+import java.text.Format;
 import java.util.Date;
 
 /**
@@ -17,6 +20,7 @@ public class Posts implements Serializable {
 
     private String userId;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date publishTime;
 
     private Integer readCount;
@@ -145,5 +149,37 @@ public class Posts implements Serializable {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    //非库字段，用于传所需信息
+
+    private String labelName;
+
+    private String realName;
+
+    private String userName;
+
+    public String getLabelName() {
+        return labelName;
+    }
+
+    public void setLabelName(String labelName) {
+        this.labelName = labelName;
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

@@ -1,5 +1,9 @@
 package com.yaohan.bbs.controller;
 
+import com.yaohan.bbs.service.MessageService;
+import com.yaohan.bbs.service.PostsReplyService;
+import com.yaohan.bbs.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -17,6 +22,13 @@ public class ApiController extends BaseController {
 
     @Value("${upload.images-path}")
     private String imagesPath;
+
+    @Autowired
+    PostsReplyService postsReplyService;
+    @Autowired
+    UserService userService;
+    @Autowired
+    MessageService messageService;
 
     @RequestMapping("upload")
     public Map upload(MultipartFile file){
@@ -49,6 +61,47 @@ public class ApiController extends BaseController {
         result.put("status", 0);
         result.put("url", img);
 
+        return result;
+    }
+
+    @RequestMapping("/top/reply")
+    public Map topReply(Integer limit){
+        Map result = new HashMap();
+        List<Map> data = postsReplyService.getWeeklyTopReplys(limit);
+        result.put("status", 0);
+        result.put("data", data);
+        return result;
+    }
+
+    @RequestMapping("/hot/reply")
+    public Map hotReply(Integer limit){
+        Map result = new HashMap();
+        List<Map> data = postsReplyService.getWeeklyHotReplys(limit);
+        result.put("status", 0);
+        result.put("data", data);
+        return result;
+    }
+
+    @RequestMapping("/message/nums")
+    public Map messageNums(){
+        Map result = new HashMap();
+        int count = messageService.countByUserId(checkUser().getId());
+        result.put("status", 0);
+        result.put("count", count);
+        return result;
+    }
+
+    @RequestMapping("/message/remove")
+    public Map messageremove(String id, Boolean all){
+        Map result = new HashMap();
+
+        if (all != null && all){
+            messageService.deleteByUserId(checkUser().getId());
+        }else {
+            messageService.delete(id);
+        }
+
+        result.put("status", 0);
         return result;
     }
 }

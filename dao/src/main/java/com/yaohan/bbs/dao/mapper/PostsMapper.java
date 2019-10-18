@@ -28,4 +28,6 @@ public interface PostsMapper {
 
     List<Posts> topPublishPostsByNum(int num);
 
+    List<Posts> findPostsBy(Map params);
+
 }

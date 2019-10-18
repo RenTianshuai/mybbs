@@ -1,5 +1,7 @@
 package com.yaohan.bbs.dao.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,6 +15,7 @@ public class PostsCollection implements Serializable {
 
     private String postsId;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date createTime;
 
     private String postsName;

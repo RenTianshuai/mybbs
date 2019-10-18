@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="common/head::head"></head>
+<body>
+
+<div th:include="common/header::header"></div>
+
+<div th:include="common/column::column"></div>
+
+<div class="layui-container fly-marginTop">
+	<div class="fly-panel">
+	  <div class="fly-none">
+	    <h2><i class="iconfont icon-404"></i></h2>
+	    <p>页面或者数据飞到火星了，啥都看不到了…</p>
+	  </div>
+	</div>
+</div>
+
+<div th:include="common/footer::footer"></div>
+<script th:src="@{/layui/layui.js}"></script>
+<script th:inline="javascript">
+    layui.cache.page = 'user';
+    layui.cache.user = {
+        username: [[${user==null?'游客':user.username}]]
+        ,id: [[${user==null?-1:user.id}]]
+    };
+    layui.config({
+        version: "3.0.0"
+        ,base: '/mods/'
+    }).extend({
+        fly: 'index'
+    }).use('fly');
+</script>
+</body>
+</html>

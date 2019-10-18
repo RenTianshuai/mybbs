@@ -12,9 +12,13 @@ public interface PostsServcie {
 
     Posts get(String id);
 
+    Posts getWithoutBLOBS(String id);
+
     List<Posts> allPublishPosts();
 
     Page<Posts> allPublishPostsByPage(int pageNo, int pageSize, Map params);
 
     List<Posts> topPublishPostsByNum(int num);
+
+    Page<Posts> findostsByPage(int pageNo, int pageSize, Map params);
 }

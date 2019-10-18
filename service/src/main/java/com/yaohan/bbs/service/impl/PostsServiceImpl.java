@@ -30,6 +30,11 @@ public class PostsServiceImpl implements PostsServcie {
     }
 
     @Override
+    public Posts getWithoutBLOBS(String id) {
+        return postsMapper.selectByPrimaryKeyWithoutBLOBS(id);
+    }
+
+    @Override
     public List<Posts> allPublishPosts() {
         return postsMapper.findAllPubishPosts();
     }
@@ -44,5 +49,12 @@ public class PostsServiceImpl implements PostsServcie {
     @Override
     public List<Posts> topPublishPostsByNum(int num) {
         return postsMapper.topPublishPostsByNum(num);
+    }
+
+    @Override
+    public Page<Posts> findostsByPage(int pageNo, int pageSize, Map params) {
+        Page<Posts> page = PageHelper.startPage(pageNo, pageSize);
+        postsMapper.findPostsBy(params);
+        return page;
     }
 }

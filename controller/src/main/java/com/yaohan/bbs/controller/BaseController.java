@@ -1,16 +1,15 @@
 package com.yaohan.bbs.controller;
 
+import com.yaohan.bbs.dao.entity.Posts;
 import com.yaohan.bbs.dao.entity.PostsLabel;
-import com.yaohan.bbs.dao.entity.Role;
 import com.yaohan.bbs.dao.entity.User;
 import com.yaohan.bbs.service.PostsLabelService;
 import com.yaohan.bbs.service.RoleService;
-import org.apache.commons.lang3.StringUtils;
+import com.yaohan.bbs.service.UserService;
+import com.yaohan.bbs.vo.PostsVO;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.List;
@@ -19,6 +18,10 @@ public class BaseController {
 
     @Autowired
     PostsLabelService postsLabelService;
+    @Autowired
+    UserService userService;
+    @Autowired
+    RoleService roleService;
 
     @ModelAttribute("labels")
     List<PostsLabel> getPostsLabel(){
@@ -50,4 +53,17 @@ public class BaseController {
         subject.getSession().setAttribute("user", user);
     }
 
+    /**
+     * 获取PostsVO
+     * @param posts
+     * @return
+     */
+     PostsVO getPostsVO(Posts posts) {
+        PostsVO vo = new PostsVO();
+        vo.setLabel(postsLabelService.get(posts.getLabelId()));
+        vo.setPosts(posts);
+        vo.setUser(userService.get(posts.getUserId()));
+        vo.setRole(roleService.get(vo.getUser().getRoleId()));
+        return vo;
+    }
 }

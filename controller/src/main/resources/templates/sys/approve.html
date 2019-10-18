@@ -1,0 +1,155 @@
+ 
+ 
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="common/head::head"></head>
+<body>
+
+<div th:include="common/header::header"></div>
+
+<div th:include="common/column::column"></div>
+
+<div class="layui-container">
+  <div class="layui-row layui-col-space15">
+    <div class="layui-col-md15 content detail">
+      <div class="fly-panel detail-box">
+        <h1 th:text="${vo.posts.title}"></h1>
+        <div class="fly-detail-info">
+          <span class="layui-badge layui-bg-black" th:if="${#strings.equals('1', vo.posts.top)}">置顶</span>
+          <span class="layui-badge layui-bg-red" th:if="${vo.posts.essence}">精帖</span>
+          
+          <div class="fly-admin-box" th:data-id="${vo.posts.id}">
+            <span class="layui-btn layui-btn-xs jie-admin" type="set" field="status" rank="1">加精</span>
+             <span class="layui-btn layui-btn-xs jie-admin" type="set" field="status" rank="0" style="background-color:#ccc;">取消加精</span>
+          </div>
+          <span class="fly-list-nums layui-hide-xs">
+            <a href="#comment"><i class="jie-admin iconfont" title="评论">&#xe60c;</i> <span th:text="${vo.posts.readCount}"></span> </a>
+          </span>
+        </div>
+        <div class="detail-about">
+            <a th:href="@{'/user/home?id=' + ${vo.user.id}}" class="fly-avatar">
+                <img th:src="@{${vo.user.portrait}}" th:alt="${vo.user.username}">
+            </a>
+          <div class="fly-detail-user">
+              <a th:href="@{'/user/home?id=' + ${vo.user.id}}" class="fly-link">
+                  <cite th:text="${vo.user.username}"></cite>
+                  <i class="iconfont icon-renzheng" th:title="${'认证信息：' + vo.role.name}"></i>
+              </a>
+              <span th:text="${#dates.format(vo.posts.publishTime, 'yyyy-MM-dd hh:mm:ss')}"></span>
+          </div>
+          <div class="detail-hits" id="LAY_jieAdmin" th:data-id="${vo.posts.id}">
+            <span style="padding-right: 10px; color: #FF7200" th:if="${vo.user.realname!=null}" th:text="${#strings.append('实名：', vo.user.realname)}"></span>
+              <span style="padding-right: 10px; color: #FF7200" th:if="${vo.user.realname==null}">未更新实名</span>
+          </div>
+        </div>
+        <div class="detail-body photos" th:text="${vo.posts.content}">
+
+        </div>
+      </div>
+
+      <div class="fly-panel detail-box" id="flyReply">
+        <fieldset class="layui-elem-field layui-field-title" style="text-align: center;">
+          <legend>点评</legend>
+        </fieldset>
+
+        <!--<ul class="jieda" id="jieda">-->
+          <!--<li th:each="rep:${reps}" th:data-id="${rep.postsReply.id}">-->
+            <!--<a th:name="'item-'+${rep.postsReply.id}"></a>-->
+            <!--<div class="detail-about detail-about-reply">-->
+              <!--<a class="fly-avatar" href="">-->
+                <!--<img th:src="@{${rep.user.portrait}}" th:alt="${rep.user.username}">-->
+              <!--</a>-->
+              <!--<div class="fly-detail-user">-->
+                <!--<a href="" class="fly-link">-->
+                  <!--<cite th:text="${rep.user.username}"></cite>-->
+                  <!--<i class="iconfont icon-renzheng" th:title="${'认证信息：' + rep.role.name}"></i>-->
+                <!--</a>-->
+              <!--</div>-->
+
+              <!--<div class="detail-hits">-->
+                <!--<span th:text="${#dates.format(rep.postsReply.createTime, 'yyyy-MM-dd')}"></span>-->
+              <!--</div>-->
+
+            <!--</div>-->
+            <!--<div class="jieda-body photos" th:text="${rep.postsReply.content}">-->
+            <!--</div>-->
+          <!--</li>-->
+        <!--</ul>-->
+
+        <div class="layui-form layui-form-pane">
+          <a name="comment"></a>
+          <form th:action="@{/approve/approve}" method="post">
+            <div class="layui-form-item layui-form-text">
+              <label class="layui-form-label">评分</label>
+              <div class="layui-input-block">
+                <input id="score" type="hidden" name="score" lay-verify="number" value="80" autocomplete="off" class="layui-input">
+              </div>
+                <div><div id="test8"></div></div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+              <label class="layui-form-label">点评</label>
+              <div class="layui-input-block">
+                <textarea id="L_content" name="content" required lay-verify="required" placeholder="请输入点评内容"  class="layui-textarea" style="height: 150px;"></textarea>
+              </div>
+            </div>
+              <div class="layui-form-item layui-form-text">
+                  <label class="layui-form-label">审核</label>
+                  <div class="layui-input-block">
+                      <input type="radio" name="status" value="4" title="通过" checked>
+                      <input type="radio" name="status" value="3" title="打回">
+                  </div>
+              </div>
+            <div class="layui-form-item">
+              <input type="hidden" name="jid" th:value="${vo.posts.id}">
+              <button class="layui-btn" lay-filter="*" lay-submit>立即提交</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:include="common/footer::footer"></div>
+
+<script th:src="@{/layui/layui.js}"></script>
+<script th:inline="javascript">
+  layui.cache.page = 'jie';
+  layui.cache.user = {
+      username: [[${user==null?'游客':user.username}]]
+      ,id: [[${user==null?-1:user.id}]]
+  };
+  layui.config({
+    version: "3.0.0"
+    ,base: '/mods/'
+  }).extend({
+    fly: 'index'
+  }).use(['fly', 'face', 'form', 'rate'], function(){
+    var $ = layui.$
+        ,form = layui.form
+        ,rate = layui.rate
+        ,fly = layui.fly;
+
+    //如果你是采用模版自带的编辑器，你需要开启以下语句来解析。
+    $('.detail-body').each(function(){
+      var othis = $(this), html = othis.html();
+      othis.html(fly.content(html));
+    });
+
+      rate.render({
+          elem: '#test8'
+          ,length: 10
+          ,value: 8 //初始值
+          ,text: true //开启文本
+          ,half: true //开启半星
+          ,setText: function(value){ //自定义文本的回调
+              this.span.text( value*10 + "分");
+              $("#score").val(value*10);
+          }
+      });
+
+  });
+</script>
+
+</body>
+</html>

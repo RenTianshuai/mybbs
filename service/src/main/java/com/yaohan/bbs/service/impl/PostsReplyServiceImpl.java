@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -35,7 +36,7 @@ public class PostsReplyServiceImpl implements PostsReplyService {
     }
 
     @Override
-    public void addReply(String postsId, String userId, String content) {
+    public PostsReply addReply(String postsId, String userId, String content) {
         PostsReply postsReply = new PostsReply();
         postsReply.setId(flowNoService.generateFlowNo());
         postsReply.setPostsId(postsId);
@@ -48,10 +49,22 @@ public class PostsReplyServiceImpl implements PostsReplyService {
         Posts posts = postsMapper.selectByPrimaryKeyWithoutBLOBS(postsId);
         posts.setReadCount(posts.getReadCount() + 1);
         postsMapper.updateByPrimaryKeySelective(posts);
+
+        return postsReply;
     }
 
     @Override
     public List<PostsReply> getRecentReplyByUserId(String userId) {
         return postsReplyMapper.getRecentReplyByUserId(userId);
+    }
+
+    @Override
+    public List<Map> getWeeklyTopReplys(Integer limit) {
+        return postsReplyMapper.getWeeklyTopReplys(limit);
+    }
+
+    @Override
+    public List<Map> getWeeklyHotReplys(Integer limit) {
+        return postsReplyMapper.getWeeklyHopReplys(limit);
     }
 }

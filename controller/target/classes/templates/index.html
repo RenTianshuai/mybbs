@@ -1,0 +1,129 @@
+ 
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="common/head::head"></head>
+<body>
+
+<div th:include="common/header::header"></div>
+
+<div th:include="common/column::column"></div>
+
+<div class="layui-container">
+  <div class="layui-row layui-col-space15">
+
+    <div class="layui-col-md8">
+      <div class="fly-panel">
+        <div class="fly-panel-title fly-filter">
+          <a>置顶</a>
+          <!--<a href="#signin" class="layui-hide-sm layui-show-xs-block fly-right" id="LAY_goSignin" style="color: #FF5722;">去签到</a>-->
+        </div>
+        <ul class="fly-list" th:if="${tops != null}">
+          <li th:each="top:${tops}">
+            <a th:href="@{'/user/home?id=' + ${top.user.id}}" class="fly-avatar">
+              <img th:src="@{${top.user.portrait}}" th:alt="${top.user.username}">
+            </a>
+            <h2>
+              <a class="layui-badge" th:text="${top.label.name}"></a>
+              <a th:href="@{'/jie/detail?id=' + ${top.posts.id}}" th:text="${top.posts.title}"></a>
+            </h2>
+            <div class="fly-list-info">
+              <a th:href="@{'/user/home?id=' + ${top.user.id}}" link>
+                <cite th:text="${top.user.username}"></cite>
+                <i class="iconfont icon-renzheng" th:title="${'认证信息：' + top.role.name}"></i>
+              </a>
+              <span th:text="${#dates.format(top.posts.publishTime, 'yyyy-MM-dd hh:mm:ss')}"></span>
+
+              <span class="fly-list-kiss layui-hide-xs" title="点赞"><i class="iconfont icon-kiss"></i> <span th:text="${top.posts.experience}"></span> </span>
+              <!--<span class="layui-badge fly-badge-accept layui-hide-xs">已结</span>-->
+              <span class="fly-list-nums">
+                <i class="iconfont icon-pinglun1" title="评论"></i> <span th:text="${top.posts.readCount}"></span>
+              </span>
+            </div>
+            <div class="fly-list-badge">
+              <span class="layui-badge layui-bg-black">置顶</span>
+              <span class="layui-badge layui-bg-red" th:if="${top.posts.essence}">精帖</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="fly-panel" style="margin-bottom: 0;">
+
+        <div th:include="common/filter::filter"></div>
+
+        <ul class="fly-list" th:if="${vos != null}">
+          <li th:each="vo:${vos}">
+            <a th:href="@{'/user/home?id=' + ${vo.user.id}}" class="fly-avatar">
+              <img th:src="@{${vo.user.portrait}}" th:alt="${vo.user.username}">
+            </a>
+            <h2>
+              <a class="layui-badge" th:text="${vo.label.name}"></a>
+              <a th:href="@{'/jie/detail?id=' + ${vo.posts.id}}" th:text="${vo.posts.title}"></a>
+            </h2>
+            <div class="fly-list-info">
+              <a th:href="@{'/user/home?id=' + ${vo.user.id}}" link>
+                <cite th:text="${vo.user.username}"></cite>
+                <i class="iconfont icon-renzheng" th:title="${'认证信息：' + vo.role.name}"></i>
+              </a>
+              <span th:text="${#dates.format(vo.posts.publishTime, 'yyyy-MM-dd hh:mm:ss')}"></span>
+              
+              <span class="fly-list-kiss layui-hide-xs" title="点赞"><i class="iconfont icon-kiss"></i> <span th:text="${vo.posts.experience}"></span> </span>
+              <!--<span class="layui-badge fly-badge-accept layui-hide-xs">已结</span>-->
+              <span class="fly-list-nums">
+                <i class="iconfont icon-pinglun1" title="评论"></i> <span th:text="${vo.posts.readCount}"></span>
+              </span>
+            </div>
+            <div class="fly-list-badge">
+              <span class="layui-badge layui-bg-red" th:if="${vo.posts.essence}">精帖</span>
+            </div>
+          </li>
+        </ul>
+        <div class="fly-none" th:if="${vos == null}">没有相关数据</div>
+        <div style="text-align: center">
+          <div class="laypage-main">
+            <a th:href="@{/jie/index}" class="laypage-next">更多求解</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="layui-col-md4">
+
+      <div th:include="common/transport::transport"></div>
+
+      <!--<div th:include="common/signin::signin"></div>-->
+
+      <div th:include="common/replyrank::replyrank"></div>
+
+      <div th:include="common/hotpost::hotpost"></div>
+
+      <div th:include="common/ad::ad"></div>
+
+      <div th:include="common/link::link"></div>
+
+    </div>
+  </div>
+</div>
+
+<div th:include="common/footer::footer"></div>
+
+<script th:src="@{/layui/layui.js}"></script>
+<script th:inline="javascript">
+    layui.cache.page = 'index';
+    layui.cache.user = {
+        username: [[${user==null?'游客':user.username}]]
+        ,id: [[${user==null?-1:user.id}]]
+    };
+    layui.config({
+        version: "3.0.0"
+        ,base: '/mods/'
+    }).extend({
+        fly: 'index'
+    }).use('fly');
+</script>
+
+<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_30088308'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "w.cnzz.com/c.php%3Fid%3D30088308' type='text/javascript'%3E%3C/script%3E"));</script>
+
+</body>
+</html>

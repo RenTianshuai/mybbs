@@ -2,6 +2,9 @@ package com.yaohan.bbs.dao.mapper;
 
 import com.yaohan.bbs.dao.entity.User;
 
+import java.util.List;
+import java.util.Map;
+
 public interface UserMapper {
     int deleteByPrimaryKey(String id);
 
@@ -18,4 +21,6 @@ public interface UserMapper {
     User selectByUsername(String username);
 
     User selectByEmail(String email);
+
+    List<User> findAll(Map params);
 }

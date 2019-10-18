@@ -52,10 +52,12 @@ public class PostsController extends BaseController {
         posts.setPublishTime(new Date());
         posts.setExperience(0);
         posts.setReadCount(0);
+        posts.setDelFlag("0");
 
         PostsLabel postsLabel = postsLabelService.get(label);
         if (user.getRoleId().equals("student") && "1".equals(postsLabel.getIsApprove())){
-            posts.setStatus((byte)0);
+            //如果是学生发布需要审核的贴
+            posts.setStatus((byte)2);
         }else {
             posts.setStatus((byte)4);
         }

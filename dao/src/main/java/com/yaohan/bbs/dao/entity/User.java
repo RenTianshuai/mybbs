@@ -1,5 +1,7 @@
 package com.yaohan.bbs.dao.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -45,6 +47,7 @@ public class User implements Serializable {
 
     private String status;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date registerDate;
 
     private String remarks;

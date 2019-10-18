@@ -1,10 +1,7 @@
 package com.yaohan.bbs.controller;
 
 import com.github.pagehelper.Page;
-import com.yaohan.bbs.dao.entity.Posts;
-import com.yaohan.bbs.dao.entity.PostsCollection;
-import com.yaohan.bbs.dao.entity.PostsReply;
-import com.yaohan.bbs.dao.entity.User;
+import com.yaohan.bbs.dao.entity.*;
 import com.yaohan.bbs.service.*;
 import com.yaohan.bbs.shiro.CustomPasswordToken;
 import lombok.extern.slf4j.Slf4j;
@@ -53,23 +50,32 @@ public class UserController extends BaseController{
     PostsReplyService postsReplyService;
     @Autowired
     RoleService roleService;
+    @Autowired
+    MessageService messageService;
 
     @RequestMapping("/login")
-    public String login(String username, String email, String password, String vercode, Model model){
+    @ResponseBody
+    public Map login(String username, String email, String password, String vercode){
+        Map result = new HashMap();
         Subject subject = SecurityUtils.getSubject();
         CustomPasswordToken token = new CustomPasswordToken(username, password, email, vercode);
         try {
             subject.login(token);
         } catch (IncorrectCredentialsException e) {
             subject.getSession().removeAttribute("user");
-            model.addAttribute("msg", "密码错误，请重试");
-            return "user/login";
+            result.put("status", -1);
+            result.put("msg", "密码错误，请重试");
+            return result;
         } catch (AuthenticationException e) {
             subject.getSession().removeAttribute("user");
-            model.addAttribute("msg", e.getMessage());
-            return "user/login";
+            result.put("status", -1);
+            result.put("msg", e.getMessage());
+            return result;
         }
-        return "redirect:/";
+        result.put("status", 0);
+        result.put("msg", "登录成功");
+        result.put("action", "/");
+        return result;
     }
 
     @RequestMapping("/logout")
@@ -79,31 +85,38 @@ public class UserController extends BaseController{
     }
 
     @RequestMapping("/register")
-    public String register(String email, String username, String password, String repassword, String vercode, Model model){
+    @ResponseBody
+    public Map register(String email, String username, String password, String repassword, String vercode){
+        Map result = new HashMap();
         if (StringUtils.isEmpty(password) || password.length() < 6 || password.length() > 16){
-            model.addAttribute("msg", "密码为6到16个字符");
-            return "user/reg";
+            result.put("status", -1);
+            result.put("msg", "密码为6到16个字符");
+            return result;
         }
         if (!password.equals(repassword)){
-            model.addAttribute("msg", "确认密码与密码不符");
-            return "user/reg";
+            result.put("status", -1);
+            result.put("msg", "确认密码与密码不符");
+            return result;
         }
         User user = userService.getByEmail(email);
         if (user != null){
-            model.addAttribute("msg", "用户邮箱已存在");
-            return "user/reg";
+            result.put("status", -1);
+            result.put("msg", "用户邮箱已存在");
+            return result;
         }
         user = userService.getByUserName(username);
         if (user != null){
-            model.addAttribute("msg", "用户昵称已存在");
-            return "user/reg";
+            result.put("status", -1);
+            result.put("msg", "用户昵称已存在");
+            return result;
         }
         //验证码
         Session session = SecurityUtils.getSubject().getSession();
         String code = (String)session.getAttribute("validateCode");
         if (vercode == null || !vercode.toUpperCase().equals(code)){
-            model.addAttribute("msg", "验证码错误,请重试");
-            return "user/reg";
+            result.put("status", -1);
+            result.put("msg", "验证码错误，请重试");
+            return result;
         }
 
         user = new User();
@@ -125,7 +138,10 @@ public class UserController extends BaseController{
 
         userService.add(user);
 
-        return "user/login";
+        result.put("status", 0);
+        result.put("msg", "注册成功");
+        result.put("action", "/user/loginPage");
+        return result;
     }
 
     @RequestMapping("/index")
@@ -144,7 +160,7 @@ public class UserController extends BaseController{
         model.addAttribute("pageSize", pageSize);
         Map params = new HashMap(1);
         params.put("userId", checkUser().getId());
-        Page<Posts> page = postsServcie.allPublishPostsByPage(pageNo, pageSize, params);
+        Page<Posts> page = postsServcie.findostsByPage(pageNo, pageSize, params);
         model.addAttribute("count", page.getTotal());
         model.addAttribute("postsList", page.getResult());
         return "user/index";
@@ -198,6 +214,30 @@ public class UserController extends BaseController{
         return "user/home";
     }
 
+    @RequestMapping("/jump")
+    public String userJumpHome(String username, Model model){
+        User user = userService.getByUserName(username);
+        if (user == null || StringUtils.isEmpty(user.getId())){
+            return "redirect:/";
+        }
+        model.addAttribute("userInfo", user);
+        model.addAttribute("roleInfo", roleService.get(user.getRoleId()));
+
+        //最近发帖10条
+        Map params = new HashMap(1);
+        params.put("userId", user.getId());
+        List<Posts> recentPosts = postsServcie.allPublishPostsByPage(1, 10, params).getResult();
+        if (recentPosts!=null && recentPosts.size()>0){
+            model.addAttribute("currPosts", recentPosts);
+        }
+        //最近评论10条
+        List<PostsReply> recentReplys = postsReplyService.getRecentReplyByUserId(user.getId());
+        if (recentReplys!=null && recentReplys.size()>0){
+            model.addAttribute("currReplys", recentReplys);
+        }
+        return "user/home";
+    }
+
     @RequestMapping("/set")
     public String userSet(Model model){
         //设置菜单点击项
@@ -207,11 +247,43 @@ public class UserController extends BaseController{
 
     @RequestMapping("/modify")
     @ResponseBody
-    public Map userSet(String email, String username, String sex, String phone, String city, String sign, Model model){
+    public Map userSet(String email, String username, String sex, String realname, String phone, String city, String sign, Model model){
         Map result = new HashMap();
-
         User user = checkUser();
+        if (user == null || StringUtils.isEmpty(user.getId())){
+            result.put("status", -1);
+            result.put("msg", "亲，您还没有登录哦");
+            return result;
+        }
+        User userOld = null;
+        if (!user.getEmail().equals(email)){
+            userOld = userService.getByEmail(email);
+            if (userOld != null){
+                result.put("status", -1);
+                result.put("msg", "邮箱已使用");
+                return result;
+            }
+        }
+        if (!user.getUsername().equals(username)){
+            userOld = userService.getByUserName(username);
+            if (userOld != null){
+                result.put("status", -1);
+                result.put("msg", "用户名已使用");
+                return result;
+            }
+        }
         //修改用户信息
+        user.setEmail(email);
+        user.setEmailActivate("N");
+        user.setUsername(username);
+        user.setSex(sex);
+        user.setRealname(realname);
+        user.setPhone(phone);
+        user.setCity(city);
+        user.setSignature(sign);
+
+        userService.update(user);
+        refreshUser(user);
 
         result.put("status", 0);
         result.put("action", "/user/set");
@@ -301,5 +373,14 @@ public class UserController extends BaseController{
         result.put("action", "/user/set");
 
         return result;
+    }
+
+    @RequestMapping("/message")
+    public String getMessage(Model model){
+        //设置菜单点击项
+        model.addAttribute("nav", "message");
+        List<Message> messages = messageService.findByUserId(checkUser().getId());
+        model.addAttribute("messages", messages);
+        return "user/message";
     }
 }

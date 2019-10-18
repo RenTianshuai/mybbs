@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="common/head::head"></head>
+<body>
+
+<div th:include="common/header::header"></div>
+
+<div class="layui-container fly-marginTop fly-user-main">
+
+  <div th:replace="common/user-nav"></div>
+  
+  
+  <div class="fly-panel fly-panel-user" pad20>
+    <div class="layui-tab layui-tab-brief" lay-filter="user">
+      <ul class="layui-tab-title" id="LAY_mine">
+        <li data-type="collection" lay-id="collection" class="layui-this">我收藏的帖（<span th:text="${count}"></span>）</li>
+      </ul>
+      <div class="layui-tab-content" style="padding: 20px 0;">
+        <div class="layui-tab-item layui-show">
+          <ul class="mine-view jie-row">
+            <li th:each="collection:${collections}">
+              <a class="jie-title" th:href="@{'/jie/detail?id=' + ${collection.postsId}}" target="_blank" th:text="${collection.postsName}"></a>
+              <i th:text="${#strings.append('收藏于', #dates.format(collection.createTime, 'yyyy-MM-dd hh:mm:ss'))}"></i>  </li>
+          </ul>
+          <div style="text-align: center">
+            <div id="LAY_page"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div th:include="common/footer::footer"></div>
+
+<script th:src="@{/layui/layui.js}"></script>
+<script th:inline="javascript">
+  layui.cache.page = 'user';
+  layui.cache.user = {
+      username: [[${user==null?'游客':user.username}]]
+      ,id: [[${user==null?-1:user.id}]]
+  };
+  layui.config({
+    version: "3.0.0"
+    ,base: '/mods/'
+  }).extend({
+    fly: 'index'
+  }).use('fly');
+
+  layui.use('laypage', function(){
+      var laypage = layui.laypage;
+      //执行一个laypage实例
+      laypage.render({
+          elem: 'LAY_page'
+          ,count: [[${count}]]
+          ,curr: [[${pageNo}]]
+          ,limit: [[${pageSize}]]
+          ,first: '首页'
+          ,last: '尾页'
+          ,prev: '<em>上一页</em>'
+          ,next: '<em>下一页</em>'
+          ,jump: function (obj, first) {
+              //得到了当前页，用于向服务端请求对应数据
+              if (!first) {
+                  location.href = '/user/collection?pageNo=' + obj.curr;
+              }
+          }
+      });
+  });
+</script>
+
+</body>
+</html>

@@ -9,6 +9,7 @@ import com.yaohan.bbs.vo.PostsVO;
 import com.yaohan.bbs.vo.ReplyVO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,12 +22,11 @@ import java.util.List;
 @Controller
 public class PageController extends BaseController{
 
+    @Value("${index.top.num}")
+    private int topNum;
+
     @Autowired
     PostsServcie postsServcie;
-    @Autowired
-    UserService userService;
-    @Autowired
-    RoleService roleService;
     @Autowired
     PostsCollectionService postsCollectionService;
     @Autowired
@@ -35,7 +35,7 @@ public class PageController extends BaseController{
     @GetMapping("/")
     public String indexPage(Model model){
         //获取前五条置顶贴
-        List<Posts> top = postsServcie.topPublishPostsByNum(5);
+        List<Posts> top = postsServcie.topPublishPostsByNum(topNum);
         if (top!=null && top.size()>0){
             List<PostsVO> tops = new ArrayList<>(top.size());
             for (Posts posts:top){
@@ -57,36 +57,22 @@ public class PageController extends BaseController{
         return "index";
     }
 
-    /**
-     * 获取PostsVO
-     * @param posts
-     * @return
-     */
-    private PostsVO getPostsVO(Posts posts) {
-        PostsVO vo = new PostsVO();
-        vo.setLabel(postsLabelService.get(posts.getLabelId()));
-        vo.setPosts(posts);
-        vo.setUser(userService.get(posts.getUserId()));
-        vo.setRole(roleService.get(vo.getUser().getRoleId()));
-        return vo;
-    }
-
-    @RequestMapping("user/loginPage")
+    @RequestMapping("/user/loginPage")
     public String loginPage(){
         return "user/login";
     }
 
-    @RequestMapping("user/regPage")
+    @RequestMapping("/user/regPage")
     public String regPage(){
         return "user/reg";
     }
 
-    @RequestMapping("jie/add")
+    @RequestMapping("/jie/add")
     public String addPage(){
         return "jie/add";
     }
 
-    @RequestMapping("jie/index")
+    @RequestMapping("/jie/index")
     public String jieIndex(Integer pageNo, Integer pageSize, Model model){
         if (pageNo == null || pageNo == 0){
             pageNo = 1;
@@ -111,7 +97,7 @@ public class PageController extends BaseController{
         return "jie/index";
     }
 
-    @RequestMapping("jie/detail")
+    @RequestMapping("/jie/detail")
     public String jieDetail(String id, Integer repPageNo, Integer repPageSize, Model model){
         //判断用户是否登录
         User user = checkUser();

@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="common/head::head"></head>
+<body>
+
+<div th:include="common/header::header"></div>
+
+<div class="layui-container fly-marginTop fly-user-main">
+
+  <div th:replace="common/user-nav"></div>
+  
+  <div class="fly-panel fly-panel-user" pad20>
+      <div class="layui-tab layui-tab-brief" lay-filter="user">
+          <ul class="layui-tab-title" id="LAY_mine">
+              <li data-type="organization" lay-id="organization" class="layui-this">待审批列表</li>
+          </ul>
+          <div class="layui-tab-content" style="padding: 20px 0;">
+              <!--<form class="layui-form">-->
+                  <!--<div class="layui-form-item">-->
+                      <!--<label class="layui-form-label">用户名</label>-->
+                      <!--<div class="layui-input-block">-->
+                          <!--<input type="text" name="username" required  lay-verify="" placeholder="请输入用户昵称" autocomplete="off" class="layui-input">-->
+                      <!--</div>-->
+                  <!--</div>-->
+                  <!--<div class="layui-form-item">-->
+                      <!--<label class="layui-form-label">实名</label>-->
+                      <!--<div class="layui-input-block">-->
+                          <!--<input type="text" name="username" required  lay-verify="" placeholder="请输入用户实名" autocomplete="off" class="layui-input">-->
+                      <!--</div>-->
+                  <!--</div>-->
+                  <!--<div class="layui-form-item">-->
+                      <!--<div class="layui-input-block">-->
+                          <!--<button class="layui-btn" lay-filter="userSearch" lay-submit>查询</button>-->
+                          <!--&lt;!&ndash;<button type="reset" class="layui-btn layui-btn-primary">重置</button>&ndash;&gt;-->
+                      <!--</div>-->
+                  <!--</div>-->
+              <!--</form>-->
+              <div class="layui-tab-item layui-show">
+                  <table class="layui-table" lay-filter="test3" lay-data="{url:'/approve/list', id:'test3', page: true}">
+                      <thead>
+                      <tr>
+                          <th lay-data="{field:'id',sort: false, hide:true}">ID</th>
+                          <th lay-data="{field:'labelName'}">标签</th>
+                          <th lay-data="{field:'title', minWidth:240}">标题</th>
+                          <th lay-data="{field:'realName'}">作者实名</th>
+                          <th lay-data="{field:'userName'}">作者昵称</th>
+                          <th lay-data="{field:'publishTime'}">日期</th>
+                          <th lay-data="{fixed: 'right', width:80, align:'center', toolbar: '#barDemo'}"></th>
+                      </tr>
+                      </thead>
+                  </table>
+                  <script id="barDemo" type="text/html">
+                      <a class="layui-btn layui-btn-xs" lay-event="appro">审阅</a>
+                      <!--<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>-->
+                  </script>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<div th:include="common/footer::footer"></div>
+
+<script th:src="@{/layui/layui.js}"></script>
+<script th:inline="javascript">
+  layui.cache.page = 'user';
+  layui.cache.user = {
+      username: [[${user==null?'游客':user.username}]]
+      ,id: [[${user==null?-1:user.id}]]
+  };
+  layui.config({
+    version: "3.0.0"
+    ,base: '/mods/'
+  }).extend({
+    fly: 'index'
+  }).use(['fly','table','form'], function(){
+      var table = layui.table
+          ,form = layui.form
+          ,fly = layui.fly;
+
+      // var param = '';
+      //表单提交
+      // form.on('submit(userSearch)', function(data){
+      //     param = data.field;
+      //     table.reload('test3', {
+      //         where: param
+      //         ,page: {
+      //             // curr: 1 //重新从第 1 页开始
+      //         }
+      //     }); //只重载数据
+      //     return false;
+      // });
+
+      //监听行工具事件
+      table.on('tool(test3)', function(obj){
+          var data = obj.data;
+          if(obj.event === 'appro'){
+              layer.confirm('确定审阅该日记吗？', function(index){
+                  layer.close(index);
+                  location.href = '/approve/approvePage?id=' + data.id;
+              });
+          }
+      });
+  });
+
+</script>
+
+</body>
+</html>

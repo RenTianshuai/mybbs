@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="common/head::head"></head>
+<body>
+
+<div th:include="common/header::header"></div>
+
+<div class="layui-container fly-marginTop fly-user-main">
+
+  <div th:replace="common/user-nav"></div>
+  
+  <div class="fly-panel fly-panel-user" pad20>
+      <div class="layui-tab layui-tab-brief" lay-filter="user">
+          <ul class="layui-tab-title" id="LAY_mine">
+              <li data-type="organization" lay-id="organization" class="layui-this">用户管理</li>
+          </ul>
+          <div class="layui-tab-content" style="padding: 20px 0;">
+              <form class="layui-form">
+                  <div class="layui-form-item">
+                      <label class="layui-form-label">用户名</label>
+                      <div class="layui-input-block">
+                          <input type="text" name="username" required  lay-verify="" placeholder="请输入用户昵称" autocomplete="off" class="layui-input">
+                      </div>
+                  </div>
+                  <div class="layui-form-item">
+                      <div class="layui-input-block">
+                          <button class="layui-btn" lay-filter="userSearch" lay-submit>查询</button>
+                          <!--<button type="reset" class="layui-btn layui-btn-primary">重置</button>-->
+                      </div>
+                  </div>
+              </form>
+              <div class="layui-tab-item layui-show">
+                  <table class="layui-table" lay-filter="test3" lay-data="{url:'/org/user/list', id:'test3', page: true}">
+                      <thead>
+                      <tr>
+                          <th lay-data="{field:'id',sort: false, hide:true}">ID</th>
+                          <th lay-data="{field:'username'}">用户名</th>
+                          <th lay-data="{field:'realname'}">实名</th>
+                          <th lay-data="{field:'roleId'}">角色</th>
+                          <th lay-data="{field:'school'}">学校</th>
+                          <th lay-data="{field:'className'}">班级</th>
+                          <th lay-data="{fixed: 'right', width:80, align:'center', toolbar: '#barDemo'}"></th>
+                      </tr>
+                      </thead>
+                  </table>
+                  <script id="barDemo" type="text/html">
+                      <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                      <!--<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>-->
+                  </script>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<div th:include="common/footer::footer"></div>
+
+<script th:src="@{/layui/layui.js}"></script>
+<script th:inline="javascript">
+  layui.cache.page = 'user';
+  layui.cache.user = {
+      username: [[${user==null?'游客':user.username}]]
+      ,id: [[${user==null?-1:user.id}]]
+  };
+  layui.config({
+    version: "3.0.0"
+    ,base: '/mods/'
+  }).extend({
+    fly: 'index'
+  }).use(['fly','table','form'], function(){
+      var table = layui.table
+          ,form = layui.form
+          ,fly = layui.fly;
+
+      var param = '';
+      //表单提交
+      form.on('submit(userSearch)', function(data){
+          param = data.field;
+          table.reload('test3', {
+              where: param
+              ,page: {
+                  // curr: 1 //重新从第 1 页开始
+              }
+          }); //只重载数据
+          return false;
+      });
+
+      //监听行工具事件
+      table.on('tool(test3)', function(obj){
+          var data = obj.data;
+          if(obj.event === 'del'){
+              layer.confirm('真的要删除么？', function(index){
+                  // fly.json("/org/user/del"
+                  //     ,{id : data.id}
+                  //     ,function (res) {
+                  //         if (res.status === 0) {
+                  //             layer.msg("删除成功");
+                  //             obj.del();
+                  //             layer.close(index);
+                  //         }
+                  //     }
+                  // );
+              });
+          } else if(obj.event === 'edit'){
+              var school = (data.school==null || data.school=='')?'学校':data.school
+                  ,className = (data.className==null || data.className=='')?'班级':data.className;
+              layer.prompt({
+                  formType: 2
+                  ,value: data.roleId + '|' + school + '|' + className
+              }, function(value, index){
+                  var arr = value.split('|');
+                  fly.json("/org/user/mod"
+                      ,
+                      {
+                          id : data.id,
+                          roleId :arr[0],
+                          school:arr[1],
+                          className:arr[2]
+                      }
+                      ,function (res) {
+                          if (res.status === 0) {
+                              layer.msg("修改成功");
+                              layer.close(index);
+                              table.reload('test3', {
+                                  where: param
+                                  ,page: {
+                                      // curr: 1 //重新从第 1 页开始
+                                  }
+                              }); //只重载数据
+                          }else {
+                              layer.msg(res.msg);
+                          }
+                      }
+                  );
+              });
+          }
+      });
+  });
+
+</script>
+
+</body>
+</html>
