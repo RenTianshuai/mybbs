@@ -3,6 +3,7 @@ package com.yaohan.bbs.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -58,7 +59,7 @@ public class ValidateCodeController {
          */
         String s = createCharacter(g);
         log.info("生成验证码：" + s);
-        request.getSession().setAttribute(VALIDATE_CODE, s);
+        SecurityUtils.getSubject().getSession().setAttribute(VALIDATE_CODE, s);
 
         g.dispose();
         OutputStream out = response.getOutputStream();

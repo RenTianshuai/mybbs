@@ -9,9 +9,9 @@ spring:
       content-type: text/html
     cache: false
     mode: LEGACYHTML5
-  devtools:  #热部署配置
-    livereload:
-      enabled: false
+#  devtools:  #热部署配置
+#    livereload:
+#      enabled: false
 #    restart:
 #      additional-paths: controller/src/main/java,dao/src/main/java,service/src/main/java,shiro/src/main/java
   datasource: #数据源配置

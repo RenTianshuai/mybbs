@@ -1,12 +1,13 @@
 <div th:fragment="header" xmlns:th="http://www.thymeleaf.org">
-  <div class="fly-header" style="background-color: #e8e0d5; border-bottom: 1px solid #ad6f68;">
+  <div class="fly-header layui-bg-black">
     <div class="layui-container">
       <a class="fly-logo" th:href="@{/}">
-        <img style="height: 45px" th:src="@{/images/chlogos.png}" alt="青少年传习论坛">
+        <!--<img style="height: 45px;" th:src="@{/images/logo.png}" alt="青少年传习论坛">-->
+          <span style="color: #63ba7c; font-size: 28px; font-family: layui-icon; display: block;">社 区</span>
       </a>
       <ul class="layui-nav fly-nav layui-hide-xs">
         <li th:each="label:${labels}" th:class="${label?.id==selabel?'layui-nav-item layui-this':'layui-nav-item'}">
-          <a style="color: #4c0800;" th:href="@{'/?label=' + ${label?.id}}"><i class="iconfont icon-jiaoliu"></i><span th:text="${label?.name}"></span><span th:if="${label?.isApprove=='1'}" class="layui-badge-dot"></span></a>
+          <a th:href="@{'/?label=' + ${label?.id}}"><i class="iconfont icon-jiaoliu"></i><span th:text="${label?.name}"></span><span th:if="${label?.isApprove=='1'}" class="layui-badge-dot"></span></a>
         </li>
       </ul>
 
