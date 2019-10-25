@@ -52,9 +52,21 @@ public class PostsServiceImpl implements PostsServcie {
     }
 
     @Override
-    public Page<Posts> findostsByPage(int pageNo, int pageSize, Map params) {
+    public Page<Posts> findPostsByPage(int pageNo, int pageSize, Map params) {
         Page<Posts> page = PageHelper.startPage(pageNo, pageSize);
         postsMapper.findPostsBy(params);
+        return page;
+    }
+
+    @Override
+    public void update(Posts posts) {
+        postsMapper.updateByPrimaryKeySelective(posts);
+    }
+
+    @Override
+    public Page<Posts> allPublishPostsByPageAndReplys(int pageNo, int pageSize, Map params) {
+        Page<Posts> page = PageHelper.startPage(pageNo, pageSize);
+        postsMapper.findAllPubishPostsBySortReplys(params);
         return page;
     }
 }

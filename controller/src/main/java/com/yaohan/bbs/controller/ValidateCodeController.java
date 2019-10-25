@@ -1,5 +1,6 @@
 package com.yaohan.bbs.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import java.io.OutputStream;
 import java.util.Random;
 
 @Controller
+@Slf4j
 public class ValidateCodeController {
 
     public static final String VALIDATE_CODE = "validateCode";
@@ -55,6 +57,7 @@ public class ValidateCodeController {
          * 生成字符
          */
         String s = createCharacter(g);
+        log.info("生成验证码：" + s);
         request.getSession().setAttribute(VALIDATE_CODE, s);
 
         g.dispose();
@@ -97,7 +100,7 @@ public class ValidateCodeController {
         char[] codeSeq = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J',
                 'K', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
                 'X', 'Y', 'Z', '2', '3', '4', '5', '6', '7', '8', '9' };
-        String[] fontTypes = {"Arial","Arial Black","AvantGarde Bk BT","Calibri"};
+        String[] fontTypes = {"Arial","Calibri"};
         Random random = new Random();
         StringBuilder s = new StringBuilder();
         for (int i = 0; i < 4; i++) {

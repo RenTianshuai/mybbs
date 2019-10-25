@@ -27,7 +27,7 @@
               <div class="layui-input-inline">
                 <input type="text" id="L_email" name="email" required lay-verify="email" autocomplete="off" th:value="${user?.email}" class="layui-input">
               </div>
-              <div class="layui-form-mid layui-word-aux">如果您在邮箱已激活的情况下，变更了邮箱，需<a href="activate.html" style="font-size: 12px; color: #4f99cf;">重新验证邮箱</a>。</div>
+              <div class="layui-form-mid layui-word-aux">注意：如果您在邮箱已激活的情况下，变更了邮箱，需<a th:href="@{/user/activatePage}" style="font-size: 12px; color: #4f99cf;">重新验证邮箱</a>。</div>
             </div>
             <div class="layui-form-item">
               <label for="L_username" class="layui-form-label">昵称</label>
@@ -44,7 +44,7 @@
               <div class="layui-form-item">
                   <label for="L_city" class="layui-form-label">实名</label>
                   <div class="layui-input-inline">
-                      <input type="text" id="L_realname" name="realname" autocomplete="off" th:value="${user?.realname}" class="layui-input">
+                      <input type="text" id="L_realname" name="realname" autocomplete="off" th:value="${user?.realname}" class="layui-input" th:lay-verify="${user?.roleId=='student'?'required':''}">
                   </div>
               </div>
               <div class="layui-form-item">
@@ -66,7 +66,7 @@
               </div>
             </div>
             <div class="layui-form-item">
-              <button class="layui-btn" key="set-mine" lay-filter="*" lay-submit>确认修改</button>
+              <button class="layui-btn" alert="1" key="set-mine" lay-filter="*" lay-submit>确认修改</button>
             </div>
           </form>
         </div>
@@ -106,7 +106,7 @@
                 </div>
               </div>
               <div class="layui-form-item">
-                <button class="layui-btn" key="set-mine" lay-filter="*" lay-submit>确认修改</button>
+                <button class="layui-btn" alert="1" key="set-mine" lay-filter="*" lay-submit>确认修改</button>
               </div>
             </form>
           </div>
@@ -114,20 +114,16 @@
           <div class="layui-form layui-form-pane layui-tab-item">
             <ul class="app-bind">
               <li class="fly-msg app-havebind">
-                <i class="iconfont icon-qq"></i>
-                <span>已成功绑定，您可以使用QQ帐号直接登录Fly社区，当然，您也可以</span>
+                <i class="iconfont icon-mail"></i>
+                <span>邮箱已成功认证，您可以使用邮箱登录社区</span>
+              </li>
+              <li class="fly-msg app-havebind">
+                <i class="layui-icon layui-icon-login-wechat"></i>
+                <span>已成功绑定，您可以使用微信帐号直接登录社区，当然，您也可以</span>
                 <a href="javascript:;" class="acc-unbind" type="qq_id">解除绑定</a>
                 
-                <!-- <a href="" onclick="layer.msg('正在绑定微博QQ', {icon:16, shade: 0.1, time:0})" class="acc-bind" type="qq_id">立即绑定</a>
-                <span>，即可使用QQ帐号登录Fly社区</span> -->
-              </li>
-              <li class="fly-msg">
-                <i class="iconfont icon-weibo"></i>
-                <!-- <span>已成功绑定，您可以使用微博直接登录Fly社区，当然，您也可以</span>
-                <a href="javascript:;" class="acc-unbind" type="weibo_id">解除绑定</a> -->
-                
-                <a href="" class="acc-weibo" type="weibo_id"  onclick="layer.msg('正在绑定微博', {icon:16, shade: 0.1, time:0})" >立即绑定</a>
-                <span>，即可使用微博帐号登录Fly社区</span>
+                <a href="" onclick="layer.msg('正在绑定微信', {icon:16, shade: 0.1, time:0})" class="acc-bind" type="qq_id">立即绑定</a>
+                <span>，即可使用QQ帐号登录Fly社区</span>
               </li>
             </ul>
           </div>

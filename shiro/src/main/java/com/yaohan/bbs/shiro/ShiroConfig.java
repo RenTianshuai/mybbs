@@ -1,6 +1,7 @@
 package com.yaohan.bbs.shiro;
 
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
@@ -11,9 +12,22 @@ import java.util.Map;
 
 @Configuration
 public class ShiroConfig {
+
     @Bean
     public CustomRealm customRealm(){
         return new CustomRealm();
+    }
+
+    @Bean
+    public RedisSessionDao redisSessionDao(){
+        return new RedisSessionDao();
+    }
+
+    @Bean
+    public SessionManager sessionManager(){
+        CustomSessionManager sessionManager = new CustomSessionManager();
+        sessionManager.setSessionDAO(redisSessionDao());
+        return sessionManager;
     }
 
     @Bean
@@ -29,6 +43,9 @@ public class ShiroConfig {
 
         // 设置Realm
         securityManager.setRealm(customRealm);
+        //设置session管理器
+        securityManager.setSessionManager(sessionManager());
+
         return securityManager;
     }
 

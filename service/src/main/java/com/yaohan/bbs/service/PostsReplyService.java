@@ -18,4 +18,6 @@ public interface PostsReplyService {
 
     List<Map> getWeeklyHotReplys(Integer limit);
 
+    int replyTimesInHour(String postsId, String userId);
+
 }

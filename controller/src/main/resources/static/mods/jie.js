@@ -98,6 +98,8 @@ layui.define('fly', function(exports){
       }, function(res){
         if(res.status === 0){
           location.reload();
+        }else {
+            layer.msg(res.msg);
         }
       });
     }

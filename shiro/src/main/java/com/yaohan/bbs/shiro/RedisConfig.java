@@ -1,6 +1,5 @@
 package com.yaohan.bbs.shiro;
 
-import org.apache.shiro.session.mgt.SessionManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -28,24 +27,11 @@ public class RedisConfig {
     private long maxWaitMillis;
 
     @Bean
-    public JedisPool jedisPool(){
+    public JedisPool jedisPool() {
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setMaxIdle(maxIdle);
         jedisPoolConfig.setMinIdle(minIdle);
         jedisPoolConfig.setMaxWaitMillis(maxWaitMillis);
         return new JedisPool(jedisPoolConfig, host, port);
     }
-
-    @Bean
-    public RedisSessionDao redisSessionDao(){
-        return new RedisSessionDao();
-    }
-
-    @Bean
-    public SessionManager sessionManager(){
-        CustomSessionManager sessionManager = new CustomSessionManager();
-        sessionManager.setSessionDAO(redisSessionDao());
-        return sessionManager;
-    }
-
 }

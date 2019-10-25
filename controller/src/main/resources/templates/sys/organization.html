@@ -11,7 +11,8 @@
   <div th:replace="common/user-nav"></div>
   
   <div class="fly-panel fly-panel-user" pad20>
-      <div class="layui-tab layui-tab-brief" lay-filter="user">
+      <div class="fly-none" th:if="${user == null}">没有权限,请登录</div>
+      <div class="layui-tab layui-tab-brief" lay-filter="user" th:if="${user != null}">
           <ul class="layui-tab-title" id="LAY_mine">
               <li data-type="organization" lay-id="organization" class="layui-this">学校组织管理</li>
           </ul>

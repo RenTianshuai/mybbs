@@ -1,6 +1,7 @@
 package com.yaohan.bbs.dao.mapper;
 
 import com.yaohan.bbs.dao.entity.PostsReply;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -27,4 +28,6 @@ public interface PostsReplyMapper {
     List<Map> getWeeklyTopReplys(Integer limit);
 
     List<Map> getWeeklyHopReplys(Integer limit);
+
+    int replyTimesInHour(@Param("postsId") String postsId, @Param("userId") String userId);
 }

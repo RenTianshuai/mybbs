@@ -1,12 +1,12 @@
 <div th:fragment="header" xmlns:th="http://www.thymeleaf.org">
-  <div class="fly-header layui-bg-black">
+  <div class="fly-header" style="background-color: #e8e0d5; border-bottom: 1px solid #ad6f68;">
     <div class="layui-container">
       <a class="fly-logo" th:href="@{/}">
-        <img th:src="@{/images/logo.png}" alt="茶江传习">
+        <img style="height: 45px" th:src="@{/images/chlogos.png}" alt="青少年传习论坛">
       </a>
       <ul class="layui-nav fly-nav layui-hide-xs">
-        <li class="layui-nav-item layui-this" th:each="label:${labels}">
-          <a th:href="@{'/?label=' + ${label?.id}}"><i class="iconfont icon-jiaoliu"></i><span th:text="${label?.name}"></span></a>
+        <li th:each="label:${labels}" th:class="${label?.id==selabel?'layui-nav-item layui-this':'layui-nav-item'}">
+          <a style="color: #4c0800;" th:href="@{'/?label=' + ${label?.id}}"><i class="iconfont icon-jiaoliu"></i><span th:text="${label?.name}"></span><span th:if="${label?.isApprove=='1'}" class="layui-badge-dot"></span></a>
         </li>
       </ul>
 
@@ -34,6 +34,8 @@
                     <dd><a th:href="@{/user/set}"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
                     <dd><a th:href="@{/user/message}"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
                     <dd><a th:href="@{/user/home}"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
+                    <dd th:if="${user?.roleId == 'teacher'}"><a th:href="@{/approve/index}"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe6b2;</i>日记审批</a></dd>
+                    <dd th:if="${user?.roleId == 'sys_admin'}"><a th:href="@{/org/user}"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe770;</i>用户管理</a></dd>
                     <hr style="margin: 5px 0;">
                     <dd><a th:href="@{/user/logout}" style="text-align: center;">退出</a></dd>
                 </dl>

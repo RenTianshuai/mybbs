@@ -129,7 +129,7 @@ CREATE TABLE `user` (
   UNIQUE KEY `idx_user_phone` (`phone`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表' ROW_FORMAT = Dynamic;
 
-INSERT INTO `yh_bbs`.`user`(`id`, `realname`, `username`, `sex`, `password`, `portrait`, `salt`, `email`, `email_activate`, `phone`, `role_id`, `auth`, `auth_info`, `experience`, `city`, `school`, `class_name`, `signature`, `status`, `register_date`, `remarks`, `del_flag`) VALUES ('631432778313371648', NULL, 'rts', 'M', 'a060d937974c074b013e4ab8f0ad0ed0', '/upload/images/avatar/631432778313371648.jpg', '58db687fce5b1911b54e31c83df2c852', 'rts@qq.com', NULL, NULL, 'sys_admin', NULL, NULL, 0, NULL, NULL, NULL, '人生就像一场修行', NULL, '2019-10-01 17:29:33', NULL, '0');
+INSERT INTO `yh_bbs`.`user`(`id`, `realname`, `username`, `sex`, `password`, `portrait`, `salt`, `email`, `email_activate`, `phone`, `role_id`, `auth`, `auth_info`, `experience`, `city`, `school`, `class_name`, `signature`, `status`, `register_date`, `remarks`, `del_flag`) VALUES ('631432778313371648', NULL, '红豆生南国', 'M', 'a060d937974c074b013e4ab8f0ad0ed0', '/images/avatar/00.jpg', '58db687fce5b1911b54e31c83df2c852', 'rtswyd@163.com', 'Y', NULL, 'sys_admin', NULL, NULL, 0, NULL, NULL, NULL, '人生就像一场修行', NULL, '2019-10-01 17:29:33', NULL, '0');
 
 DROP TABLE IF EXISTS `posts_reply`;
 CREATE TABLE `posts_reply` (

@@ -18,14 +18,14 @@
           <!-- <span class="layui-badge">审核中</span> -->
           <!-- <span class="layui-badge" style="background-color: #5FB878;">已结</span> -->
           
-          <span class="layui-badge layui-bg-black" th:if="${#strings.equals('1', vo.posts.top)}">置顶</span>
+          <span class="layui-badge layui-bg-black" th:if="${vo.posts.top}">置顶</span>
           <span class="layui-badge layui-bg-red" th:if="${vo.posts.essence}">精帖</span>
           
           <div class="fly-admin-box" th:data-id="${vo.posts.id}">
             <!--<span class="layui-btn layui-btn-xs jie-admin" type="del">删除</span>-->
             
-            <!--<span class="layui-btn layui-btn-xs jie-admin" type="set" field="stick" rank="1">置顶</span> -->
-            <!-- <span class="layui-btn layui-btn-xs jie-admin" type="set" field="stick" rank="0" style="background-color:#ccc;">取消置顶</span> -->
+            <span class="layui-btn layui-btn-xs jie-admin" type="set" field="top" rank="1" th:if="${user?.roleId=='sys_admin'}">置顶</span>
+            <span class="layui-btn layui-btn-xs jie-admin" type="set" field="top" rank="0" style="background-color:#ccc;" th:if="${user?.roleId=='sys_admin'}">取消置顶</span>
 
             <!--<span class="layui-btn layui-btn-xs jie-admin" type="set" field="status" rank="1">加精</span> -->
             <!-- <span class="layui-btn layui-btn-xs jie-admin" type="set" field="status" rank="0" style="background-color:#ccc;">取消加精</span> -->
@@ -48,12 +48,21 @@
           </div>
           <div class="detail-hits" id="LAY_jieAdmin" th:data-id="${vo.posts.id}">
             <span style="padding-right: 10px; color: #FF7200" th:text="${#strings.append('评分：', (vo.posts.score>0?vo.posts.score:'无'))}"></span>
-            <!--<span class="layui-btn layui-btn-xs jie-admin" type="edit"><a href="add.html">编辑此贴</a></span>-->
+            <span class="layui-btn layui-btn-xs jie-admin" type="edit" th:if="${editable}"><a th:href="@{'/posts/edit?id='+${vo.posts.id}}">编辑此贴</a></span>
             <span th:if="${collect != null}" th:class="${collect?'layui-btn layui-btn-xs jie-admin layui-btn-danger':'layui-btn layui-btn-xs jie-admin'}" type="collect" th:data-type="${collect?'remove':'add'}"><span th:if="${!collect}">收藏</span><span th:if="${collect}">取消收藏</span></span>
           </div>
         </div>
         <div class="detail-body photos" th:text="${vo.posts.content}">
 
+        </div>
+      </div>
+
+      <div class="fly-panel detail-box" th:if="${log != null}">
+        <div class="layui-card">
+          <div class="layui-card-header">老师点评</div>
+          <div class="layui-card-body">
+            <span th:text="${log?.content}" style="color: #FF7200;"></span>
+          </div>
         </div>
       </div>
 

@@ -11,7 +11,8 @@
   <div th:replace="common/user-nav"></div>
   
   <div class="fly-panel fly-panel-user" pad20>
-      <div class="layui-tab layui-tab-brief" lay-filter="user">
+      <div class="fly-none" th:if="${user == null}">没有权限,请登录</div>
+      <div class="layui-tab layui-tab-brief" lay-filter="user" th:if="${user != null}">
           <ul class="layui-tab-title" id="LAY_mine">
               <li data-type="organization" lay-id="organization" class="layui-this">用户管理</li>
           </ul>
@@ -31,7 +32,7 @@
                   </div>
               </form>
               <div class="layui-tab-item layui-show">
-                  <table class="layui-table" lay-filter="test3" lay-data="{url:'/org/user/list', id:'test3', page: true}">
+                  <table class="layui-table" lay-filter="test3" lay-data="{url:'/org/user/list', id:'test3', page: true, toolbar: '#toolbarDemo', defaultToolbar: ['filter', 'exports', 'print',{title: '提示',layEvent: 'LAYTABLE_TIPS',icon: 'layui-icon-tips'}]}">
                       <thead>
                       <tr>
                           <th lay-data="{field:'id',sort: false, hide:true}">ID</th>
@@ -44,6 +45,11 @@
                       </tr>
                       </thead>
                   </table>
+                  <script id="toolbarDemo" type="text/html">
+                      <div class="layui-btn-container">
+                          <button class="layui-btn layui-btn-sm" lay-event="importSchoolUser" id="importU" title="Excel格式与下面表格相同">导入用户学校信息</button>
+                      </div>
+                  </script>
                   <script id="barDemo" type="text/html">
                       <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
                       <!--<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>-->
@@ -69,9 +75,10 @@
     ,base: '/mods/'
   }).extend({
     fly: 'index'
-  }).use(['fly','table','form'], function(){
+  }).use(['fly','table','form', 'upload'], function(){
       var table = layui.table
           ,form = layui.form
+          ,upload = layui.upload
           ,fly = layui.fly;
 
       var param = '';
@@ -135,6 +142,37 @@
                       }
                   );
               });
+          }
+      });
+
+      //头工具栏事件
+      table.on('toolbar(test3)', function(obj){
+          switch(obj.event){
+              case 'importSchoolUser':
+                    console.log("表头按钮点击")
+                  break;
+              //自定义头工具栏右侧图标 - 提示
+              case 'LAYTABLE_TIPS':
+                  layer.alert('工具栏导出请使用非IE浏览器');
+                  break;
+          };
+      });
+
+      upload.render({
+          elem: '#importU'
+          ,url: '/api/import/schoolUser'
+          ,accept: 'file' //普通文件
+          ,size: 1024*2 //限制文件大小，单位 KB
+          ,done: function(res){
+              layer.msg(res.msg)
+              if (res.status == 0){
+                  table.reload('test3', {
+                      where: {}
+                      ,page: {
+                          // curr: 1 //重新从第 1 页开始
+                      }
+                  }); //只重载数据
+              }
           }
       });
   });

@@ -93,7 +93,7 @@
             ,jump: function (obj, first) {
                 //得到了当前页，用于向服务端请求对应数据
                 if (!first) {
-                    location.href = '/jie/index?pageNo=' + obj.curr;
+                    location.href = '/jie/index?pageNo=' + obj.curr + '&label=' + [[${selabel}]] + '&sort=' + [[${sort}]];
                 }
             }
         });

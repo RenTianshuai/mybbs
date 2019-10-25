@@ -2,9 +2,13 @@ package com.yaohan.bbs.controller;
 
 import com.github.pagehelper.Page;
 import com.yaohan.bbs.dao.entity.Posts;
+import com.yaohan.bbs.dao.entity.PostsApproveLog;
 import com.yaohan.bbs.dao.entity.PostsReply;
 import com.yaohan.bbs.dao.entity.User;
-import com.yaohan.bbs.service.*;
+import com.yaohan.bbs.service.PostsApproveLogService;
+import com.yaohan.bbs.service.PostsCollectionService;
+import com.yaohan.bbs.service.PostsReplyService;
+import com.yaohan.bbs.service.PostsServcie;
 import com.yaohan.bbs.vo.PostsVO;
 import com.yaohan.bbs.vo.ReplyVO;
 import org.apache.commons.lang3.StringUtils;
@@ -18,12 +22,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class PageController extends BaseController{
 
     @Value("${index.top.num}")
     private int topNum;
+    @Value("${index.jie.num}")
+    private int jieNum;
+    @Value("${index.jie.page}")
+    private int jiePage;
 
     @Autowired
     PostsServcie postsServcie;
@@ -31,9 +40,16 @@ public class PageController extends BaseController{
     PostsCollectionService postsCollectionService;
     @Autowired
     PostsReplyService postsReplyService;
+    @Autowired
+    PostsApproveLogService postsApproveLogService;
 
     @GetMapping("/")
-    public String indexPage(Model model){
+    public String indexPage(String label, Integer sort,  Model model){
+        if (sort==null) {
+            sort=0;
+        }
+        model.addAttribute("selabel", label==null?"":label);
+        model.addAttribute("sort", sort);
         //获取前五条置顶贴
         List<Posts> top = postsServcie.topPublishPostsByNum(topNum);
         if (top!=null && top.size()>0){
@@ -45,7 +61,17 @@ public class PageController extends BaseController{
         }
 
         //获取最近的10条贴
-        List<Posts> publishPosts = postsServcie.allPublishPostsByPage(1, 10, new HashMap(0)).getResult();
+        Map params = new HashMap(1);
+        if (StringUtils.isNotEmpty(label)){
+            params.put("labelId", label);
+        }
+        List<Posts> publishPosts = null;
+        if (sort==1){
+            //按热议
+            publishPosts = postsServcie.allPublishPostsByPageAndReplys(1, jieNum, params).getResult();
+        }else {
+            publishPosts = postsServcie.allPublishPostsByPage(1, jieNum, params).getResult();
+        }
         if (publishPosts!=null && publishPosts.size()>0){
             List<PostsVO> vos = new ArrayList<>(publishPosts.size());
             for (Posts posts:publishPosts){
@@ -73,17 +99,31 @@ public class PageController extends BaseController{
     }
 
     @RequestMapping("/jie/index")
-    public String jieIndex(Integer pageNo, Integer pageSize, Model model){
+    public String jieIndex(Integer pageNo, Integer pageSize, String label, Integer sort, Model model){
+        if (sort==null) {
+            sort=0;
+        }
+        model.addAttribute("selabel", label==null?"":label);
+        model.addAttribute("sort", sort);
         if (pageNo == null || pageNo == 0){
             pageNo = 1;
         }
         if (pageSize == null || pageSize == 0){
-            pageSize = 20;
+            pageSize = jiePage;
         }
         model.addAttribute("count", 0);
         model.addAttribute("pageNo", pageNo);
         model.addAttribute("pageSize", pageSize);
-        Page<Posts> page = postsServcie.allPublishPostsByPage(pageNo, pageSize, new HashMap(0));
+        Map params = new HashMap(1);
+        if (StringUtils.isNotEmpty(label)){
+            params.put("labelId", label);
+        }
+        Page<Posts> page = null;
+        if (sort==1){
+            page = postsServcie.allPublishPostsByPageAndReplys(pageNo, pageSize, params);
+        }else {
+            page = postsServcie.allPublishPostsByPage(pageNo, pageSize, params);
+        }
         model.addAttribute("count", page.getTotal());
         List<Posts> publishPosts = page.getResult();
         if (publishPosts!=null && publishPosts.size()>0){
@@ -116,6 +156,10 @@ public class PageController extends BaseController{
             repPageSize = 10;
         }
 
+        //老师审批日志
+        PostsApproveLog approveLog = postsApproveLogService.getNewByPostsId(id);
+        model.addAttribute("log", approveLog);
+
         //获取回复
         model.addAttribute("repCount", 0);
         model.addAttribute("repPageNo", repPageNo);
@@ -136,6 +180,23 @@ public class PageController extends BaseController{
         }
 
         PostsVO vo = getPostsVO(postsServcie.get(id));
+
+        //检查是否可编辑
+        model.addAttribute("editable", false);
+        if (user != null && StringUtils.isNotEmpty(user.getId())){
+            if (user.getId().equals(vo.getUser().getId())){
+                if (!"1".equals(vo.getLabel().getIsApprove())) {
+                    //用户登录且不需要审批
+                    model.addAttribute("editable", true);
+                }else {
+                    if (vo.getPosts().getStatus()!=4 && vo.getPosts().getStatus()!=2){
+                        //审批帖子不在提交或审批完成时
+                        model.addAttribute("editable", true);
+                    }
+                }
+            }
+        }
+
         model.addAttribute("vo", vo);
         return "jie/detail";
     }

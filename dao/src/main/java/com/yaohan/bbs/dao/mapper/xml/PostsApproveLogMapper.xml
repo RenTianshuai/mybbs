@@ -90,4 +90,13 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="selectByPostsId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from posts_approve_log
+    where posts_id = #{postsId,jdbcType=VARCHAR}
+    order by create_time desc
+    limit 1
+  </select>
 </mapper>

@@ -47,20 +47,31 @@ public class PostsReplyController extends BaseController {
             result.put("msg", "亲，您还没有登录哟");
             return result;
         }
+
+        int times = postsReplyService.replyTimesInHour(jid, user.getId());
+        if (times > 5){
+            result.put("status", -1);
+            result.put("msg", "亲，您一个小时内已评论5次，不要刷评哦！");
+            return result;
+        }
+
         PostsReply reply = postsReplyService.addReply(jid, user.getId(), content);
 
         //添加一条消息
         try{
             Posts p = postsServcie.getWithoutBLOBS(jid);
-            Message message = new Message();
-            message.setId(flowNoService.generateFlowNo());
-            //接收人作者
-            message.setUserId(p.getUserId());
-            message.setCreateTime(new Date());
-            //格式化消息：昵称，昵称，帖子ID,回复ID,标题
-            String msg = String.format(messageReplyTemp, user.getUsername(), user.getUsername(), jid, reply.getId(), p.getTitle());
-            message.setMessage(msg);
-            messageService.add(message);
+            //不是作者自己评论就发送消息
+            if (!p.getUserId().equals(user.getId())){
+                Message message = new Message();
+                message.setId(flowNoService.generateFlowNo());
+                //接收人作者
+                message.setUserId(p.getUserId());
+                message.setCreateTime(new Date());
+                //格式化消息：昵称，昵称，帖子ID,回复ID,标题
+                String msg = String.format(messageReplyTemp, user.getUsername(), user.getUsername(), jid, reply.getId(), p.getTitle());
+                message.setMessage(msg);
+                messageService.add(message);
+            }
 
         }catch (Exception e){
             log.error("添加消息出错", e);

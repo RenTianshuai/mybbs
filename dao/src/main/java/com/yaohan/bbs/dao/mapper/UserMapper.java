@@ -23,4 +23,8 @@ public interface UserMapper {
     User selectByEmail(String email);
 
     List<User> findAll(Map params);
+
+    User selectByAuthInfo(String authInfo);
+
+    User selectByPhone(String phone);
 }

@@ -81,7 +81,7 @@
         <div class="fly-none" th:if="${vos == null}">没有相关数据</div>
         <div style="text-align: center">
           <div class="laypage-main">
-            <a th:href="@{/jie/index}" class="laypage-next">更多求解</a>
+            <a th:href="@{'/jie/index?label=' + ${selabel} + '&sort='+${sort}}" class="laypage-next">更多帖子</a>
           </div>
         </div>
 
@@ -99,6 +99,8 @@
       <div th:include="common/hotpost::hotpost"></div>
 
       <div th:include="common/ad::ad"></div>
+
+      <div th:include="common/weixin::weixin"></div>
 
       <div th:include="common/link::link"></div>
 

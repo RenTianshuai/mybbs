@@ -44,6 +44,7 @@ i{font-style: normal;}
 .icon-tuichu:before{content:"\e601"}
 .icon-shui:before{content:"\e602"}
 .icon-qq:before{content:"\e618"}
+.icon-mail:before{content:"\f0e0"}
 .icon-weibo:before{content:"\e617"}
 .icon-tupian:before{content:"\e608"}
 .icon-logo:before{content:"\e603"}
@@ -127,6 +128,7 @@ pre{padding: 10px 15px; margin: 10px 0; font-size: 12px; border-left: 6px solid 
 .fly-zanzhu{display: block; position: relative; height: 60px; line-height: 60px; margin-top: 10px; padding: 0 20px; text-align: center; font-size: 16px; font-weight: 300; background-color: #009688; color: #fff;}
 .fly-zanzhu:first-child{margin-top: 0;}
 .fly-zanzhu:hover{opacity: 0.9; color: #fff;}
+.fly-zanzhu-img{height: auto;max-width: 100%;padding: 0;text-align: center;background-color: #eeeeee}
 
 /* 图标 */
 .icon-touxiang{display: inline-block; font-size: 34px;}

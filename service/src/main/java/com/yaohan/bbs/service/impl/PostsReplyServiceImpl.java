@@ -67,4 +67,9 @@ public class PostsReplyServiceImpl implements PostsReplyService {
     public List<Map> getWeeklyHotReplys(Integer limit) {
         return postsReplyMapper.getWeeklyHopReplys(limit);
     }
+
+    @Override
+    public int replyTimesInHour(String postsId, String userId) {
+        return postsReplyMapper.replyTimesInHour(postsId, userId);
+    }
 }

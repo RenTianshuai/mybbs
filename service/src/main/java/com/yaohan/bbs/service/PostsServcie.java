@@ -20,5 +20,9 @@ public interface PostsServcie {
 
     List<Posts> topPublishPostsByNum(int num);
 
-    Page<Posts> findostsByPage(int pageNo, int pageSize, Map params);
+    Page<Posts> findPostsByPage(int pageNo, int pageSize, Map params);
+
+    void update(Posts posts);
+
+    Page<Posts> allPublishPostsByPageAndReplys(int pageNo, int pageSize, Map params);
 }

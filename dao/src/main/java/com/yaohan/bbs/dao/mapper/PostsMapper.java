@@ -30,4 +30,6 @@ public interface PostsMapper {
 
     List<Posts> findPostsBy(Map params);
 
+    List<Posts> findAllPubishPostsBySortReplys(Map params);
+
 }

@@ -333,4 +333,48 @@
     </where>
     order by publish_time desc
   </select>
+
+  <select id="findAllPubishPostsBySortReplys" resultMap="BaseResultMap" parameterType="java.util.Map">
+      select
+      <include refid="Base_Column_List"/>
+      from posts
+      where status = 4
+      <if test="labelId != null">
+        and label_id = #{labelId,jdbcType=VARCHAR}
+      </if>
+      <if test="title != null">
+        and title = #{title,jdbcType=VARCHAR}
+      </if>
+      <if test="experience != null">
+        and experience = #{experience,jdbcType=INTEGER}
+      </if>
+      <if test="userId != null">
+        and user_id = #{userId,jdbcType=VARCHAR}
+      </if>
+      <if test="publishTime != null">
+        and publish_time = #{publishTime,jdbcType=TIMESTAMP}
+      </if>
+      <if test="readCount != null">
+        and read_count = #{readCount,jdbcType=INTEGER}
+      </if>
+      <if test="top != null">
+        and top = #{top,jdbcType=BIT}
+      </if>
+      <if test="essence != null">
+        and essence = #{essence,jdbcType=BIT}
+      </if>
+      <if test="score != null">
+        and score = #{score,jdbcType=TINYINT}
+      </if>
+      <if test="approver != null">
+        and approver = #{approver,jdbcType=VARCHAR}
+      </if>
+      <if test="delFlag != null">
+        and del_flag = #{delFlag,jdbcType=CHAR}
+      </if>
+      <if test="content != null">
+        and content = #{content,jdbcType=LONGVARCHAR}
+      </if>
+      order by read_count desc,publish_time desc
+  </select>
 </mapper>

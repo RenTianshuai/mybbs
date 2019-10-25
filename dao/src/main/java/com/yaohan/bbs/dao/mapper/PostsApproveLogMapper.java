@@ -14,4 +14,6 @@ public interface PostsApproveLogMapper {
     int updateByPrimaryKeySelective(PostsApproveLog record);
 
     int updateByPrimaryKey(PostsApproveLog record);
+
+    PostsApproveLog selectByPostsId(String postsId);
 }

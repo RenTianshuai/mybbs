@@ -1,9 +1,13 @@
 package com.yaohan.bbs.controller;
 
 import com.github.pagehelper.Page;
+import com.yaohan.bbs.common.Constant;
 import com.yaohan.bbs.dao.entity.*;
+import com.yaohan.bbs.mail.config.EmailConfig;
+import com.yaohan.bbs.mail.dto.EmailDTO;
 import com.yaohan.bbs.service.*;
 import com.yaohan.bbs.shiro.CustomPasswordToken;
+import com.yaohan.bbs.utils.Util;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -25,10 +29,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @Slf4j
@@ -37,6 +38,9 @@ public class UserController extends BaseController{
 
     @Value("${upload.images-path}")
     private String imagesPath;
+
+    @Autowired
+    EmailConfig emailConfig;
 
     @Autowired
     UserService userService;
@@ -72,9 +76,16 @@ public class UserController extends BaseController{
             result.put("msg", e.getMessage());
             return result;
         }
+        User u = (User) subject.getSession().getAttribute("user");
         result.put("status", 0);
         result.put("msg", "登录成功");
-        result.put("action", "/");
+        if ("Y".equals(u.getEmailActivate())){
+            result.put("action", "/");
+        }else {
+            //未激活不让登录
+            subject.getSession().removeAttribute("user");
+            result.put("action", "/user/activatePage?u="+u.getId());
+        }
         return result;
     }
 
@@ -104,6 +115,11 @@ public class UserController extends BaseController{
             result.put("msg", "用户邮箱已存在");
             return result;
         }
+        if (username.contains("admin") || username.contains("管理员")){
+            result.put("status", -1);
+            result.put("msg", "用户昵称不能包含admin或管理员");
+            return result;
+        }
         user = userService.getByUserName(username);
         if (user != null){
             result.put("status", -1);
@@ -124,8 +140,9 @@ public class UserController extends BaseController{
         user.setRoleId("member");
         user.setExperience(0);
         user.setEmail(email);
+        user.setEmailActivate("N");
         user.setUsername(username);
-        user.setPortrait("/images/avatar/default.png");
+        user.setPortrait("/images/avatar/" + Util.randomInt(12) + ".jpg");
         //生成盐值
         String salt = new SecureRandomNumberGenerator().nextBytes().toHex();
         //生成的密文
@@ -140,7 +157,7 @@ public class UserController extends BaseController{
 
         result.put("status", 0);
         result.put("msg", "注册成功");
-        result.put("action", "/user/loginPage");
+        result.put("action", "/user/activatePage?u="+user.getId());
         return result;
     }
 
@@ -160,7 +177,7 @@ public class UserController extends BaseController{
         model.addAttribute("pageSize", pageSize);
         Map params = new HashMap(1);
         params.put("userId", checkUser().getId());
-        Page<Posts> page = postsServcie.findostsByPage(pageNo, pageSize, params);
+        Page<Posts> page = postsServcie.findPostsByPage(pageNo, pageSize, params);
         model.addAttribute("count", page.getTotal());
         model.addAttribute("postsList", page.getResult());
         return "user/index";
@@ -263,6 +280,8 @@ public class UserController extends BaseController{
                 result.put("msg", "邮箱已使用");
                 return result;
             }
+            //更换邮箱需重新激活
+            user.setEmailActivate("N");
         }
         if (!user.getUsername().equals(username)){
             userOld = userService.getByUserName(username);
@@ -272,9 +291,16 @@ public class UserController extends BaseController{
                 return result;
             }
         }
+        if (StringUtils.isNotEmpty(phone) && !phone.equals(user.getPhone())){
+            userOld = userService.getByPhone(phone);
+            if (userOld != null){
+                result.put("status", -1);
+                result.put("msg", "手机号码已使用");
+                return result;
+            }
+        }
         //修改用户信息
         user.setEmail(email);
-        user.setEmailActivate("N");
         user.setUsername(username);
         user.setSex(sex);
         user.setRealname(realname);
@@ -286,6 +312,7 @@ public class UserController extends BaseController{
         refreshUser(user);
 
         result.put("status", 0);
+        result.put("msg", "信息更新成功");
         result.put("action", "/user/set");
 
         return result;
@@ -382,5 +409,108 @@ public class UserController extends BaseController{
         List<Message> messages = messageService.findByUserId(checkUser().getId());
         model.addAttribute("messages", messages);
         return "user/message";
+    }
+
+    @RequestMapping("/activatePage")
+    public String userActivatePage(String u, HttpServletRequest request, Model model){
+        User user = null;
+        if (StringUtils.isEmpty(u)){
+            user =  checkUser();
+        }else {
+            user = userService.get(u);
+        }
+
+        if (StringUtils.isEmpty(user.getAuthInfo())){
+            //发送激活邮件
+            sendActivateMail(request, user);
+        }
+
+        model.addAttribute("activateU", user);
+        model.addAttribute("adminEmail", emailConfig.getSmtpAccount());
+        model.addAttribute("userMailHost", "http://mail." + user.getEmail().substring(user.getEmail().indexOf("@")+1));
+
+        return "user/activate";
+    }
+
+    @RequestMapping("/activate")
+    public String userActivate(String code, Model model){
+        User user = userService.getByAuthInfo(code);
+
+        if (user == null){
+            model.addAttribute("msg", "激活连接失效，请登录重试");
+            return "user/login";
+        }
+
+        user.setEmailActivate("Y");
+        user.setAuthInfo("");
+        userService.update(user);
+
+        model.addAttribute("msg", "邮箱激活成功，请登录");
+        return "user/login";
+    }
+
+    @RequestMapping("/forget")
+    public String userForget(Model model){
+        return "user/forget";
+    }
+
+    @RequestMapping("/findPass")
+    @ResponseBody
+    public Map findPass(String email, String vercode, HttpServletRequest request) {
+        Map result = new HashMap();
+        //验证码
+        Session session = SecurityUtils.getSubject().getSession();
+        String code = (String) session.getAttribute("validateCode");
+        if (vercode == null || !vercode.toUpperCase().equals(code)) {
+            result.put("status", -1);
+            result.put("msg", "验证码错误，请重试");
+            return result;
+        }
+
+        User userOld = userService.getByEmail(email);
+        if (userOld == null){
+            result.put("status", -1);
+            result.put("msg", "该邮箱未注册，请重试");
+            return result;
+        }
+
+        //发送重置链接
+        String path = request.getRequestURL().toString();
+        String codePass = UUID.randomUUID().toString();
+        EmailDTO emailDTO = new EmailDTO();
+        emailDTO.setSubject("来自青少年传习论坛的密码重置邮件");
+        emailDTO.setReceiver(userOld.getEmail());
+        emailDTO.setContent(String.format(Constant.REPASS_EMAIL, path.substring(0, path.indexOf(request.getServletPath())), codePass, codePass.substring(0, 6)));
+        mailSenderService.sendMail(emailDTO, true);
+
+        //暂存code在session
+        session.setAttribute(codePass, email);
+
+        result.put("status", 0);
+        result.put("msg", "重置邮件已发送，请登陆邮箱重置，并使用新密码登录");
+        result.put("action", "/user/loginPage");
+
+        return result;
+    }
+
+    @RequestMapping("/findNewPass")
+    public String findNewPass(String code, Model model){
+        Session session = SecurityUtils.getSubject().getSession();
+        Object object = session.getAttribute(code);
+        if (object == null){
+            model.addAttribute("msg", "重置密码链接已失效，请重试");
+            return "user/login";
+        }
+
+        String email = (String) object;
+        User user = userService.getByEmail(email);
+        //重置密码
+        String ciphertext = new Md5Hash(code.substring(0,6), user.getSalt(),1).toString();
+        //修改用户信息
+        user.setPassword(ciphertext);
+        userService.update(user);
+
+        model.addAttribute("msg", "重置密码成功，请登录");
+        return "user/login";
     }
 }

@@ -19,8 +19,8 @@
           <span class="layui-badge layui-bg-red" th:if="${vo.posts.essence}">精帖</span>
           
           <div class="fly-admin-box" th:data-id="${vo.posts.id}">
-            <span class="layui-btn layui-btn-xs jie-admin" type="set" field="status" rank="1">加精</span>
-             <span class="layui-btn layui-btn-xs jie-admin" type="set" field="status" rank="0" style="background-color:#ccc;">取消加精</span>
+            <span class="layui-btn layui-btn-xs jie-admin" type="set" field="essence" rank="1">加精</span>
+             <span class="layui-btn layui-btn-xs jie-admin" type="set" field="essence" rank="0" style="background-color:#ccc;">取消加精</span>
           </div>
           <span class="fly-list-nums layui-hide-xs">
             <a href="#comment"><i class="jie-admin iconfont" title="评论">&#xe60c;</i> <span th:text="${vo.posts.readCount}"></span> </a>
