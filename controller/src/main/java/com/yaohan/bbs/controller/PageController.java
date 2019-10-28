@@ -5,10 +5,7 @@ import com.yaohan.bbs.dao.entity.Posts;
 import com.yaohan.bbs.dao.entity.PostsApproveLog;
 import com.yaohan.bbs.dao.entity.PostsReply;
 import com.yaohan.bbs.dao.entity.User;
-import com.yaohan.bbs.service.PostsApproveLogService;
-import com.yaohan.bbs.service.PostsCollectionService;
-import com.yaohan.bbs.service.PostsReplyService;
-import com.yaohan.bbs.service.PostsServcie;
+import com.yaohan.bbs.service.*;
 import com.yaohan.bbs.vo.PostsVO;
 import com.yaohan.bbs.vo.ReplyVO;
 import org.apache.commons.lang3.StringUtils;
@@ -42,6 +39,8 @@ public class PageController extends BaseController{
     PostsReplyService postsReplyService;
     @Autowired
     PostsApproveLogService postsApproveLogService;
+    @Autowired
+    UserLikeLogService userLikeLogService;
 
     @GetMapping("/")
     public String indexPage(String label, Integer sort,  Model model){
@@ -194,6 +193,14 @@ public class PageController extends BaseController{
                         model.addAttribute("editable", true);
                     }
                 }
+            }
+        }
+
+        //是否已点赞
+        model.addAttribute("zan", false);
+        if (user != null && StringUtils.isNotEmpty(user.getId())){
+            if (userLikeLogService.get(user.getId(), id).getZan()){
+                model.addAttribute("zan", true);
             }
         }
 

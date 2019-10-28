@@ -2,9 +2,13 @@ package com.yaohan.bbs.dao.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class PostsApproveLog {
+/**
+ * @author renti
+ */
+public class PostsApproveLog implements Serializable {
     private String id;
 
     private String userId;

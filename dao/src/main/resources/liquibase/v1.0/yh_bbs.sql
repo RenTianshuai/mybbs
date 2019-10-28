@@ -30,8 +30,8 @@ CREATE TABLE `posts` (
   `user_id` varchar(32) NOT NULL COMMENT '用户ID',
   `publish_time` datetime DEFAULT NULL COMMENT '发布时间',
   `read_count` int(10) DEFAULT NULL COMMENT '阅读数',
-  `top` tinyint(1) DEFAULT NULL COMMENT '置顶',
-  `essence` tinyint(1) DEFAULT NULL COMMENT '精华',
+  `top` tinyint(1) DEFAULT 0 COMMENT '置顶',
+  `essence` tinyint(1) DEFAULT 0 COMMENT '精华',
   `status` tinyint(2) NOT NULL COMMENT '状态（0-新增 2-提交 3-打回 4-发布）',
   `score` tinyint(3) DEFAULT NULL COMMENT '得分',
   `approver` varchar(32) DEFAULT NULL COMMENT '审批人',
@@ -172,3 +172,12 @@ CREATE TABLE `posts_approve_log` (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx1`(`posts_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT = '日记审批历史表' ROW_FORMAT = Dynamic;
+
+DROP TABLE IF EXISTS `user_like_log`;
+CREATE TABLE `user_like_log` (
+  `user_id` varchar(32) DEFAULT NULL COMMENT '用户ID',
+  `posts_id` varchar(32) NOT NULL COMMENT '帖子ID',
+  `zan` tinyint(1) DEFAULT NULL COMMENT '赞',
+  `operater_time` datetime DEFAULT NULL COMMENT '操作时间',
+  PRIMARY KEY (`user_id`,`posts_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT = '用户点赞历史表' ROW_FORMAT = Dynamic;

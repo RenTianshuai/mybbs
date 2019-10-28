@@ -12,6 +12,9 @@ layui.define('fly', function(exports){
   var laytpl = layui.laytpl;
   var form = layui.form;
   var fly = layui.fly;
+
+  //判断重复点击变量
+    var firstZan = true;
   
   var gather = {}, dom = {
     jieda: $('#jieda')
@@ -74,13 +77,13 @@ layui.define('fly', function(exports){
   gather.jieAdmin = {
     //删求解
     del: function(div){
-      layer.confirm('确认删除该求解么？', function(index){
+      layer.confirm('确认删除该帖子么？删除后会保留痕迹，内容不可见。', function(index){
         layer.close(index);
         fly.json('/api/jie-delete/', {
           id: div.data('id')
         }, function(res){
           if(res.status === 0){
-            location.href = '/jie/';
+            location.href = '/user/index';
           } else {
             layer.msg(res.msg);
           }
@@ -142,8 +145,12 @@ layui.define('fly', function(exports){
   //解答操作
   gather.jiedaActive = {
     zan: function(li){ //赞
+        if (!firstZan){
+            return;
+        }
+        firstZan = false;
       var othis = $(this), ok = othis.hasClass('zanok');
-      fly.json('/api/jieda-zan/', {
+      fly.json('/api/jie-zan/', {
         ok: ok
         ,id: li.data('id')
       }, function(res){
@@ -154,6 +161,7 @@ layui.define('fly', function(exports){
         } else {
           layer.msg(res.msg);
         }
+        firstZan = true;
       });
     }
     ,reply: function(li){ //回复

@@ -2,9 +2,13 @@ package com.yaohan.bbs.dao.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Organization {
+/**
+ * @author renti
+ */
+public class Organization implements Serializable {
     private String id;
 
     private String name;

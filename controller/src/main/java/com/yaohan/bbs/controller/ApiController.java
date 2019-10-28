@@ -3,13 +3,12 @@ package com.yaohan.bbs.controller;
 import com.alibaba.excel.EasyExcel;
 import com.yaohan.bbs.dao.entity.Posts;
 import com.yaohan.bbs.dao.entity.User;
+import com.yaohan.bbs.dao.entity.UserLikeLog;
 import com.yaohan.bbs.excel.UserModel;
 import com.yaohan.bbs.excel.UserModelListener;
-import com.yaohan.bbs.service.MessageService;
-import com.yaohan.bbs.service.PostsReplyService;
-import com.yaohan.bbs.service.PostsServcie;
-import com.yaohan.bbs.service.UserService;
+import com.yaohan.bbs.service.*;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +39,8 @@ public class ApiController extends BaseController {
     MessageService messageService;
     @Autowired
     PostsServcie postsServcie;
+    @Autowired
+    UserLikeLogService userLikeLogService;
 
     @RequestMapping("upload")
     public Map upload(MultipartFile file){
@@ -202,6 +203,44 @@ public class ApiController extends BaseController {
         result.put("status", 0);
         result.put("msg", "导入成功");
 
+        return result;
+    }
+
+    @RequestMapping("/jie-zan")
+    public Map jieZan(Boolean ok, String id){
+        Map result = new HashMap();
+        User user = checkUser();
+        if (user == null || StringUtils.isEmpty(user.getId())){
+            result.put("status", -1);
+            result.put("msg", "亲，您还没有登录哟！");
+            return result;
+        }
+        UserLikeLog userLikeLog = userLikeLogService.get(user.getId(), id);
+        if (ok){
+            userLikeLogService.cancel(userLikeLog);
+        }else {
+            userLikeLogService.zan(userLikeLog);
+        }
+
+        result.put("status", 0);
+        return result;
+    }
+
+    @RequestMapping("/jie-delete")
+    public Map jieDelete(String id){
+        Map result = new HashMap();
+        User user = checkUser();
+        if (user == null || StringUtils.isEmpty(user.getId())){
+            result.put("status", -1);
+            result.put("msg", "亲，您还没有登录哟！");
+            return result;
+        }
+
+        Posts posts = postsServcie.get(id);
+        posts.setDelFlag("1");
+        postsServcie.update(posts);
+
+        result.put("status", 0);
         return result;
     }
 }

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yaohan.bbs.dao.mapper.UserLikeLogMapper" >
+  <resultMap id="BaseResultMap" type="com.yaohan.bbs.dao.entity.UserLikeLog" >
+    <id column="user_id" property="userId" jdbcType="VARCHAR" />
+    <id column="posts_id" property="postsId" jdbcType="VARCHAR" />
+    <result column="zan" property="zan" jdbcType="BIT" />
+    <result column="operater_time" property="operaterTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, posts_id, zan, operater_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.yaohan.bbs.dao.entity.UserLikeLogKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_like_log
+    where user_id = #{userId,jdbcType=VARCHAR}
+      and posts_id = #{postsId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.yaohan.bbs.dao.entity.UserLikeLogKey" >
+    delete from user_like_log
+    where user_id = #{userId,jdbcType=VARCHAR}
+      and posts_id = #{postsId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.yaohan.bbs.dao.entity.UserLikeLog" >
+    insert into user_like_log (user_id, posts_id, zan, 
+      operater_time)
+    values (#{userId,jdbcType=VARCHAR}, #{postsId,jdbcType=VARCHAR}, #{zan,jdbcType=BIT}, 
+      #{operaterTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yaohan.bbs.dao.entity.UserLikeLog" >
+    insert into user_like_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="postsId != null" >
+        posts_id,
+      </if>
+      <if test="zan != null" >
+        zan,
+      </if>
+      <if test="operaterTime != null" >
+        operater_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="postsId != null" >
+        #{postsId,jdbcType=VARCHAR},
+      </if>
+      <if test="zan != null" >
+        #{zan,jdbcType=BIT},
+      </if>
+      <if test="operaterTime != null" >
+        #{operaterTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yaohan.bbs.dao.entity.UserLikeLog" >
+    update user_like_log
+    <set >
+      <if test="zan != null" >
+        zan = #{zan,jdbcType=BIT},
+      </if>
+      <if test="operaterTime != null" >
+        operater_time = #{operaterTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=VARCHAR}
+      and posts_id = #{postsId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yaohan.bbs.dao.entity.UserLikeLog" >
+    update user_like_log
+    set zan = #{zan,jdbcType=BIT},
+      operater_time = #{operaterTime,jdbcType=TIMESTAMP}
+    where user_id = #{userId,jdbcType=VARCHAR}
+      and posts_id = #{postsId,jdbcType=VARCHAR}
+  </update>
+</mapper>

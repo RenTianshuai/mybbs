@@ -32,4 +32,7 @@ public interface PostsMapper {
 
     List<Posts> findAllPubishPostsBySortReplys(Map params);
 
+    int addExperience(String id);
+
+    int subExperience(String id);
 }

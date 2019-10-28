@@ -51,7 +51,10 @@ public class PostsCollectionServiceImpl implements PostsCollectionService {
     }
 
     @Override
-    public void addByUserIdAndPostsId(String userId, String postsId) {
+    public synchronized void addByUserIdAndPostsId(String userId, String postsId) {
+        if (getByUserIdAndPostsId(userId, postsId) != null){
+            return;
+        }
         PostsCollection postsCollection = new PostsCollection();
         postsCollection.setId(flowNoService.generateFlowNo());
         postsCollection.setUserId(userId);

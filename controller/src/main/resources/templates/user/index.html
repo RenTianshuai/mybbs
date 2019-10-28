@@ -27,9 +27,10 @@
             <li th:each="posts:${postsList}">
               <a class="jie-title" th:href="@{'/jie/detail?id=' + ${posts.id}}" target="_blank" th:text="${posts.title}"></a>
               <i th:text="${#dates.format(posts.publishTime, 'yyyy-MM-dd hh:mm:ss')}"></i>
-              <i style="color: red;margin-left: 10px" th:text="${posts.status==4?'已发布':(posts.status==2?'已提交':(posts.status==3?'打回':'新增'))}"></i>
+              <i style="color: red;margin-left: 10px" th:text="${posts.delFlag=='1'?'已删除':(posts.status==4?'已发布':(posts.status==2?'已提交':(posts.status==3?'打回':'新增')))}"></i>
                 <i th:if="${posts.score > 0}" style="color: red;margin-left: 10px" th:text="${#strings.append('评分',posts.score)}"></i>
               <a class="mine-edit" th:if="${posts.status==3}" th:href="@{'/posts/edit?id=' + ${posts.id}}">修改</a>
+              <a class="mine-edit" th:if="${posts.delFlag=='1'}" th:href="@{'/posts/findBack?id=' + ${posts.id}}">找回</a>
                 <em th:text="${#strings.append('评论',posts.readCount)}"></em>
             </li>
           </ul>

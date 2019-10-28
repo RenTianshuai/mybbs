@@ -377,4 +377,18 @@
       </if>
       order by read_count desc,publish_time desc
   </select>
+
+  <update id="addExperience" parameterType="java.lang.String" >
+    update posts
+    set
+      experience = experience+1
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <update id="subExperience" parameterType="java.lang.String" >
+    update posts
+    set
+      experience = experience-1
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
 </mapper>

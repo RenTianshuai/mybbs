@@ -12,7 +12,11 @@
 <div class="layui-container">
   <div class="layui-row layui-col-space15">
     <div class="layui-col-md8 content detail">
-      <div class="fly-panel detail-box">
+        <!--详细信息-->
+        <div class="fly-panel detail-box" th:if="${vo.posts.delFlag == '1'}">
+            <div class="fly-none">哎呀呀，该贴已被主人删除</div>
+        </div>
+      <div class="fly-panel detail-box"  th:if="${vo.posts.delFlag != '1'}">
         <h1 th:text="${vo.posts.title}"></h1>
         <div class="fly-detail-info">
           <!-- <span class="layui-badge">审核中</span> -->
@@ -22,10 +26,10 @@
           <span class="layui-badge layui-bg-red" th:if="${vo.posts.essence}">精帖</span>
           
           <div class="fly-admin-box" th:data-id="${vo.posts.id}">
-            <!--<span class="layui-btn layui-btn-xs jie-admin" type="del">删除</span>-->
+            <span class="layui-btn layui-btn-xs jie-admin" type="del" th:if="${editable}">删除</span>
             
-            <span class="layui-btn layui-btn-xs jie-admin" type="set" field="top" rank="1" th:if="${user?.roleId=='sys_admin'}">置顶</span>
-            <span class="layui-btn layui-btn-xs jie-admin" type="set" field="top" rank="0" style="background-color:#ccc;" th:if="${user?.roleId=='sys_admin'}">取消置顶</span>
+            <span class="layui-btn layui-btn-xs jie-admin" type="set" field="top" rank="1" th:if="${user?.roleId=='sys_admin' && !vo.posts.top}">置顶</span>
+            <span class="layui-btn layui-btn-xs jie-admin" type="set" field="top" rank="0" style="background-color:#ccc;" th:if="${user?.roleId=='sys_admin' && vo.posts.top}">取消置顶</span>
 
             <!--<span class="layui-btn layui-btn-xs jie-admin" type="set" field="status" rank="1">加精</span> -->
             <!-- <span class="layui-btn layui-btn-xs jie-admin" type="set" field="status" rank="0" style="background-color:#ccc;">取消加精</span> -->
@@ -52,11 +56,13 @@
             <span th:if="${collect != null}" th:class="${collect?'layui-btn layui-btn-xs jie-admin layui-btn-danger':'layui-btn layui-btn-xs jie-admin'}" type="collect" th:data-type="${collect?'remove':'add'}"><span th:if="${!collect}">收藏</span><span th:if="${collect}">取消收藏</span></span>
           </div>
         </div>
+
         <div class="detail-body photos" th:text="${vo.posts.content}">
 
         </div>
       </div>
 
+        <!--老师点评-->
       <div class="fly-panel detail-box" th:if="${log != null}">
         <div class="layui-card">
           <div class="layui-card-header">老师点评</div>
@@ -66,6 +72,24 @@
         </div>
       </div>
 
+        <!--点赞信息-->
+        <div class="fly-panel detail-box">
+            <fieldset class="layui-elem-field layui-field-title" style="text-align: center;">
+                <legend>喜欢点个赞</legend>
+            </fieldset>
+            <div class="jieda-reply">
+                <ul>
+                    <li th:data-id="${vo.posts.id}" style="display: block; width: 100%; text-align: center;">
+                      <span th:class="${zan?'jieda-zan zanok':'jieda-zan'}" type="zan">
+                        <i class="iconfont icon-zan"></i>
+                        <em th:text="${vo.posts.experience}"></em>
+                      </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!--回复信息-->
       <div class="fly-panel detail-box" id="flyReply">
         <fieldset class="layui-elem-field layui-field-title" style="text-align: center;">
           <legend>回帖</legend>
@@ -129,7 +153,9 @@
           </form>
         </div>
       </div>
+
     </div>
+
     <div class="layui-col-md4">
 
       <div th:include="common/replyrank::replyrank"></div>

@@ -57,6 +57,8 @@ public class PostsController extends BaseController {
         posts.setExperience(0);
         posts.setReadCount(0);
         posts.setDelFlag("0");
+        posts.setTop(false);
+        posts.setEssence(false);
 
         PostsLabel postsLabel = postsLabelService.get(label);
         if (user.getRoleId().equals("student") && "1".equals(postsLabel.getIsApprove())){
@@ -123,6 +125,18 @@ public class PostsController extends BaseController {
         result.put("action", "/");
 
         return result;
+    }
+
+    @RequestMapping("findBack")
+    public String findBack(String id, Model model){
+
+        Posts posts = postsServcie.get(id);
+
+        posts.setDelFlag("0");
+
+        postsServcie.update(posts);
+
+        return "redirect:/jie/detail?id=" + id;
     }
 
     private void addMessage(User user, Posts posts) {

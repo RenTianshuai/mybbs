@@ -129,5 +129,10 @@
                <!--enableDeleteByExample="false" enableSelectByExample="false"-->
                <!--selectByExampleQueryId="false">-->
         <!--</table>-->
+        <!--<table tableName="user_like_log" domainObjectName="UserLikeLog"-->
+                <!--enableCountByExample="false" enableUpdateByExample="false"-->
+                <!--enableDeleteByExample="false" enableSelectByExample="false"-->
+                <!--selectByExampleQueryId="false">-->
+        <!--</table>-->
     </context>
 </generatorConfiguration>
