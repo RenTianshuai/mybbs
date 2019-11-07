@@ -39,13 +39,13 @@ public class RedisSessionDao extends AbstractSessionDAO {
         Serializable sessionId = generateSessionId(session);
         assignSessionId(session, sessionId);
         saveSession(session);
-        log.info("create session : " + sessionId.toString());
+        log.debug("create session : " + sessionId.toString());
         return sessionId;
     }
 
     @Override
     protected Session doReadSession(Serializable serializable) {
-        log.info("read session : " + serializable.toString());
+        log.debug("read session : " + serializable.toString());
         if(serializable == null) {
             return null;
         }
@@ -57,7 +57,7 @@ public class RedisSessionDao extends AbstractSessionDAO {
     @Override
     public void update(Session session) throws UnknownSessionException {
         saveSession(session);
-        log.info("update session : " + session.getId().toString());
+        log.debug("update session : " + session.getId().toString());
     }
 
     @Override
@@ -67,7 +67,7 @@ public class RedisSessionDao extends AbstractSessionDAO {
         }
         byte[] key = getKey(session.getId().toString());
         redisUtil.del(key);
-        log.info("delete session : " + session.getId().toString());
+        log.debug("delete session : " + session.getId().toString());
     }
 
     @Override

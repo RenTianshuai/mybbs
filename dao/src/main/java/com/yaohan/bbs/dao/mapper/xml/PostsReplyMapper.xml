@@ -11,6 +11,9 @@
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.yaohan.bbs.dao.entity.PostsReply">
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
+  <resultMap id="PostsNameResultMap" extends="ResultMapWithBLOBs" type="com.yaohan.bbs.dao.entity.PostsReply">
+    <result column="title" jdbcType="LONGVARCHAR" property="postsTitle" />
+  </resultMap>
   <sql id="Base_Column_List">
     id, user_id, posts_id, create_time
   </sql>
@@ -115,14 +118,14 @@
     order by create_time desc
   </select>
 
-  <select id="getRecentReplyByUserId" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  <select id="getRecentReplyByUserId" parameterType="java.lang.String" resultMap="PostsNameResultMap">
     select
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from posts_reply
-    where user_id = #{userId,jdbcType=VARCHAR}
-    order by create_time desc
+    a.*,b.title
+    from posts_reply a
+    left join posts b
+    on a.posts_id = b.id
+    where a.user_id = #{userId,jdbcType=VARCHAR}
+    order by a.create_time desc
     limit 10;
   </select>
 

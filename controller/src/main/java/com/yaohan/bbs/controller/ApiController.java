@@ -1,6 +1,7 @@
 package com.yaohan.bbs.controller;
 
 import com.alibaba.excel.EasyExcel;
+import com.yaohan.bbs.dao.entity.Organization;
 import com.yaohan.bbs.dao.entity.Posts;
 import com.yaohan.bbs.dao.entity.User;
 import com.yaohan.bbs.dao.entity.UserLikeLog;
@@ -41,6 +42,8 @@ public class ApiController extends BaseController {
     PostsServcie postsServcie;
     @Autowired
     UserLikeLogService userLikeLogService;
+    @Autowired
+    OrganizationService organizationService;
 
     @RequestMapping("upload")
     public Map upload(MultipartFile file){
@@ -221,6 +224,9 @@ public class ApiController extends BaseController {
         }else {
             userLikeLogService.zan(userLikeLog);
         }
+        //查询点赞用户列表
+        List<UserLikeLog> likeLogs = userLikeLogService.findZanUsers(id);
+        result.put("data", likeLogs);
 
         result.put("status", 0);
         return result;
@@ -239,6 +245,19 @@ public class ApiController extends BaseController {
         Posts posts = postsServcie.get(id);
         posts.setDelFlag("1");
         postsServcie.update(posts);
+
+        result.put("status", 0);
+        return result;
+    }
+
+
+    @RequestMapping("/org/getByParent")
+    public Map getOrgByParent(String id){
+        Map result = new HashMap();
+
+        List<Organization> organizations = organizationService.findByParentId(id);
+
+        result.put("data", organizations);
 
         result.put("status", 0);
         return result;

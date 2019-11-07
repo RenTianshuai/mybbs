@@ -15,12 +15,16 @@ public class Organization implements Serializable {
 
     private String parentId;
 
+    private String grandId;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date createTime;
 
     private String delFlag;
 
     private String pname;
+
+    private String gname;
 
     public String getId() {
         return id;
@@ -68,5 +72,21 @@ public class Organization implements Serializable {
 
     public void setPname(String pname) {
         this.pname = pname;
+    }
+
+    public String getGrandId() {
+        return grandId;
+    }
+
+    public void setGrandId(String grandId) {
+        this.grandId = grandId;
+    }
+
+    public String getGname() {
+        return gname;
+    }
+
+    public void setGname(String gname) {
+        this.gname = gname;
     }
 }

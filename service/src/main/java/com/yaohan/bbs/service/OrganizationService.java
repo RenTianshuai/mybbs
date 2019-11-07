@@ -9,6 +9,8 @@ public interface OrganizationService {
 
     List<Organization> findSchools();
 
+    List<Organization> findgrades();
+
     void add(Organization organization);
 
     Page<Organization> pageList(int pageNo, int pageSize);
@@ -22,4 +24,6 @@ public interface OrganizationService {
     Organization findByParentIdAndName(String parentId, String name);
 
     Organization get(String id);
+
+    List<Organization> findByParentId(String parentId);
 }

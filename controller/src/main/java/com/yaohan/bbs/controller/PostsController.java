@@ -1,5 +1,6 @@
 package com.yaohan.bbs.controller;
 
+import com.yaohan.bbs.common.Constant;
 import com.yaohan.bbs.dao.entity.*;
 import com.yaohan.bbs.service.*;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +38,7 @@ public class PostsController extends BaseController {
 
     @RequestMapping("/add")
     @ResponseBody
-    public Map add(String label, String title, String content, String vercode, User user){
+    public Map add(String label, String title, String content, String jobCommit, String vercode, User user){
         Map result = new HashMap();
         //验证码
         Session session = SecurityUtils.getSubject().getSession();
@@ -61,7 +62,7 @@ public class PostsController extends BaseController {
         posts.setEssence(false);
 
         PostsLabel postsLabel = postsLabelService.get(label);
-        if (user.getRoleId().equals("student") && "1".equals(postsLabel.getIsApprove())){
+        if (Constant.YES.equals(jobCommit)){
             //如果是学生发布需要审核的贴
             posts.setStatus((byte)2);
         }else {

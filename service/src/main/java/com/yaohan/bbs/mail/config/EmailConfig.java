@@ -1,5 +1,6 @@
 package com.yaohan.bbs.mail.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
@@ -7,6 +8,7 @@ import org.springframework.core.env.Environment;
 import java.util.Base64;
 
 @Configuration
+@Slf4j
 public class EmailConfig {
 	@Autowired
 	private Environment env;

@@ -16,9 +16,10 @@ spring:
 #      additional-paths: controller/src/main/java,dao/src/main/java,service/src/main/java,shiro/src/main/java
   datasource: #数据源配置
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://47.107.118.152:3306/yh_bbs?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+#    url: jdbc:mysql://47.107.118.152:3306/yh_bbs?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://localhost:3306/yh_bbs?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     username: root
-    password:
+    password: admin
     type: com.alibaba.druid.pool.DruidDataSource
     hikari:
       maximum-pool-size: 5
@@ -33,12 +34,14 @@ spring:
   liquibase: #sql版本管理
     change-log: classpath:liquibase/master.yml
     user: root
-    password:
-    url: jdbc:mysql://47.107.118.152:3306/yh_bbs?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    password: admin
+#    url: jdbc:mysql://47.107.118.152:3306/yh_bbs?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    url: jdbc:mysql://localhost:3306/yh_bbs?useUnicode=true&characterEncoding=UTF-8&useSSL=false
     drop-first: false
     enabled: true
   redis:   #redis配置
-    host: 47.107.118.152
+#    host: 47.107.118.152
+    host: 127.0.0.1
     port: 6379
     password:
     pool:
@@ -46,6 +49,9 @@ spring:
       min-idle: 0
       max-active: 8
       max-wait: -1
+  mvc:
+    favicon:
+      enabled: false
 
 
 
@@ -71,12 +77,12 @@ mybatis:
     lazy-loading-enabled: true
     aggressive-lazy-loading: false
 
-#打印mabitis sql 日志
+#打印日志
 logging:
   level:
     root: info
     org.mybatis: debug
-    com.yaohan.bbs.dao: debug
+    com.yaohan.bbs: debug
 
 #ID生成工具配置
 id:
@@ -94,6 +100,8 @@ index.top.num: 5
 index.jie.num: 20
 #首页分页帖子数量
 index.jie.page: 30
+#同一用户一小时内帖子的回复频率
+posts.reply.timeInHour: 5
 
 
 #邮件发送相关配置
@@ -106,3 +114,9 @@ mail:
   smtp:
     auth: true
     timeout: 25000
+
+
+#elastic search 配置
+es:
+ url: http://127.0.0.1:9200/
+ index: mybbs

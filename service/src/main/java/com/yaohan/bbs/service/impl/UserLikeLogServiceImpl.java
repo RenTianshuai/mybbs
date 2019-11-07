@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -55,6 +56,10 @@ public class UserLikeLogServiceImpl implements UserLikeLogService {
         return userLikeLog;
     }
 
+    @Override
+    public List<UserLikeLog> findZanUsers(String postsId) {
+        return userLikeLogMapper.findAllZanUsersByPostsId(postsId);
+    }
 
     private UserLikeLog initUserLikeLog(String userId, String postsId){
         UserLikeLog log = new UserLikeLog();

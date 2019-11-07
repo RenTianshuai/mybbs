@@ -41,14 +41,44 @@
                 </div>
               </div>
             </div>
-              <div class="layui-form-item">
-                  <label for="L_city" class="layui-form-label">实名</label>
-                  <div class="layui-input-inline">
-                      <input type="text" id="L_realname" name="realname" autocomplete="off" th:value="${user?.realname}" class="layui-input" th:lay-verify="${user?.roleId=='student'?'required':''}">
-                  </div>
+            <div class="layui-form-item">
+              <label class="layui-form-label">学生</label>
+              <div class="layui-input-inline">
+                  <input lay-filter="isStudent" type="radio" name="isStudent" value="Y" th:checked="${user?.roleId=='student'}" title="是">
+                  <input lay-filter="isStudent" type="radio" name="isStudent" value="N" th:checked="${user?.roleId!='student'}" title="否">
               </div>
+              <div class="layui-form-mid layui-word-aux">需要提交作业的亲请选择是，否则请不要随意改动</div>
+            </div>
+            <div class="layui-form-item">
+                <label for="L_realname" class="layui-form-label">实名</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="L_realname" name="realname" autocomplete="off" th:value="${user?.realname}" class="layui-input" th:lay-verify="${user?.roleId=='student'?'required':''}">
+                </div>
+                <div class="layui-form-mid layui-word-aux">学生请填写实名，方便老师审核</div>
+            </div>
+            <div id="schoolDiv" th:class="${user?.roleId=='student'?'layui-form-item':'layui-hide'}">
+              <label class="layui-form-label">学校信息</label>
+              <div class="layui-input-inline">
+                <select id="school" lay-filter="school" name="school">
+                  <option value="">请选择学校</option>
+                  <option th:if="${schools!=null}" th:each="school:${schools}" th:value="${school.id}" th:text="${school.name}" th:selected="${school.id == user?.school}"></option>
+                </select>
+              </div>
+              <div class="layui-input-inline">
+                <select id="grade" lay-filter="grade" name="grade">
+                  <option value="">请选择年级</option>
+                    <option th:if="${grades!=null}" th:each="grade:${grades}" th:value="${grade.id}" th:text="${grade.name}" th:selected="${grade.id == user?.grade}"></option>
+                </select>
+              </div>
+              <div class="layui-input-inline">
+                <select id="className" lay-filter="className" name="className">
+                  <option value="">请选择班级</option>
+                    <option th:if="${classes!=null}" th:each="class:${classes}" th:value="${class.id}" th:text="${class.name}" th:selected="${class.id == user?.className}"></option>
+                </select>
+              </div>
+            </div>
               <div class="layui-form-item">
-                  <label for="L_city" class="layui-form-label">手机</label>
+                  <label for="L_phone" class="layui-form-label">手机</label>
                   <div class="layui-input-inline">
                       <input type="text" id="L_phone" name="phone" lay-verify="phone" autocomplete="off" th:value="${user?.phone}" class="layui-input">
                   </div>
@@ -56,7 +86,7 @@
             <div class="layui-form-item">
               <label for="L_city" class="layui-form-label">城市</label>
               <div class="layui-input-inline">
-                <input type="text" id="L_city" name="city" autocomplete="off" th:value="${user?.city}" class="layui-input">
+                <input type="text" id="L_city" lay-filter="L_city" name="city" autocomplete="off" th:value="${user?.city}" class="layui-input">
               </div>
             </div>
             <div class="layui-form-item layui-form-text">
@@ -78,7 +108,7 @@
                 <button type="button" class="layui-btn upload-img">
                   <i class="layui-icon">&#xe67c;</i>上传头像
                 </button>
-                <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
+                <img th:src="@{${user?.portrait}}">
                 <span class="loading"></span>
               </div>
             </div>
@@ -114,17 +144,17 @@
           <div class="layui-form layui-form-pane layui-tab-item">
             <ul class="app-bind">
               <li class="fly-msg app-havebind">
-                <i class="iconfont icon-mail"></i>
+                <i class="layui-icon icon-mail"></i>
                 <span>邮箱已成功认证，您可以使用邮箱登录社区</span>
               </li>
-              <li class="fly-msg app-havebind">
-                <i class="layui-icon layui-icon-login-wechat"></i>
-                <span>已成功绑定，您可以使用微信帐号直接登录社区，当然，您也可以</span>
-                <a href="javascript:;" class="acc-unbind" type="qq_id">解除绑定</a>
-                
-                <a href="" onclick="layer.msg('正在绑定微信', {icon:16, shade: 0.1, time:0})" class="acc-bind" type="qq_id">立即绑定</a>
-                <span>，即可使用QQ帐号登录Fly社区</span>
-              </li>
+              <!--<li class="fly-msg app-havebind">-->
+                <!--<i class="layui-icon layui-icon-login-wechat"></i>-->
+                <!--<span>已成功绑定，您可以使用微信帐号直接登录社区，当然，您也可以</span>-->
+                <!--<a href="javascript:;" class="acc-unbind" type="qq_id">解除绑定</a>-->
+                <!---->
+                <!--<a href="" onclick="layer.msg('正在绑定微信', {icon:16, shade: 0.1, time:0})" class="acc-bind" type="qq_id">立即绑定</a>-->
+                <!--<span>，即可使用QQ帐号登录Fly社区</span>-->
+              <!--</li>-->
             </ul>
           </div>
         </div>
@@ -147,7 +177,69 @@
       ,base: '/mods/'
     }).extend({
       fly: 'index'
-    }).use('fly');
+    }).use(['fly','form','laytpl'], function () {
+
+        var form = layui.form,
+            laytpl = layui.laytpl,
+            fly = layui.fly;
+
+        var selectTemplate1 = ['<option value="">请选择年级</option>','{{# layui.each(d.data, function(index, item){ }}'
+            ,'<option value="{{item.id}}">{{item.name}}</option>'
+            ,'{{# }); }}'].join('');
+
+        var selectTemplate2 = ['<option value="">请选择班级</option>','{{# layui.each(d.data, function(index, item){ }}'
+            ,'<option value="{{item.id}}">{{item.name}}</option>'
+            ,'{{# }); }}'].join('');
+
+        form.on('radio(isStudent)', function(data){
+            if (data.value == 'Y'){
+                $("#schoolDiv").attr("class","layui-form-item");
+                $("#L_realname").attr("lay-verify","required");
+                $("#school").attr("lay-verify","required");
+                $("#grade").attr("lay-verify","required");
+                $("#className").attr("lay-verify","required");
+            } else {
+                $("#schoolDiv").attr("class","layui-hide");
+                $("#L_realname").attr("lay-verify","");
+                $("#school").attr("lay-verify","");
+                $("#grade").attr("lay-verify","");
+                $("#className").attr("lay-verify","");
+            }
+        });
+
+        form.on('select(school)', function(data){
+            var schoolId = data.value;
+            fly.json("/api/org/getByParent"
+                ,{id : schoolId}
+                ,function (res) {
+                    if (res.status === 0) {
+                        laytpl(selectTemplate1).render(res, function(html){
+                            $("#grade").html(html);
+                            form.render("select");
+                        });
+                    }
+                }
+            );
+
+        });
+
+        form.on('select(grade)', function(data){
+            var gradeId = data.value;
+            fly.json("/api/org/getByParent"
+                ,{id : gradeId}
+                ,function (res) {
+                    if (res.status === 0) {
+                        laytpl(selectTemplate2).render(res, function(html){
+                            $("#className").html(html);
+                            form.render("select");
+                        });
+                    }
+                }
+            );
+
+        });
+    });
+    
 </script>
 
 </body>

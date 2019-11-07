@@ -11,6 +11,8 @@ public class UserLikeLog extends UserLikeLogKey implements Serializable {
 
     private Date operaterTime;
 
+    private String username;
+
     public Boolean getZan() {
         return zan;
     }
@@ -25,5 +27,13 @@ public class UserLikeLog extends UserLikeLogKey implements Serializable {
 
     public void setOperaterTime(Date operaterTime) {
         this.operaterTime = operaterTime;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

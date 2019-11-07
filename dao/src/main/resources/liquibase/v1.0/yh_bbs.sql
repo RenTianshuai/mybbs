@@ -70,9 +70,9 @@ CREATE TABLE `posts_label` (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT = '标签表' ROW_FORMAT = Dynamic;
 
-INSERT INTO `posts_label` VALUES ('communication', '交流', '10', '1', '0', '0');
-INSERT INTO `posts_label` VALUES ('article', '美文', '20', '1', '0', '0');
-INSERT INTO `posts_label` VALUES ('diary', '日记', '30', '1', '0', '1');
+INSERT INTO `posts_label` VALUES ('ch_medicine', '中医', '10', '1', '0', '0');
+INSERT INTO `posts_label` VALUES ('ch_culture', '国学', '20', '1', '0', '0');
+INSERT INTO `posts_label` VALUES ('new_morality', '新八德', '30', '1', '0', '1');
 
 
 -- ----------------------------
@@ -117,6 +117,7 @@ CREATE TABLE `user` (
   `experience` int(10) DEFAULT NULL COMMENT '飞吻',
   `city` varchar(50) DEFAULT NULL COMMENT '城市',
   `school` varchar(50) DEFAULT NULL COMMENT '学校',
+  `grade` varchar(50) DEFAULT NULL COMMENT '年级',
   `class_name` varchar(50) DEFAULT NULL COMMENT '班级',
   `signature` varchar(250) DEFAULT NULL COMMENT '签名',
   `status` varchar(255) DEFAULT NULL COMMENT '系统用户的状态',
@@ -157,6 +158,7 @@ CREATE TABLE `organization`  (
   `id` varchar(32) NOT NULL COMMENT '主键',
   `name` varchar(200) NULL COMMENT '名称',
   `parent_id` varchar(32) NULL COMMENT '父节点',
+  `grand_id` varchar(32) NULL COMMENT '顶节点',
   `create_time` datetime(0) NULL COMMENT '创建时间',
   `del_flag` char(1) DEFAULT '0',
   PRIMARY KEY (`id`) USING BTREE
@@ -175,7 +177,7 @@ CREATE TABLE `posts_approve_log` (
 
 DROP TABLE IF EXISTS `user_like_log`;
 CREATE TABLE `user_like_log` (
-  `user_id` varchar(32) DEFAULT NULL COMMENT '用户ID',
+  `user_id` varchar(32) NOT NULL COMMENT '用户ID',
   `posts_id` varchar(32) NOT NULL COMMENT '帖子ID',
   `zan` tinyint(1) DEFAULT NULL COMMENT '赞',
   `operater_time` datetime DEFAULT NULL COMMENT '操作时间',

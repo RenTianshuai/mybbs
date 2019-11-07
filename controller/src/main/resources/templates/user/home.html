@@ -62,7 +62,7 @@
           <li th:each="rep:${currReplys}">
           <p>
           <span th:text="${#dates.format(rep.createTime, 'yyyy-MM-dd hh:mm:ss')}"></span>
-          在<a th:href="@{'/jie/detail?id=' + ${rep.postsId}}" target="_blank">某文</a>中回复：
+          在<a th:href="@{'/jie/detail?id=' + ${rep.postsId}}" target="_blank" th:text="${rep.postsTitle}"></a>中回复：
           </p>
           <div class="home-dacontent" th:text="${rep.content}">
           </div>

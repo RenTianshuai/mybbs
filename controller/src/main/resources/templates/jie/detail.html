@@ -85,6 +85,9 @@
                         <em th:text="${vo.posts.experience}"></em>
                       </span>
                     </li>
+                    <li id="zanUsers">
+                        <div style="display: inline" th:if="${likeLogs!=null}" th:each="likeLog:${likeLogs}">@<a href="javascript:;" class="fly-aite" style="color: #4f99cf" th:text="${likeLog?.username}"></a></div>
+                    </li>
                 </ul>
             </div>
         </div>

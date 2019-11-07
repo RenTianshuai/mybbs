@@ -19,6 +19,7 @@
     <result column="experience" property="experience" jdbcType="INTEGER" />
     <result column="city" property="city" jdbcType="VARCHAR" />
     <result column="school" property="school" jdbcType="VARCHAR" />
+    <result column="grade" property="grade" jdbcType="VARCHAR" />
     <result column="class_name" property="className" jdbcType="VARCHAR" />
     <result column="signature" property="signature" jdbcType="VARCHAR" />
     <result column="status" property="status" jdbcType="VARCHAR" />
@@ -28,7 +29,7 @@
   </resultMap>
   <sql id="Base_Column_List" >
     id, realname, username, sex, password, portrait, salt, email, email_activate, phone, 
-    role_id, auth, auth_info, experience, city, school, class_name, signature, status, 
+    role_id, auth, auth_info, experience, city, school, grade, class_name, signature, status,
     register_date, remarks, del_flag
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
@@ -64,7 +65,7 @@
       sex, password, portrait, 
       salt, email, email_activate, 
       phone, role_id, auth, 
-      auth_info, experience, city, 
+      auth_info, experience, city, grade,
       school, class_name, signature, 
       status, register_date, remarks, 
       del_flag)
@@ -73,7 +74,7 @@
       #{salt,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{emailActivate,jdbcType=VARCHAR}, 
       #{phone,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}, #{auth,jdbcType=VARCHAR}, 
       #{authInfo,jdbcType=VARCHAR}, #{experience,jdbcType=INTEGER}, #{city,jdbcType=VARCHAR}, 
-      #{school,jdbcType=VARCHAR}, #{className,jdbcType=VARCHAR}, #{signature,jdbcType=VARCHAR}, 
+      #{school,jdbcType=VARCHAR}, #{grade,jdbcType=VARCHAR}, #{className,jdbcType=VARCHAR}, #{signature,jdbcType=VARCHAR},
       #{status,jdbcType=VARCHAR}, #{registerDate,jdbcType=TIMESTAMP}, #{remarks,jdbcType=VARCHAR}, 
       #{delFlag,jdbcType=CHAR})
   </insert>
@@ -127,6 +128,9 @@
       </if>
       <if test="school != null" >
         school,
+      </if>
+      <if test="grade != null" >
+        grade,
       </if>
       <if test="className != null" >
         class_name,
@@ -196,6 +200,9 @@
       <if test="school != null" >
         #{school,jdbcType=VARCHAR},
       </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=VARCHAR},
+      </if>
       <if test="className != null" >
         #{className,jdbcType=VARCHAR},
       </if>
@@ -264,6 +271,9 @@
       <if test="school != null" >
         school = #{school,jdbcType=VARCHAR},
       </if>
+      <if test="grade != null" >
+        grade = #{grade,jdbcType=VARCHAR},
+      </if>
       <if test="className != null" >
         class_name = #{className,jdbcType=VARCHAR},
       </if>
@@ -301,6 +311,7 @@
       auth_info = #{authInfo,jdbcType=VARCHAR},
       experience = #{experience,jdbcType=INTEGER},
       city = #{city,jdbcType=VARCHAR},
+      grade = #{grade,jdbcType=VARCHAR},
       school = #{school,jdbcType=VARCHAR},
       class_name = #{className,jdbcType=VARCHAR},
       signature = #{signature,jdbcType=VARCHAR},
@@ -324,6 +335,9 @@
       </if>
       <if test="school != null and school!=''" >
         and school = #{school,jdbcType=VARCHAR}
+      </if>
+      <if test="grade != null and grade!=''" >
+        and grade = #{grade,jdbcType=VARCHAR}
       </if>
       <if test="className != null and className != ''" >
         and class_name = #{className,jdbcType=VARCHAR}

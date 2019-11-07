@@ -58,7 +58,7 @@ public class ValidateCodeController {
          * 生成字符
          */
         String s = createCharacter(g);
-        log.info("生成验证码：" + s);
+        log.debug("生成验证码：" + s);
         SecurityUtils.getSubject().getSession().setAttribute(VALIDATE_CODE, s);
 
         g.dispose();

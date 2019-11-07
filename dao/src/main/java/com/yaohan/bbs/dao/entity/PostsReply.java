@@ -20,6 +20,8 @@ public class PostsReply implements Serializable {
 
     private String content;
 
+    private String postsTitle;
+
     public String getId() {
         return id;
     }
@@ -58,5 +60,13 @@ public class PostsReply implements Serializable {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    public String getPostsTitle() {
+        return postsTitle;
+    }
+
+    public void setPostsTitle(String postsTitle) {
+        this.postsTitle = postsTitle;
     }
 }

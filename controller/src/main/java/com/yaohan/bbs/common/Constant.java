@@ -27,4 +27,17 @@ public class Constant {
             "    <h3>请点击链接重置为新密码：<a href='%s/user/findNewPass?code=%s'>%s</a></h3>\n" +
             "</body>\n" +
             "</html>";
+
+
+    public static class Role{
+        public static final String MEM = "member";
+        public static final String TCH = "teacher";
+        public static final String STU = "student";
+        public static final String SYS = "sys_admin";
+        public static final String VIP = "vip";
+        public static final String SCH = "school_admin";
+    }
+
+    public static final String YES = "Y";
+    public static final String NO = "N";
 }

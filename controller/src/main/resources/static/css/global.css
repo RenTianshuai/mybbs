@@ -143,6 +143,8 @@ pre{padding: 10px 15px; margin: 10px 0; font-size: 12px; border-left: 6px solid 
 .fly-nav{margin-left: 200px;}
 .fly-nav a i{position: absolute; left: 25px; top: 0; padding-right: 10px; font-size: 26px;}
 .fly-nav a .icon-shouye, .nav a .icon-shezhi{top: 2px;}
+.header-bg{background-image: url("../images/btn.jpg"); background-repeat: no-repeat; background-size: 100% 100%; -moz-background-size: 100% 100%;}
+.body-bg{background-image: url("../images/yh_bg.jpg"); background-repeat: repeat}
 
 .fly-nav-user{position: absolute; top: 0; right: 0;}
 .fly-nav-user .iconfont{position: relative;}

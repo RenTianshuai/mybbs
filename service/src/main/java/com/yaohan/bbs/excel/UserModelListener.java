@@ -17,7 +17,7 @@ public class UserModelListener extends AnalysisEventListener<UserModel> {
 
     @Override
     public void invoke(UserModel userModel, AnalysisContext analysisContext) {
-        log.info("读取到sheet:" + analysisContext.readSheetHolder().getSheetName() + "的第" + analysisContext.readRowHolder().getRowIndex() + "行");
+        log.debug("读取到sheet:" + analysisContext.readSheetHolder().getSheetName() + "的第" + analysisContext.readRowHolder().getRowIndex() + "行");
         updateUser(userModel);
     }
 

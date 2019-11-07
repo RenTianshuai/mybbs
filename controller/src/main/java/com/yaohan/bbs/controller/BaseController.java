@@ -58,6 +58,7 @@ public class BaseController {
         if (subject == null) {
             return ;
         }
+        user.setRoleName(roleService.get(user.getRoleId()).getName());
         subject.getSession().setAttribute("user", user);
     }
 

@@ -14,6 +14,8 @@ public class UserModel {
     String roleId;
     @ExcelProperty(value = "学校", index = 3)
     String school;
-    @ExcelProperty(value = "班级", index = 4)
+    @ExcelProperty(value = "年级", index = 4)
+    String grade;
+    @ExcelProperty(value = "班级", index = 5)
     String className;
 }

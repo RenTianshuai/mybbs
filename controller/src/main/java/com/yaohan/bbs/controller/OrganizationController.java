@@ -1,6 +1,7 @@
 package com.yaohan.bbs.controller;
 
 import com.github.pagehelper.Page;
+import com.yaohan.bbs.common.Constant;
 import com.yaohan.bbs.dao.entity.Organization;
 import com.yaohan.bbs.dao.entity.Role;
 import com.yaohan.bbs.dao.entity.User;
@@ -38,10 +39,6 @@ public class OrganizationController extends BaseController {
     public String index(Model model){
         model.addAttribute("nav", "sysschool");
 
-        List<Organization> schools = organizationService.findSchools();
-
-        model.addAttribute("schools", schools);
-
         return "sys/organization";
 
     }
@@ -55,7 +52,7 @@ public class OrganizationController extends BaseController {
 
     @RequestMapping("/add")
     @ResponseBody
-    public Map add(String parentId, String name, Model model){
+    public Map add(String parentId, String grandId, String name, Model model){
         Map result = new HashMap();
         Organization organization = new Organization();
         organization.setId(flowNoService.generateFlowNo());
@@ -64,6 +61,9 @@ public class OrganizationController extends BaseController {
         organization.setDelFlag("0");
         if (StringUtils.isNotEmpty(parentId)){
             organization.setParentId(parentId);
+        }
+        if (StringUtils.isNotEmpty(grandId)){
+            organization.setGrandId(grandId);
         }
         organizationService.add(organization);
         result.put("status", 0);
@@ -118,8 +118,17 @@ public class OrganizationController extends BaseController {
         if (limit == null || limit == 0){
             limit = 10;
         }
+
+        User user = checkUser();
+
         Map params = new HashMap();
         params.put("username", username);
+        if (Constant.Role.TCH.equals(user.getRoleId())){
+            params.put("roleId", Constant.Role.STU);
+            params.put("school", user.getSchool());
+            params.put("grade", user.getGrade());
+            params.put("className", user.getClassName());
+        }
         Page<User> users = userService.pageAll(page, limit, params);
         List<User> list = users.getResult();
         //替换学校和班级
@@ -129,6 +138,12 @@ public class OrganizationController extends BaseController {
                     Organization o = organizationService.get(u.getSchool());
                     if (o!=null){
                         u.setSchool(o.getName());
+                    }
+                }
+                if (StringUtils.isNotEmpty(u.getGrade())){
+                    Organization o = organizationService.get(u.getGrade());
+                    if (o!=null){
+                        u.setGrade(o.getName());
                     }
                 }
                 if (StringUtils.isNotEmpty(u.getClassName())){
@@ -148,7 +163,7 @@ public class OrganizationController extends BaseController {
 
     @RequestMapping("/user/mod")
     @ResponseBody
-    public Map userMod(String id, String roleId, String school, String className){
+    public Map userMod(String id, String roleId, String school, String grade, String className){
         Map result = new HashMap(2);
 
         Organization organizationSchool = organizationService.findSchoolByName(school);
@@ -157,7 +172,13 @@ public class OrganizationController extends BaseController {
             result.put("msg", "学校名称有误");
             return result;
         }
-        Organization organizationClass = organizationService.findByParentIdAndName(organizationSchool.getId(), className);
+        Organization organizationGrade = organizationService.findByParentIdAndName(organizationSchool.getId(), grade);
+        if (organizationGrade == null){
+            result.put("status", -1);
+            result.put("msg", "年级名称有误");
+            return result;
+        }
+        Organization organizationClass = organizationService.findByParentIdAndName(organizationGrade.getId(), className);
         if (organizationClass == null){
             result.put("status", -1);
             result.put("msg", "班级名称有误");
@@ -172,8 +193,25 @@ public class OrganizationController extends BaseController {
         User user = userService.get(id);
         user.setRoleId(roleId);
         user.setSchool(organizationSchool.getId());
+        user.setGrade(organizationGrade.getId());
         user.setClassName(organizationClass.getId());
         userService.update(user);
+        result.put("status", 0);
+        return result;
+    }
+
+    @RequestMapping("/user/remove")
+    @ResponseBody
+    public Map userRemove(String id){
+        Map result = new HashMap(2);
+
+        User user = userService.get(id);
+
+        user.setRoleId(Constant.Role.MEM);
+        user.setSchool(null);
+        user.setGrade(null);
+        user.setClassName(null);
+
         result.put("status", 0);
         return result;
     }

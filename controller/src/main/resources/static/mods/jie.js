@@ -15,7 +15,7 @@ layui.define('fly', function(exports){
 
   //判断重复点击变量
     var firstZan = true;
-  
+
   var gather = {}, dom = {
     jieda: $('#jieda')
     ,content: $('#L_content')
@@ -142,6 +142,10 @@ layui.define('fly', function(exports){
   //   }
   // }();
 
+    var zanUsersList = ['{{# layui.each(d.data, function(index, item){ }}'
+        ,'@<a href="javascript:;" class="fly-aite" style="color: #4f99cf">{{item.username}}</a> '
+        ,'{{# }); }}'].join('');
+
   //解答操作
   gather.jiedaActive = {
     zan: function(li){ //赞
@@ -154,14 +158,19 @@ layui.define('fly', function(exports){
         ok: ok
         ,id: li.data('id')
       }, function(res){
-        if(res.status === 0){
-          var zans = othis.find('em').html()|0;
-          othis[ok ? 'removeClass' : 'addClass']('zanok');
-          othis.find('em').html(ok ? (--zans) : (++zans));
-        } else {
-          layer.msg(res.msg);
-        }
-        firstZan = true;
+          if(res.status === 0){
+              var zans = othis.find('em').html()|0;
+              othis[ok ? 'removeClass' : 'addClass']('zanok');
+              othis.find('em').html(ok ? (--zans) : (++zans));
+
+              laytpl(zanUsersList).render(res, function(html){
+                  $("#zanUsers").html(html);
+              });
+
+          } else {
+              layer.msg(res.msg);
+          }
+          firstZan = true;
       });
     }
     ,reply: function(li){ //回复

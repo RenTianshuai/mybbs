@@ -40,6 +40,7 @@
                           <th lay-data="{field:'realname'}">实名</th>
                           <th lay-data="{field:'roleId'}">角色</th>
                           <th lay-data="{field:'school'}">学校</th>
+                          <th lay-data="{field:'grade'}">年级</th>
                           <th lay-data="{field:'className'}">班级</th>
                           <th lay-data="{fixed: 'right', width:80, align:'center', toolbar: '#barDemo'}"></th>
                       </tr>
@@ -51,8 +52,8 @@
                       </div>
                   </script>
                   <script id="barDemo" type="text/html">
-                      <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
-                      <!--<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>-->
+                      <a class="layui-btn layui-btn-xs" lay-event="edit" th:if="${user?.roleId=='sys_admin'}">编辑</a>
+                      <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" th:if="${user?.roleId=='teacher'}">排除</a>
                   </script>
               </div>
           </div>
@@ -98,24 +99,25 @@
       table.on('tool(test3)', function(obj){
           var data = obj.data;
           if(obj.event === 'del'){
-              layer.confirm('真的要删除么？', function(index){
-                  // fly.json("/org/user/del"
-                  //     ,{id : data.id}
-                  //     ,function (res) {
-                  //         if (res.status === 0) {
-                  //             layer.msg("删除成功");
-                  //             obj.del();
-                  //             layer.close(index);
-                  //         }
-                  //     }
-                  // );
+              layer.confirm('确定该用户不是本班学生吗？', function(index){
+                  fly.json("/org/user/remove"
+                      ,{id : data.id}
+                      ,function (res) {
+                          if (res.status === 0) {
+                              layer.msg("排除成功");
+                              obj.del();
+                              layer.close(index);
+                          }
+                      }
+                  );
               });
           } else if(obj.event === 'edit'){
               var school = (data.school==null || data.school=='')?'学校':data.school
+                  ,grade = (data.grade==null || data.grade=='')?'年级':data.grade
                   ,className = (data.className==null || data.className=='')?'班级':data.className;
               layer.prompt({
                   formType: 2
-                  ,value: data.roleId + '|' + school + '|' + className
+                  ,value: data.roleId + '|' + school + '|' + grade + "|" + className
               }, function(value, index){
                   var arr = value.split('|');
                   fly.json("/org/user/mod"
@@ -124,7 +126,8 @@
                           id : data.id,
                           roleId :arr[0],
                           school:arr[1],
-                          className:arr[2]
+                          grade:arr[2],
+                          className:arr[3]
                       }
                       ,function (res) {
                           if (res.status === 0) {

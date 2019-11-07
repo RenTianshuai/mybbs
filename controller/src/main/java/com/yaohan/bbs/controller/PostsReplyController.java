@@ -11,10 +11,12 @@ import com.yaohan.bbs.service.PostsServcie;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +26,9 @@ import java.util.Map;
 public class PostsReplyController extends BaseController {
 
     private final String messageReplyTemp = "<a href=\"/user/jump?username=%s\" target=\"_blank\"><cite>%s</cite></a>评论了您的帖子<a target=\"_blank\" href=\"/jie/detail?id=%s#item-%s\"><cite>%s</cite></a>";
+
+    private final String messageAnswerTemp = "<a href=\"/user/jump?username=%s\" target=\"_blank\"><cite>%s</cite></a>在帖子里<a target=\"_blank\" href=\"/jie/detail?id=%s#item-%s\"><cite>%s</cite></a>回复了您";
+
 
     @Autowired
     PostsReplyService postsReplyService;
@@ -37,6 +42,9 @@ public class PostsReplyController extends BaseController {
     @Autowired
     FlowNoService flowNoService;
 
+    @Value("${posts.reply.timeInHour}")
+    private int replyTimesInHour;
+
     @RequestMapping("/jie/reply")
     @ResponseBody
     public Map reply(String jid, String content){
@@ -49,9 +57,9 @@ public class PostsReplyController extends BaseController {
         }
 
         int times = postsReplyService.replyTimesInHour(jid, user.getId());
-        if (times > 5){
+        if (times >= replyTimesInHour){
             result.put("status", -1);
-            result.put("msg", "亲，您一个小时内已评论5次，不要刷评哦！");
+            result.put("msg", "亲，您一个小时内已评论" + replyTimesInHour + "次，不要刷评哦！");
             return result;
         }
 
@@ -71,7 +79,29 @@ public class PostsReplyController extends BaseController {
                 String msg = String.format(messageReplyTemp, user.getUsername(), user.getUsername(), jid, reply.getId(), p.getTitle());
                 message.setMessage(msg);
                 messageService.add(message);
+                log.debug(msg);
             }
+
+            //被回复者消息被回复者格式：@username xxx
+            Arrays.asList(content.split("@"))
+                    .stream()
+                    .filter(n -> StringUtils.isNotEmpty(n))
+                    .filter(n -> n.indexOf(" ")>-1)
+                    .map(n -> n.substring(0, n.indexOf(" ")))
+                    .forEach(n -> {
+                        User u = userService.getByUserName(n);
+                        if (u != null){
+                            Message message = new Message();
+                            message.setId(flowNoService.generateFlowNo());
+                            message.setUserId(u.getId());
+                            message.setCreateTime(new Date());
+                            //格式化消息：昵称，昵称，帖子ID,回复ID,标题
+                            String msg = String.format(messageAnswerTemp, user.getUsername(), user.getUsername(), jid, reply.getId(), p.getTitle());
+                            message.setMessage(msg);
+                            messageService.add(message);
+                            log.debug(msg);
+                        }
+                    });
 
         }catch (Exception e){
             log.error("添加消息出错", e);

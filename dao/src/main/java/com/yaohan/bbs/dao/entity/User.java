@@ -41,6 +41,8 @@ public class User implements Serializable {
 
     private String school;
 
+    private String grade;
+
     private String className;
 
     private String signature;
@@ -238,5 +240,13 @@ public class User implements Serializable {
 
     public void setRoleName(String roleName) {
         this.roleName = roleName;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
     }
 }

@@ -19,18 +19,9 @@
           <div class="layui-tab-content" style="padding: 20px 0;">
               <form class="layui-form" th:action="@{/org/add}">
                   <div class="layui-form-item">
-                      <label class="layui-form-label">学校</label>
+                      <label class="layui-form-label">组织名称</label>
                       <div class="layui-input-block">
-                          <select name="parentId" lay-verify="">
-                              <option value="">请选择</option>
-                              <option th:each="school:${schools}" th:value="${school?.id}" th:text="${school?.name}"></option>
-                          </select>
-                      </div>
-                  </div>
-                  <div class="layui-form-item">
-                      <label class="layui-form-label">学校/班级</label>
-                      <div class="layui-input-block">
-                          <input type="text" name="name" required  lay-verify="required" placeholder="请输入学校或班级名称" autocomplete="off" class="layui-input">
+                          <input type="text" name="name" required  lay-verify="required" placeholder="请输入名称" autocomplete="off" class="layui-input">
                       </div>
                   </div>
                   <div class="layui-form-item">
@@ -45,15 +36,17 @@
                       <thead>
                       <tr>
                           <th lay-data="{field:'id',sort: false, hide:true, width:150}">ID</th>
-                          <th lay-data="{field:'pname'}">学校</th>
+                          <th lay-data="{field:'gname'}">学校</th>
+                          <th lay-data="{field:'pname'}">年级</th>
                           <th lay-data="{field:'name'}">班级</th>
-                          <th lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}"></th>
+                          <th lay-data="{fixed: 'right', width:185, align:'center', toolbar: '#barDemo'}"></th>
                       </tr>
                       </thead>
                   </table>
                   <script id="barDemo" type="text/html">
                       <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
                       <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                      <a class="layui-btn layui-btn-xs" lay-event="addSon">添加下级</a>
                   </script>
               </div>
           </div>
@@ -97,10 +90,21 @@
                   );
               });
           } else if(obj.event === 'edit'){
-              var p = (data.name==null||data.name=='');
+              var g = (data.name==null||data.name=='') && (data.pname==null||data.pname=='');
+              var p = (data.name==null||data.name=='') && (data.pname!=null||data.pname!='');
+              var v = '';
+              if (!g && !p){
+                  v = data.name;
+              }
+              if (p){
+                  v = data.pname;
+              }
+              if (g){
+                  v = data.gname;
+              }
               layer.prompt({
                   formType: 2
-                  ,value: p?data.pname:data.name
+                  ,value: v
               }, function(value, index){
                   fly.json("/org/mod"
                       ,
@@ -119,6 +123,37 @@
                                       // curr: 1 //重新从第 1 页开始
                                   }
                               }); //只重载数据
+                          }
+                      }
+                  );
+              });
+          } else if(obj.event === 'addSon'){
+              var g = (data.name==null||data.name=='') && (data.pname==null||data.pname=='');
+              var p = (data.name==null||data.name=='') && (data.pname!=null||data.pname!='');
+              if (!g && !p){
+                  layer.msg("只支持三级组织");
+                  return;
+              }
+              layer.prompt({
+                  title: '输入名称'
+                  ,formType: 2
+                  ,value: ''
+              }, function(value, index){
+                  if (value == null || value == ''){
+                      layer.close(index);
+                      return;
+                  }
+                  fly.json("/org/add"
+                      ,
+                      {
+                          parentId : data.id,
+                          grandId : g?'':data.parentId,
+                          name :value
+                      }
+                      ,function (res) {
+                          if (res.status === 0) {
+                              layer.close(index);
+                              location.href = res.action;
                           }
                       }
                   );

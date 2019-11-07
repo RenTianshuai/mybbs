@@ -56,6 +56,8 @@ public class UserController extends BaseController{
     RoleService roleService;
     @Autowired
     MessageService messageService;
+    @Autowired
+    OrganizationService organizationService;
 
     @RequestMapping("/login")
     @ResponseBody
@@ -257,14 +259,33 @@ public class UserController extends BaseController{
 
     @RequestMapping("/set")
     public String userSet(Model model){
+        //是否登录
+        User user = checkUser();
+        if (user == null || StringUtils.isEmpty(user.getId())){
+            return "redirect:/";
+        }
+
         //设置菜单点击项
         model.addAttribute("nav", "set");
+
+
+        List<Organization> schools = organizationService.findSchools();
+        model.addAttribute("schools", schools);
+
+        if (Constant.Role.STU.equals(user.getRoleId())){
+            List<Organization> grades = organizationService.findByParentId(user.getSchool());
+            model.addAttribute("grades", grades);
+
+            List<Organization> classes = organizationService.findByParentId(user.getGrade());
+            model.addAttribute("classes", classes);
+        }
+
         return "user/set";
     }
 
     @RequestMapping("/modify")
     @ResponseBody
-    public Map userSet(String email, String username, String sex, String realname, String phone, String city, String sign, Model model){
+    public Map userSet(String email, String username, String sex, String isStudent, String school, String grade, String className, String realname, String phone, String city, String sign, Model model){
         Map result = new HashMap();
         User user = checkUser();
         if (user == null || StringUtils.isEmpty(user.getId())){
@@ -308,7 +329,22 @@ public class UserController extends BaseController{
         user.setCity(city);
         user.setSignature(sign);
 
+        if (Constant.YES.equals(isStudent)){
+            user.setRoleId(Constant.Role.STU);
+            user.setSchool(school);
+            user.setGrade(grade);
+            user.setClassName(className);
+        }else {
+            if (Constant.Role.STU.equals(user.getRoleId())){
+                user.setRoleId(Constant.Role.MEM);
+            }
+            user.setSchool("");
+            user.setGrade("");
+            user.setClassName("");
+        }
+
         userService.update(user);
+
         refreshUser(user);
 
         result.put("status", 0);

@@ -1,10 +1,7 @@
 package com.yaohan.bbs.controller;
 
 import com.github.pagehelper.Page;
-import com.yaohan.bbs.dao.entity.Posts;
-import com.yaohan.bbs.dao.entity.PostsApproveLog;
-import com.yaohan.bbs.dao.entity.PostsReply;
-import com.yaohan.bbs.dao.entity.User;
+import com.yaohan.bbs.dao.entity.*;
 import com.yaohan.bbs.service.*;
 import com.yaohan.bbs.vo.PostsVO;
 import com.yaohan.bbs.vo.ReplyVO;
@@ -203,6 +200,10 @@ public class PageController extends BaseController{
                 model.addAttribute("zan", true);
             }
         }
+
+        //已点赞用户列表
+        List<UserLikeLog> likeLogs = userLikeLogService.findZanUsers(id);
+        model.addAttribute("likeLogs", likeLogs);
 
         model.addAttribute("vo", vo);
         return "jie/detail";

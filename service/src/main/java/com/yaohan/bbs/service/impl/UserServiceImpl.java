@@ -93,7 +93,11 @@ public class UserServiceImpl implements UserService {
         if (organizationSchool == null){
             throw new Exception("错误学校名："+userModel.getSchool());
         }
-        Organization organizationClass = organizationService.findByParentIdAndName(organizationSchool.getId(), userModel.getClassName());
+        Organization organizationGrade = organizationService.findByParentIdAndName(organizationSchool.getId(), userModel.getGrade());
+        if (organizationGrade == null){
+            throw new Exception("错误年级名："+userModel.getGrade());
+        }
+        Organization organizationClass = organizationService.findByParentIdAndName(organizationGrade.getId(), userModel.getClassName());
         if (organizationClass == null){
             throw new Exception("错误班级名："+userModel.getClassName());
         }
@@ -103,6 +107,7 @@ public class UserServiceImpl implements UserService {
         }
         user.setRoleId(role.getId());
         user.setSchool(organizationSchool.getId());
+        user.setGrade(organizationGrade.getId());
         user.setClassName(organizationClass.getId());
         user.setRealname(userModel.getRealname());
         this.update(user);

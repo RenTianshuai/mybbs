@@ -19,6 +19,8 @@ public interface OrganizationMapper {
 
     List<Organization> findSchools();
 
+    List<Organization> findGrades();
+
     List<Organization> findAll();
 
     int deleteByParentId(String parentId);

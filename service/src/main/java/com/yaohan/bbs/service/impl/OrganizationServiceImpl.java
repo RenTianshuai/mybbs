@@ -26,6 +26,11 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
+    public List<Organization> findgrades() {
+        return organizationMapper.findGrades();
+    }
+
+    @Override
     public void add(Organization organization) {
         organizationMapper.insert(organization);
     }
@@ -69,6 +74,14 @@ public class OrganizationServiceImpl implements OrganizationService {
             return list.get(0);
         }
         return null;
+    }
+
+    @Override
+    public List<Organization> findByParentId(String parentId) {
+        Organization organization = new Organization();
+        organization.setParentId(parentId);
+        List<Organization> list = organizationMapper.selectBy(organization);
+        return list;
     }
 
     @Override

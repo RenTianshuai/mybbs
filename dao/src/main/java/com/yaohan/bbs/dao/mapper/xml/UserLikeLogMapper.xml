@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.yaohan.bbs.dao.mapper.UserLikeLogMapper" >
+  <cache type="org.mybatis.caches.ehcache.EhcacheCache"></cache>
   <resultMap id="BaseResultMap" type="com.yaohan.bbs.dao.entity.UserLikeLog" >
     <id column="user_id" property="userId" jdbcType="VARCHAR" />
     <id column="posts_id" property="postsId" jdbcType="VARCHAR" />
     <result column="zan" property="zan" jdbcType="BIT" />
     <result column="operater_time" property="operaterTime" jdbcType="TIMESTAMP" />
   </resultMap>
+
+    <resultMap id="usernameResultMap" extends="BaseResultMap" type="com.yaohan.bbs.dao.entity.UserLikeLog" >
+        <result column="username" property="username" jdbcType="VARCHAR" />
+    </resultMap>
+
   <sql id="Base_Column_List" >
     user_id, posts_id, zan, operater_time
   </sql>
@@ -79,4 +85,15 @@
     where user_id = #{userId,jdbcType=VARCHAR}
       and posts_id = #{postsId,jdbcType=VARCHAR}
   </update>
+
+  <select id="findAllZanUsersByPostsId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    a.*,b.username
+    from user_like_log a
+    left join `user` b
+    on a.user_id = b.id
+    where a.zan = 1 and a.posts_id = #{postsId,jdbcType=VARCHAR}
+    order by a.operater_time
+    limit 50
+  </select>
 </mapper>
