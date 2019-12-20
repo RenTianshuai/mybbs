@@ -212,6 +212,8 @@ public class OrganizationController extends BaseController {
         user.setGrade(null);
         user.setClassName(null);
 
+        userService.update(user);
+
         result.put("status", 0);
         return result;
     }
